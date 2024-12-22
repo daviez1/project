@@ -60,10 +60,10 @@
   <div class="space-y-2 mb-4">
 
     {#each order.items as item}
-      <!-- {@const menuItem = getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId)} -->
+      {@const menuItem = getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId)}
       <div class="flex justify-between">
         <span>{item.name} x {item.quantity}</span>
-        <!-- <span>${((menuItem?.price || 0) * item.quantity).toFixed(2)}</span> -->
+        <span>${((menuItem?.price || 0) * item.quantity).toFixed(2)}</span>
       </div>
     {/each}
 

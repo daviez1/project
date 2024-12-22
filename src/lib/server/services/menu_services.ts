@@ -18,7 +18,7 @@ export const getMenuItems = async () => {
 export const getMenuItemById = async ( id: string | undefined):Promise<TypesMenu.MenuItem> => {
     try {
         await dbConnect()
-        const menuItem = await MenuItem.findById( id );
+        const menuItem = await MenuItem.findOne( {id} );
         return menuItem;
     } catch (error:any) {
         console.log(`error: ${error}`)
@@ -38,7 +38,7 @@ export const deleteMenuItemById = async ( id: string | undefined) => {
 
 export const createMenuItem = async ( menuItem: TypesMenu.MenuItem ) => {
     try {
-        await MenuItem.insertMany(menuItem);
+        await MenuItem.create(menuItem);
     } catch (error:any) {
         console.log(`error: ${error}`)
         throw new Error('Error al crear el plato')

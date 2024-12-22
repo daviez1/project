@@ -10,6 +10,7 @@
   function addToCart() {
   cart.addItem({
     menuItemId: item.id,
+    name: item.name,
     quantity: 1
   });
 

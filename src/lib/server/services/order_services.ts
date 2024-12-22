@@ -2,6 +2,7 @@ import MenuItem from "$lib/common/Schemas/MenuItem";
 import Order from "$lib/common/Schemas/Order"
 import OrderItem from "$lib/common/Schemas/OrderItem"
 import { dbConnect } from "../config/db"
+import * as OrderTypes from '$lib/types/order'
 
 // export const getOrder = async () => {
 //     try {
@@ -35,24 +36,16 @@ export const getOrder = async () => {
     }
 };
 
-export const getOrderItem = async () => {
+export const getOrderItem = async ( id:string | undefined ) => {
     try {
         await dbConnect();
-        const orderItems = await OrderItem.find().lean().exec();
-
-        // Obtener los nombres de los MenuItems
-        for (let item of orderItems) {
-            const menuItem = await MenuItem.findOne({ id: item.menuItemId }).exec();
-            if (menuItem) {
-                item.name = menuItem.name;
-            }
-        }
-
-        console.log(orderItems);
-        return orderItems;
-    } catch (error) {
+        const orderItem = await OrderItem.findOne({menuItemId: id})
+        return orderItem;}
+    catch(error){
         throw new Error(`Error al obtener pedidos: ${error}`);
-    }
+    }    
+
+    
 };
 
 // export const getOrderItem = async() =>{
@@ -64,3 +57,14 @@ export const getOrderItem = async () => {
 //         throw new Error(`Error al obtener pedidos: ${error}`)
 //     }
 // }
+
+// src/lib/server/services/order_services.ts
+
+export async function createOrder(order: OrderTypes.Order): Promise<OrderTypes.Order> {
+    try {
+        const newOrder = await Order.create(order);
+        return newOrder;
+    } catch (error) {
+        throw new Error('Error al crear el pedido');
+    }
+}

@@ -2,7 +2,7 @@ import { getOrder } from '$lib/server/services/order_services';
 import type { RequestHandler } from '@sveltejs/kit';
 import { Order, OrderItem } from '$lib/types/order';
 import { RequestEvent } from "@sveltejs/kit";
-import { createOrder } from '$lib/utils/orders';
+import { createOrder } from '$lib/server/services/order_services';
 
 export const GET: RequestHandler = async (  ) => {
     try {
@@ -15,10 +15,11 @@ export const GET: RequestHandler = async (  ) => {
 
 export const POST: RequestHandler = async ({ request }) => {
     try { 
-        const order: OrderItem[] = await request.json(); 
-        const newOrder = await createOrder(order, 4); 
+        const order: Order = await request.json(); 
+        const newOrder = await createOrder(order); 
         return new Response(JSON.stringify({ message: 'Pedido creado', order: newOrder }), 
         { status: 201, headers: { 'Content-Type': 'application/json' } }); 
     } catch (error:any) { 
         return new Response(JSON.stringify({ message: 'Error al crear el pedido', error: error.message }), 
-        { status: 500, headers: { 'Content-Type': 'application/json' } }); } };
+        { status: 500, headers: { 'Content-Type': 'application/json' } }); } 
+    };

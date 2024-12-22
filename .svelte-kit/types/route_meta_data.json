@@ -27,8 +27,8 @@
 	"/api/order": [
 		"src/routes/api/order/+server.ts"
 	],
-	"/api/order/item": [
-		"src/routes/api/order/item/+server.ts"
+	"/api/order/[id]": [
+		"src/routes/api/order/[id]/+server.ts"
 	],
 	"/chillGuy": [],
 	"/gestionarPedidos": [],

@@ -18,39 +18,42 @@
     menuItems = await cart.fetchMenuItems();
     return menuItems
   });
-  
+
+  // El $ de $cart es para suscribirse a los cambios del writable
   $: items = $cart.map(item => ({
     ...item,
     menuItem: getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId),
   }));
-
+  
   $: total = items.reduce((sum, item) => 
     sum + (item.menuItem?.price || 0) * item.quantity, 0
   );
-
-  async function checkout() { 
+  
+  // async function checkout() { 
+    //   if (items.length === 0) return; 
+    //   newOrder.items = items; 
+    //   newOrder.total = total; 
+    //   try { 
+      //     await orders.addOrderDB(newOrder); 
+      //     cart.clear(); toastMessage = 'Pedido confirmado!'; 
+  //     showToast = true; } 
+  //     catch (error) { 
+    //       console.error('Error al crear el pedido:', error); 
+    //     toastMessage = 'Error al confirmar el pedido'; 
+    //     showToast = true; }
+    //    }
+    
+    function checkout() {
     if (items.length === 0) return; 
-    newOrder.items = items; 
-    newOrder.total = total; 
-    try { 
-      await orders.addOrderDB(newOrder);
-      cart.clear(); 
-      toastMessage = 'Pedido confirmado!'; 
-      showToast = true;
-    } catch (error) { 
-      console.error('Error al crear el pedido:', error); 
-      toastMessage = 'Error al confirmar el pedido'; 
-      showToast = true; } 
-    }
-
-  // function checkout() {
-  //   if (items.length === 0) return;    
-  //   createOrder(items, total);
-  //   cart.clear();
-  //   // Muestra el toast
-  //   toastMessage = 'Pedido confirmado!';
-  //   showToast = true;
-  // }
+    newOrder.id = '7'
+    newOrder.items = items
+    newOrder.total = total
+    orders.addOrderDB(newOrder);
+    cart.clear();
+    // Muestra el toast
+    toastMessage = 'Pedido confirmado!';
+    showToast = true;
+  }
 
   function closeToast() {
     showToast = false;
