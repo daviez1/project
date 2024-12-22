@@ -9,14 +9,17 @@
   import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
 
+
+  let counterId = 3
   let showToast = false;
   let toastMessage = '';
   let menuItems: MenuItem[] = [];
+  let ordersDB: Order[] = [];
   let newOrder: Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
 
   onMount(async () => {
     menuItems = await cart.fetchMenuItems();
-    return menuItems
+    ordersDB = await orders.getOrder();
   });
 
   // El $ de $cart es para suscribirse a los cambios del writable
@@ -43,9 +46,9 @@
     //     showToast = true; }
     //    }
     
-    function checkout() {
+    async function checkout() {
     if (items.length === 0) return; 
-    newOrder.id = '7'
+    newOrder.id = String(counterId+=1)
     newOrder.items = items
     newOrder.total = total
     orders.addOrderDB(newOrder);

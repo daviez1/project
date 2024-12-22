@@ -16,11 +16,7 @@ function createOrdersStore() {
 
   return {
     subscribe,
-    getOrder: async() =>{
-      const orders = await get()
-      console.log(orders);
-      return orders
-    },
+    getOrder: get,
     addOrderDB: post,
     addOrder: (order: Order) => update(orders => [...orders, order]),
     updateStatus: (orderId: string, status: Order['status']) =>
