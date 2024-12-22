@@ -1,0 +1,39 @@
+{
+	"/": [],
+	"/api/kiosko": [
+		"src/routes/api/kiosko/+server.ts"
+	],
+	"/api/kiosko/category": [
+		"src/routes/api/kiosko/category/+server.ts"
+	],
+	"/api/kiosko/category/[id]": [
+		"src/routes/api/kiosko/category/[id]/+server.ts"
+	],
+	"/api/kiosko/[id]": [
+		"src/routes/api/kiosko/[id]/+server.ts"
+	],
+	"/api/menu": [
+		"src/routes/api/menu/+server.ts"
+	],
+	"/api/menu/category": [
+		"src/routes/api/menu/category/+server.ts"
+	],
+	"/api/menu/category/[id]": [
+		"src/routes/api/menu/category/[id]/+server.ts"
+	],
+	"/api/menu/[id]": [
+		"src/routes/api/menu/[id]/+server.ts"
+	],
+	"/api/order": [
+		"src/routes/api/order/+server.ts"
+	],
+	"/api/order/item": [
+		"src/routes/api/order/item/+server.ts"
+	],
+	"/chillGuy": [],
+	"/gestionarPedidos": [],
+	"/kiosko": [],
+	"/ordenar": [
+		"src/routes/ordenar/+page.server.ts"
+	]
+}

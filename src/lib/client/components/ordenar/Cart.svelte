@@ -1,0 +1,104 @@
+<script lang="ts">
+  import { cart } from '$lib/common/stores/cart';
+  import { getMenuItem } from '$lib/common/data/menu';
+  import { createOrder } from '$lib/utils/orders';
+  import { getKioskoItem } from '$lib/common/data/kiosko';
+  import Toast from '$lib/client/components/notifications/Toast.svelte';
+  import { onMount } from 'svelte';
+  import { MenuItem } from '$lib/common/models/menu';
+  import { Order } from '$lib/common/models/order';
+  import { orders } from '$lib/common/stores/orders';
+
+  let showToast = false;
+  let toastMessage = '';
+  let menuItems: MenuItem[] = [];
+  let newOrder: Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
+
+  onMount(async () => {
+    menuItems = await cart.fetchMenuItems();
+    return menuItems
+  });
+  
+  $: items = $cart.map(item => ({
+    ...item,
+    menuItem: getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId),
+  }));
+
+  $: total = items.reduce((sum, item) => 
+    sum + (item.menuItem?.price || 0) * item.quantity, 0
+  );
+
+  async function checkout() { 
+    if (items.length === 0) return; 
+    newOrder.items = items; 
+    newOrder.total = total; 
+    try { 
+      await orders.addOrderDB(newOrder);
+      cart.clear(); 
+      toastMessage = 'Pedido confirmado!'; 
+      showToast = true;
+    } catch (error) { 
+      console.error('Error al crear el pedido:', error); 
+      toastMessage = 'Error al confirmar el pedido'; 
+      showToast = true; } 
+    }
+
+  // function checkout() {
+  //   if (items.length === 0) return;    
+  //   createOrder(items, total);
+  //   cart.clear();
+  //   // Muestra el toast
+  //   toastMessage = 'Pedido confirmado!';
+  //   showToast = true;
+  // }
+
+  function closeToast() {
+    showToast = false;
+  }
+</script>
+
+<div class="bg-white div rounded-lg shadow-md p-6">
+  <h2 class="text-2xl font-bold mb-6">Sus pedidos</h2>
+  
+  {#if items.length === 0}
+    <p class="text-gray-500 text-center py-4">No ha realizado ningún pedido</p>
+  {:else}
+    <div class="space-y-4 mb-6">
+      {#each items as item}
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="font-semibold">{item.menuItem?.name}</h3>
+            <p class="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+          </div>
+          <div class="text-right">
+            <p class="font-semibold">${((item.menuItem?.price || 0) * item.quantity).toFixed(2)}</p>
+            <button
+              class="text-sm text-red-600 hover:text-red-700"
+              on:click={() => cart.removeItem(item.menuItemId)}
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      {/each}
+    </div>
+    
+    <div class="border-t pt-4">
+      <div class="flex justify-between items-center mb-6">
+        <span class="text-lg font-bold">Total:</span>
+        <span class="text-lg font-bold">${total.toFixed(2)}</span>
+      </div>
+      
+      <button
+        on:click={checkout}
+        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
+      >
+        Confirmar
+      </button>
+    </div>
+  {/if}
+
+  {#if showToast}
+    <Toast message={toastMessage} onClose={closeToast} />
+  {/if}
+</div>
