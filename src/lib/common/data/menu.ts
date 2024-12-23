@@ -1,4 +1,5 @@
 import type { MenuItem, MenuCategory } from '$lib/types/menu';
+import { cart } from '../stores/cart';
 
 export const menuItems: MenuItem[] = [
   {
@@ -52,4 +53,11 @@ export const featuredItems = menuItems.slice(0, 3);
 
 export function getMenuItem(id: string): MenuItem | undefined {
   return menuItems.find(item => item.id === id);
+}
+
+export async function getMenuItemDB(id: string): Promise<MenuItem | undefined> {
+  // const menuItemsDB = await cart.fetchMenuItems();
+  // const menuItemDB = menuItemsDB.find((item: MenuItem) => item.id === id);
+  const menuItemDB = await cart.fetchMenuItemsById(id);
+  return menuItemDB
 }

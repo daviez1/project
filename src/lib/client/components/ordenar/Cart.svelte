@@ -10,7 +10,7 @@
   import { orders } from '$lib/common/stores/orders';
 
 
-  let counterId = 3
+  let counterId = 3;
   let showToast = false;
   let toastMessage = '';
   let menuItems: MenuItem[] = [];
@@ -20,7 +20,7 @@
   onMount(async () => {
     menuItems = await cart.fetchMenuItems();
     ordersDB = await orders.getOrder();
-  });
+    });
 
   // El $ de $cart es para suscribirse a los cambios del writable
   $: items = $cart.map(item => ({
@@ -39,18 +39,19 @@
     //   try { 
       //     await orders.addOrderDB(newOrder); 
       //     cart.clear(); toastMessage = 'Pedido confirmado!'; 
-  //     showToast = true; } 
-  //     catch (error) { 
-    //       console.error('Error al crear el pedido:', error); 
-    //     toastMessage = 'Error al confirmar el pedido'; 
-    //     showToast = true; }
-    //    }
+      //     showToast = true; } 
+      //     catch (error) { 
+        //       console.error('Error al crear el pedido:', error); 
+        //     toastMessage = 'Error al confirmar el pedido'; 
+        //     showToast = true; }
+        //    }
     
-    async function checkout() {
-    if (items.length === 0) return; 
+        async function checkout() {
+    if (items.length === 0) return;
     newOrder.id = String(counterId+=1)
     newOrder.items = items
     newOrder.total = total
+    console.log(items);
     orders.addOrderDB(newOrder);
     cart.clear();
     // Muestra el toast
@@ -108,3 +109,4 @@
     <Toast message={toastMessage} onClose={closeToast} />
   {/if}
 </div>
+

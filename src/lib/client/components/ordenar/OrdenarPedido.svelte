@@ -8,7 +8,6 @@
 
   onMount(async () => {
     menuCategory = await cart.fetchMenuCategories();
-    menuCategory
   });
 
 </script>

@@ -7,7 +7,6 @@
   import { statusPlus } from '$lib/client/utils/statusPlus';
   import Toast from '../notifications/Toast.svelte';
   import { orders } from '$lib/common/stores/orders';
-  import { onMount } from 'svelte';
 
   export let order: Order;
   let showToast = false
