@@ -7,7 +7,7 @@
   <title>Pedidos</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8 mt-10">
   <h1 class="text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
   
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">

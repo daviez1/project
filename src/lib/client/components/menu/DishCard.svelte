@@ -23,8 +23,8 @@
 
 </script>
 
-<div class="bg-white div rounded-lg shadow-md overflow-hidden flex flex-col">
-  <img src={item.image} alt={item.name} class="w-full h-72 object-cover" />
+<div class="div w-80 rounded-lg shadow-md overflow-hidden m-auto mb-5 border flex flex-col">
+  <img src={item.image} alt={item.name} class="w-full block h-72 object-cover" />
   <div class="p-4 flex flex-col flex-grow">
     <h3 class="text-xl font-semibold mb-2">{item.name}</h3>
     <p class="text-gray-600 mb-4 flex-grow">{item.description}</p>
@@ -40,3 +40,9 @@
     </div>
   </div>
 </div>
+
+<style> 
+  .div{
+    width: 20em;
+  }
+</style>

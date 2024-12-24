@@ -64,7 +64,7 @@
   }
 </script>
 
-<div class="bg-white div rounded-lg shadow-md p-6">
+<div class="bg-white div mt-5 rounded-lg shadow-md p-6">
   <h2 class="text-2xl font-bold mb-6">Sus pedidos</h2>
   
   {#if items.length === 0}
