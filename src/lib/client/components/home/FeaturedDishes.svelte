@@ -4,17 +4,38 @@
   import { onMount } from 'svelte';
   import DishCard from '../menu/DishCard.svelte';
   import { cart } from '$lib/common/stores/cart';
+  import Cart from '../ordenar/Cart.svelte';
+  import ButtonSeeOrders from '../form/ButtonSeeOrders.svelte';
 
-  let menuItems: MenuItem[] = []
+  let menuItems: MenuItem[] = [];
+  let showSeeOrders = true;
+  let direction = 'down';
+  console.log($cart);
 
-  onMount(async()=>{
-    menuItems = await cart.fetchMenuItems()
-    setInterval(async() => {
-      let inicio = 0, fin = 2
-      menuItems.slice(inicio, fin)
-      inicio += 3; fin +=2;
+  onMount(async () => {
+    menuItems = await cart.fetchMenuItems();
+    setInterval(async () => {
+      let inicio = 0, fin = 2;
+      menuItems.slice(inicio, fin);
+      inicio += 3; fin += 2;
     }, 3000);
-  })
+
+    const cartElement = document.getElementById('cart');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          showSeeOrders = false;
+        } else {
+          showSeeOrders = true;
+        }
+      });
+    });
+
+    if (cartElement) {
+      observer.observe(cartElement);
+    }
+  });
+
 </script>
 
 <section class="py-16 bg-white">
@@ -26,4 +47,14 @@
       {/each}
     </div>
   </div>
+  {#if $cart.length > 0}
+    {#if showSeeOrders}
+      <div class="fixed top-20 right-4 z-50">
+        <ButtonSeeOrders {direction}/>
+      </div>
+    {/if}
+    <div id="cart">
+      <Cart />
+    </div>
+  {/if}
 </section>

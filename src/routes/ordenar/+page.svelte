@@ -1,6 +1,37 @@
 <script lang="ts">
+  import ButtonSeeOrders from '$lib/client/components/form/ButtonSeeOrders.svelte';
   import Cart from '$lib/client/components/ordenar/Cart.svelte';
   import OrdenarPedido from '$lib/client/components/ordenar/OrdenarPedido.svelte';
+  import { cart } from '$lib/common/stores/cart';
+  import { onMount, onDestroy } from 'svelte';
+
+  let showSeeOrders = false;
+  let direction = 'down'; // Define direction como una variable reactiva
+
+  function updateDirection() {
+    direction = window.innerWidth > 1024 ? 'up' : 'down';
+    console.log(window.innerWidth, direction);
+  }
+
+  onMount(() => {
+    updateDirection();
+    window.addEventListener('resize', updateDirection);
+
+    const cartElement = document.getElementById('cart');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        showSeeOrders = !entry.isIntersecting;
+      });
+    });
+
+    if (cartElement) {
+      observer.observe(cartElement);
+    }
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('resize', updateDirection);
+  });
 </script>
 
 <svelte:head>
@@ -14,8 +45,15 @@
     <div class="lg:col-span-2">
       <OrdenarPedido />
     </div>
-    <div>
+    <div class="h-fit" id="cart">
       <Cart />
     </div>
   </div>
+  {#if $cart.length > 0}
+    {#if showSeeOrders}
+      <div class="fixed right-4 z-50 {direction == 'up' ? 'bottom-44' : 'top-20'}">
+        <ButtonSeeOrders {direction} />
+      </div>
+    {/if}
+  {/if}
 </div>

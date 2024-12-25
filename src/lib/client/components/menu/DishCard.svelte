@@ -13,12 +13,10 @@
     name: item.name,
     quantity: 1
   });
-
-  console.log($cart);
   
-  if ($page.url.pathname !== '/ordenar' && $page.url.pathname !== '/kiosko') {
-    goto('/ordenar');
-  }
+  // if ($page.url.pathname !== '/ordenar' && $page.url.pathname !== '/kiosko') {
+  //   goto('/ordenar');
+  // }
 }
 
 </script>

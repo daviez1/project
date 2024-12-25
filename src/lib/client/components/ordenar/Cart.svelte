@@ -31,22 +31,8 @@
   $: total = items.reduce((sum, item) => 
     sum + (item.menuItem?.price || 0) * item.quantity, 0
   );
-  
-  // async function checkout() { 
-    //   if (items.length === 0) return; 
-    //   newOrder.items = items; 
-    //   newOrder.total = total; 
-    //   try { 
-      //     await orders.addOrderDB(newOrder); 
-      //     cart.clear(); toastMessage = 'Pedido confirmado!'; 
-      //     showToast = true; } 
-      //     catch (error) { 
-        //       console.error('Error al crear el pedido:', error); 
-        //     toastMessage = 'Error al confirmar el pedido'; 
-        //     showToast = true; }
-        //    }
-    
-        async function checkout() {
+
+  async function checkout() {
     if (items.length === 0) return;
     newOrder.id = String(counterId+=1)
     newOrder.items = items
@@ -65,7 +51,7 @@
 </script>
 
 <div class="bg-white div mt-5 rounded-lg shadow-md p-6">
-  <h2 class="text-2xl font-bold mb-6">Sus pedidos</h2>
+  <h2 class="text-2xl font-bold text-gray-700 mb-6">Sus pedidos</h2>
   
   {#if items.length === 0}
     <p class="text-gray-500 text-center py-4">No ha realizado ningún pedido</p>
@@ -109,4 +95,3 @@
     <Toast message={toastMessage} onClose={closeToast} />
   {/if}
 </div>
-

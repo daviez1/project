@@ -2,7 +2,6 @@ summary {
     list-style: none; /* Quita el triángulo negro */
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
   summary::marker {
