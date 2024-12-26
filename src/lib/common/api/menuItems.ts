@@ -6,7 +6,7 @@ export const get = async (customFetch = fetch) => {
     return menuItems.menuItems;
 }
 
-export const search = async (id: string) => {
+export const search = async ( id: string) => {
     const response = await fetch(`/api/menu/${id}`);
     const menuItem = await response.json();
     return menuItem as MenuItem;

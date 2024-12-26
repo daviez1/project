@@ -1,22 +1,26 @@
 <script lang="ts">
-  import { featuredItems } from '$lib/common/data/menu';
   import type { MenuItem } from '$lib/types/menu';
   import { onMount } from 'svelte';
   import DishCard from '../menu/DishCard.svelte';
   import { cart } from '$lib/common/stores/cart';
   import Cart from '../ordenar/Cart.svelte';
   import ButtonSeeOrders from '../form/ButtonSeeOrders.svelte';
+  import { createQuery } from '@tanstack/svelte-query';
+  import { GetMenuItems } from '$lib/common/constants/queries';
+  import Loader from '../form/Loader.svelte';
 
-  let menuItems: MenuItem[] = [];
   let showSeeOrders = true;
   let direction = 'down';
-  console.log($cart);
+
+  const menuItemsQuery = createQuery({
+    queryKey: [GetMenuItems],
+    queryFn: async()=> await cart.fetchMenuItems(),
+  });
 
   onMount(async () => {
-    menuItems = await cart.fetchMenuItems();
     setInterval(async () => {
       let inicio = 0, fin = 2;
-      menuItems.slice(inicio, fin);
+      $menuItemsQuery.data.slice(inicio, fin);
       inicio += 3; fin += 2;
     }, 3000);
 
@@ -35,22 +39,27 @@
       observer.observe(cartElement);
     }
   });
-
 </script>
 
 <section class="py-16 bg-white">
   <div class="container mx-auto px-4">
     <h2 class="text-3xl font-bold text-center mb-12">Algunos de nuestros platos</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {#each menuItems as item}
-        <DishCard {item} />
-      {/each}
+      {#if $menuItemsQuery.isLoading}
+        <Loader />
+      {:else if $menuItemsQuery.isError}
+        <p>Error: {$menuItemsQuery.error.message}</p>
+      {:else if $menuItemsQuery.isSuccess}
+        {#each $menuItemsQuery.data as item}
+          <DishCard {item} />
+        {/each}
+      {/if}
     </div>
   </div>
   {#if $cart.length > 0}
     {#if showSeeOrders}
       <div class="fixed top-20 right-4 z-50">
-        <ButtonSeeOrders {direction}/>
+        <ButtonSeeOrders {direction} />
       </div>
     {/if}
     <div id="cart">

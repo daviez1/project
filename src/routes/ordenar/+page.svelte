@@ -8,14 +8,13 @@
   let showSeeOrders = false;
   let direction = 'down'; // Define direction como una variable reactiva
 
-  function updateDirection() {
-    direction = window.innerWidth > 1024 ? 'up' : 'down';
-    console.log(window.innerWidth, direction);
-  }
+  // function updateDirection() {
+  //   direction = window.innerWidth > 1024 ? 'up' : 'down';
+  // }
 
   onMount(() => {
-    updateDirection();
-    window.addEventListener('resize', updateDirection);
+    // updateDirection();
+    // window.addEventListener('resize', updateDirection);
 
     const cartElement = document.getElementById('cart');
     const observer = new IntersectionObserver((entries) => {
@@ -29,9 +28,9 @@
     }
   });
 
-  onDestroy(() => {
-    window.removeEventListener('resize', updateDirection);
-  });
+  // onDestroy(() => {
+  //   window.removeEventListener('resize', updateDirection);
+  // });
 </script>
 
 <svelte:head>

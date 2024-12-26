@@ -35,5 +35,6 @@
 	"/kiosko": [],
 	"/ordenar": [
 		"src/routes/ordenar/+page.server.ts"
-	]
+	],
+	"/todos": []
 }

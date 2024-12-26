@@ -37,7 +37,6 @@
     newOrder.id = String(counterId+=1)
     newOrder.items = items
     newOrder.total = total
-    console.log(items);
     orders.addOrderDB(newOrder);
     cart.clear();
     // Muestra el toast

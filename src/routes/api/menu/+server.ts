@@ -1,5 +1,4 @@
 // src/routes/api/test-db.js
-import { Menuitem } from '$lib/common/Schemas/MenuItem';
 import { getMenuItems } from '$lib/server/services/menu_services';
 
 export const GET = async () => {

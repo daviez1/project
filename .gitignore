@@ -1,0 +1,17 @@
+.DS_Store
+node_modules
+/build
+/logs
+/.svelte-kit
+/package
+/db/ctm_sqlite.*
+.env
+.env.*
+package-lock.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+src/lib/server/logger/log_files/
+/.idea
+workspace.xml
+server.log

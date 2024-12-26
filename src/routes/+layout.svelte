@@ -2,12 +2,19 @@
   import '../app.css';
   import Navbar from '$lib/client/components/layout/Navbar.svelte';
   import Footer from '$lib/client/components/layout/Footer.svelte';
+  import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+  
+   // Create a client
+   const queryClient = new QueryClient()
+   
 </script>
 
-<div class="min-h-screen flex flex-col">
-  <Navbar />
+<QueryClientProvider client={queryClient}>
+  <div class="min-h-screen flex flex-col">
+    <Navbar />
     <main class="flex-grow">
-      <slot />
+      <slot /> 
     </main>
-  <Footer />
-</div>
+    <Footer />
+  </div>
+</QueryClientProvider>

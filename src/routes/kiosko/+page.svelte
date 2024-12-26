@@ -5,7 +5,15 @@
   import { onMount } from 'svelte';
   import { cart } from '$lib/common/stores/cart';
   import ButtonSeeOrders from '$lib/client/components/form/ButtonSeeOrders.svelte';
+  import Loader from '$lib/client/components/form/Loader.svelte';
+  import { createQuery } from '@tanstack/svelte-query';
+  import { GetKioskoItems } from '$lib/common/constants/queries';
+  import '$lib/client/components/menu/Menu_Kiosko.css'
 
+  const kioskoCategoryQuery = createQuery({
+    queryKey: [GetKioskoItems],
+    queryFn: async () => await cart.fetchKioskoCategories(),
+  });
   export let direction = 'down';
   let kioskoCategories: KioskoCategoryTypes.KioskoCategory[] = [];
   let showSeeOrders = false;
@@ -37,9 +45,15 @@
   <h1 class="text-4xl font-bold text-center mb-8">Kiosko</h1>
   <p class="text-center text-gray-600 mb-12">Encuentra comida rápida y picadera</p>
   <div class="space-y-12">
-    {#each kioskoCategories as category}
+    {#if $kioskoCategoryQuery.isLoading}
+    <Loader />
+  {:else if $kioskoCategoryQuery.isError}
+    <p>Error: {$kioskoCategoryQuery.error.message}</p>
+  {:else if $kioskoCategoryQuery.isSuccess}
+    {#each $kioskoCategoryQuery.data as category}
       <KioskoCategory {category} />
     {/each}
+    {/if}
   </div>
   {#if $cart.length > 0}
     <div id="cart">

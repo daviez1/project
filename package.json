@@ -25,6 +25,7 @@
   "type": "module",
   "dependencies": {
     "@sveltejs/adapter-netlify": "^2.0.8",
+    "@tanstack/svelte-query": "^5.62.9",
     "animate.css": "^4.1.1",
     "dotenv": "^16.4.7",
     "mongodb": "^6.12.0",
