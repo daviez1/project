@@ -17,12 +17,27 @@
     queryFn: async()=> await cart.fetchMenuItems(),
   });
 
+
+//   import { createQuery } from '@tanstack/svelte-query'
+
+//   const endpoint = 'http://localhost:5173/api/data'
+
+//   let intervalMs = 1000
+
+//   const query = createQuery({
+//     queryKey: ['refetch'],
+//     queryFn: async () => await fetch(endpoint).then((r) => r.json()),
+//     refetchInterval: intervalMs,
+//   })
+// <input type="number" bind:value={intervalMs} />
+
+
   onMount(async () => {
-    setInterval(async () => {
-      let inicio = 0, fin = 2;
-      $menuItemsQuery.data.slice(inicio, fin);
-      inicio += 3; fin += 2;
-    }, 3000);
+    // setInterval(async () => {
+    //   let inicio = 0, fin = 2;
+    //   $menuItemsQuery.data.slice(inicio, fin);
+    //   inicio += 3; fin += 2;
+    // }, 3000);
 
     const cartElement = document.getElementById('cart');
     const observer = new IntersectionObserver((entries) => {

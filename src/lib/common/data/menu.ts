@@ -1,5 +1,7 @@
 import type { MenuItem, MenuCategory } from '$lib/types/menu';
+import { createQuery } from '@tanstack/svelte-query';
 import { cart } from '../stores/cart';
+import { GetMenuItemById } from '../constants/queries';
 
 export const menuItems: MenuItem[] = [
   {
@@ -55,9 +57,6 @@ export function getMenuItem(id: string): MenuItem | undefined {
   return menuItems.find(item => item.id === id);
 }
 
-export async function getMenuItemDB(id: string): Promise<MenuItem | undefined> {
-  // const menuItemsDB = await cart.fetchMenuItems();
-  // const menuItemDB = menuItemsDB.find((item: MenuItem) => item.id === id);
-  const menuItemDB = await cart.fetchMenuItemsById(id);
-  return menuItemDB
-}
+export function getMenuItemQuery(id: string, menuItems:MenuItem[]): MenuItem | undefined {
+  return menuItems.find((item:MenuItem) => item.id === id); 
+ } 

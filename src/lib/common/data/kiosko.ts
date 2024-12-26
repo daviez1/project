@@ -87,3 +87,7 @@ export const featuredItems = kioskoItems.slice(0, 3);
 export function getKioskoItem(id: string): KioskoItem | undefined {
   return kioskoItems.find(item => item.id === id);
 }
+
+export function getKioskoItemQuery(id: string, kioskoItems:KioskoItem[]): KioskoItem | undefined {
+  return kioskoItems.find((item:KioskoItem) => item.id === id); 
+ } 

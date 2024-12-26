@@ -2,7 +2,6 @@ import * as TypesMenu from '$lib/common/models/menu';
 import MenuCategory from '$lib/common/Schemas/MenuCategory';
 import MenuItem from '$lib/common/Schemas/MenuItem';
 import { dbConnect } from '../config/db';
-import { menuCategories } from '../../common/data/menu';
 
 export const getMenuItems = async () => {
     try {

@@ -1,32 +1,47 @@
 <script lang="ts">
   import { cart } from '$lib/common/stores/cart';
-  import { getMenuItem } from '$lib/common/data/menu';
-  import { createOrder } from '$lib/utils/orders';
-  import { getKioskoItem } from '$lib/common/data/kiosko';
+  import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import Toast from '$lib/client/components/notifications/Toast.svelte';
   import { onMount } from 'svelte';
-  import { MenuItem } from '$lib/common/models/menu';
   import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
-
+  import { createQuery } from '@tanstack/svelte-query';
+  import { GetKioskoItems, GetMenuItems } from '$lib/common/constants/queries';
+  import { getMenuItemQuery } from '$lib/common/data/menu';
 
   let counterId = 3;
   let showToast = false;
   let toastMessage = '';
-  let menuItems: MenuItem[] = [];
   let ordersDB: Order[] = [];
   let newOrder: Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
 
+  const menuItemsQuery = createQuery({ 
+  queryKey: [GetMenuItems], 
+  queryFn: async () => await cart.fetchMenuItems()      
+});
+  const kioskoItemsQuery = createQuery({ 
+  queryKey: [GetKioskoItems], 
+  queryFn: async () => await cart.fetchKioskoItems()      
+});
+
   onMount(async () => {
-    menuItems = await cart.fetchMenuItems();
     ordersDB = await orders.getOrder();
     });
 
+    $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
+    $: kioskoItems = $kioskoItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
+    
+      // Componente Cart 
+    $: items = $cart.map(item => ({
+       ...item, 
+       menuItem: getMenuItemQuery(item.menuItemId, menuItems) ?? getKioskoItemQuery(item.menuItemId,kioskoItems), 
+      }));
+
   // El $ de $cart es para suscribirse a los cambios del writable
-  $: items = $cart.map(item => ({
-    ...item,
-    menuItem: getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId),
-  }));
+  // $: items = $cart.map(item => ({
+  //   ...item,
+  //   menuItem: getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId),
+  // }));
   
   $: total = items.reduce((sum, item) => 
     sum + (item.menuItem?.price || 0) * item.quantity, 0
