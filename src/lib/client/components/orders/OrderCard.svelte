@@ -1,15 +1,34 @@
 <script lang="ts">
   import type { Order } from '$lib/types/order';
-  import { getMenuItem } from '$lib/common/data/menu';
-  import { getKioskoItem } from '$lib/common/data/kiosko';
-  import { updateOrderStatus } from '$lib/utils/orders';
+  import { getMenuItemQuery } from '$lib/common/data/menu';
+  import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import { translateStatus } from '$lib/client/utils/translate';
   import { statusPlus } from '$lib/client/utils/statusPlus';
   import Toast from '../notifications/Toast.svelte';
   import { orders } from '$lib/common/stores/orders';
+  import { createQuery } from '@tanstack/svelte-query';
+  import { GetKioskoItems, GetMenuItems, GetOrders } from '$lib/common/constants/queries';
+  import { cart } from '$lib/common/stores/cart';
+  import Loader from '../form/Loader.svelte';
 
   export let order: Order;
   let showToast = false
+
+  const menuItemsQuery = createQuery({ 
+  queryKey: [GetMenuItems], 
+  queryFn: async () => await cart.fetchMenuItems()      
+});
+  const kioskoItemsQuery = createQuery({ 
+  queryKey: [GetKioskoItems], 
+  queryFn: async () => await cart.fetchKioskoItems()      
+});
+  const ordersQuery = createQuery({ 
+  queryKey: [GetOrders], 
+  queryFn: async () => await orders.getOrder()      
+});
+
+    $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
+    $: kioskoItems = $kioskoItemsQuery.data || [];
 
   const statusColors: { pending:string, preparing:string, ready:string, completed:string } = {
     pending: 'bg-yellow-100 text-yellow-800',
@@ -59,13 +78,12 @@
   <div class="space-y-2 mb-4">
 
     {#each order.items as item}
-      {@const menuItem = getMenuItem(item.menuItemId) ?? getKioskoItem(item.menuItemId)}
+      {@const menuItem = getMenuItemQuery(item.menuItemId, menuItems) ?? getKioskoItemQuery(item.menuItemId, kioskoItems)}
       <div class="flex justify-between">
         <span>{item.name} x {item.quantity}</span>
         <span>${((menuItem?.price || 0) * item.quantity).toFixed(2)}</span>
       </div>
     {/each}
-
   </div>
   {#if order.status == 'completed'}
   <Toast message='Pedido entregado' onClose={closeToast} />
