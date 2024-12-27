@@ -32,6 +32,7 @@
 	],
 	"/chillGuy": [],
 	"/gestionarPedidos": [],
+	"/inventory": [],
 	"/kiosko": [],
 	"/ordenar": [
 		"src/routes/ordenar/+page.server.ts"

@@ -56,6 +56,12 @@
             class:font-bold={$page.url.pathname === '/gestionarPedidos'}>
             Gestionar Pedidos
           </a>
+          <a 
+            href="/inventory" 
+            class="text-gray-700 {animate.animate_bounceInRight} hover:text-gray-900 px-3 py-2 rounded-md"
+            class:font-bold={$page.url.pathname === '/inventory'}>
+            Inventario
+          </a>
         </div>
       </div>
       
