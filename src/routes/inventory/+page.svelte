@@ -2,14 +2,17 @@
     import { inventory, filteredInventory } from '$lib/common/stores/inventory';
     import type { InventoryFilter } from '$lib/types/inventory';
     import InventoryItem from '$lib/client/components/inventory/InventoryItem.svelte';
+  import InventoryList from '$lib/client/components/inventory/InventoryList.svelte';
     
     let filter: InventoryFilter = {};
     
     $: items = $filteredInventory(filter);
     $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
   </script>
-  
-  <div class="space-y-6 mt-24">
+
+  <InventoryList/>
+
+  <!-- <div class="space-y-6 mt-24">
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-bold ml-20">Inventory Management</h2>
       <div class="flex gap-4 mr-20">
@@ -55,4 +58,4 @@
         <InventoryItem {item} />
       {/each}
     </div>
-  </div>
+  </div> -->

@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { InventoryItem } from '$lib/types/inventory';
     import { inventory } from '$lib/common/stores/inventory';
+    import Hanoi from "../../../../../assets/Hanoi.jpg";
     
     export let item: InventoryItem;
     
@@ -33,7 +34,7 @@
   <div class="bg-white rounded-lg shadow-md p-6">
     <div class="flex items-center gap-4">
       <img 
-        src={item.image} 
+        src={Hanoi} 
         alt={item.name}
         class="w-20 h-20 object-cover rounded-lg"
       />
@@ -52,9 +53,9 @@
       </div>
       
       <div class="flex justify-between">
-        <span>Status:</span>
+        <span>Estado:</span>
         <span class={item.available ? 'text-green-600' : 'text-red-600'}>
-          {item.available ? 'Available' : 'Unavailable'}
+          {item.available ? 'Disponible' : 'No disponible'}
         </span>
       </div>
     </div>
