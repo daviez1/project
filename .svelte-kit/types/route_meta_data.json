@@ -1,5 +1,8 @@
 {
 	"/": [],
+	"/api/inventory/items": [
+		"src/routes/api/inventory/items/+server.ts"
+	],
 	"/api/kiosko": [
 		"src/routes/api/kiosko/+server.ts"
 	],
