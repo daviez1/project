@@ -1,7 +1,7 @@
   <script lang="ts">
     import type { KioskoCategory } from '$lib/types/kiosko';
     import KioskoItemCard from './KioskoItemCard.svelte';
-  import '../menu/Menu_Kiosko.css'   
+  import '../menu/Menu_Kiosko.css'    
 
   export let category: KioskoCategory;
   </script>

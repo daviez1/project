@@ -19,7 +19,7 @@
   {#if $menuCategoryQuery.isLoading}
     <Loader />
   {:else if $menuCategoryQuery.isError}
-    <p>Error: {$menuCategoryQuery.error.message}</p>
+    <p class="text-red">Error: {$menuCategoryQuery.error.message}</p>
   {:else if $menuCategoryQuery.isSuccess}
     {#each $menuCategoryQuery.data as category}
       {#if category.items.length > 0}      

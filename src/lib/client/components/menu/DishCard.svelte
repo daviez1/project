@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { MenuItem } from '$lib/types/menu';
-  import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
   import { cart } from '$lib/common/stores/cart';
 
   export let item: MenuItem;
   let menuItems
-  
+
+  const keydown =(event:any)=> event.key === 'Enter' || event.key === ' ' &&  addToCart()
+        
   function addToCart() {
   cart.addItem({
     menuItemId: item.id,
@@ -43,4 +43,5 @@
   .div{
     width: 20em;
   }
+  @import './styles.scss';
 </style>

@@ -27,5 +27,19 @@ export let inventoryItems = [{
     minStock: 3,
     maxStock: 30,
     lastRestocked: new Date('2024-12-25')
+  },
+  {
+    id: '3',
+    name: 'Margherita Pizza',
+    description: 'A tasty veggie burger made with a blend of vegetables and spices.',
+    price: 7.99,
+    quantity: 8,
+    type: 'menu',
+    category: 'pizza',
+    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
+    available: true,
+    minStock: 3,
+    maxStock: 30,
+    lastRestocked: new Date('2024-12-25')
   }
   ]

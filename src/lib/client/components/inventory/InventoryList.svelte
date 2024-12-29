@@ -1,46 +1,81 @@
 <script lang="ts">
   import { inventory, filteredInventory } from '$lib/common/stores/inventory';
   import type { InventoryFilter } from '$lib/types/inventory';
-  import { onMount } from 'svelte';
   import InventoryItem from './InventoryItem.svelte';
+  import SeeMore from '../form/SeeMore.svelte';
+  import Select from '../form/Select.svelte';
+  import Searcher from '../form/Searcher.svelte';
 
-  let filter: InventoryFilter = {};
-  
-  $: items = $filteredInventory(filter);
+  let filter: InventoryFilter = { type: undefined };
+  let filterType: 'menu' | 'kiosk' | 'todos' | undefined = 'todos';
+  let searchQuery = '';
+
+  function handleChange(event: any) {
+    filterType = event.target.value as 'menu' | 'kiosk' | 'todos';
+    filter.type = filterType === 'todos' ? undefined : filterType;
+  }
+
+  function handleSearch(event: CustomEvent) {
+    searchQuery = event.detail.query.toLowerCase();
+  }
+
+  $: items = $filteredInventory(filter).filter(item =>
+    item.name.toLowerCase().includes(searchQuery) ||
+    item.category.toLowerCase().includes(searchQuery)
+  );
   $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
 
   // Agrupar elementos por categoría
-  $: groupedItems = items.reduce((acc:any, item) => {
+  $: groupedItems = items.reduce((acc: any, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
     }
     acc[item.category].push(item);
     return acc;
   }, {});
-
-  function toggleDetails(event: any) {
-    const details = event.currentTarget.closest('li').querySelector('.details');
-    if (details) {
-      details.classList.toggle('hidden');
-    } else {
-      console.error('No se encontró el elemento de detalles.');
-    }
-  }
 </script>
 
-<div class="space-y-6 mt-24 ml-20 mr-20">
+<div class="space-y-6 ml-20 mr-20">
   <div class="flex justify-between items-center">
-    <h2 class="text-2xl font-bold">Gestión del inventario</h2>
+    <h2 class="text-4xl font-bold">Gestión del inventario</h2>
+    <!-- Search Bar -->
+    <Searcher on:search={handleSearch} />
     <div class="flex gap-4">
-      <select 
-        bind:value={filter.type}
-        class="rounded-lg border-gray-300"
-      >
-        <option value={undefined}>Todos los productos</option>
-        <option value="menu">Productos del Restaurante</option>
-        <option value="kiosk">Productos del kiosko</option>
-      </select>
-      
+      <!-- Select -->
+      <div class="select w-fit pointer text-white mr-24 mt-24">
+        <div
+          class="selected"
+          data-default="Todos los productos"
+          data-one="Restaurante"
+          data-two="Kiosko"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 512 512"
+            class="arrow"
+          >
+            <path
+              d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+            ></path>
+          </svg>
+        </div>
+        <div class="options">
+          <div title="Todos los productos">
+            <input id="all" name="option" type="radio" value="todos" checked={filterType === 'todos'} on:change={handleChange} />
+            <label class="option" for="all" data-txt="Todos los productos"></label>
+          </div>
+          <div title="Productos del restaurante">
+            <input id="option-1" name="option" type="radio" value="menu" checked={filterType === 'menu'} on:change={handleChange} />
+            <label class="option" for="option-1" data-txt="Productos del Restaurante"></label>
+          </div>
+          <div title="Productos del kiosko">
+            <input id="option-2" name="option" type="radio" value="kiosk" checked={filterType === 'kiosk'} on:change={handleChange} />
+            <label class="option" for="option-2" data-txt="Productos del kiosko"></label>
+          </div>
+        </div>
+      </div>
+      <!-- Select -->
       <label class="flex items-center gap-2">
         <input
           type="checkbox"
@@ -51,6 +86,7 @@
       </label>
     </div>
   </div>
+
 
   {#if lowStockItems.length > 0}
     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
@@ -69,19 +105,14 @@
     </div>
   {/if}
 
-  <ul class="space-y-4">
+  <ul class="shadow-md">
     {#each Object.keys(groupedItems) as category}
-      <li class="border rounded-lg p-4">
+      <li class="rounded-lg p-1 mb-2 shadow-md">
         <div class="flex justify-between items-center">
           <div>
-            <h3 class="text-lg font-bold capitalize">{category}</h3>
+            <h3 class="font-bold text-2xl capitalize text-gray-600 ml-2">{category}</h3>
           </div>
-          <button
-            class="text-blue-600 hover:text-blue-800"
-            on:click={toggleDetails}
-          >
-            Ver detalles
-          </button>
+          <SeeMore/>
         </div>
         <div class="details hidden mt-4">
           <ul class="space-y-2">
@@ -96,3 +127,100 @@
     {/each}
   </ul>
 </div>
+
+<style>
+  .select {
+    transition: 300ms;
+    overflow: hidden;
+  }
+
+  .selected {
+    background-color: #2a2f3b;
+    padding: 5px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 100000;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .arrow {
+    position: relative;
+    right: 0px;
+    height: 10px;
+    transform: rotate(-90deg);
+    width: 25px;
+    fill: white;
+    z-index: 100000;
+    transition: 300ms;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #2a2f3b;
+    position: relative;
+    opacity: 0;
+    transition: 300ms;
+  }
+
+  .select:hover > .options {
+    opacity: 1;
+    top: 0;
+  }
+
+  .select:hover > .selected .arrow {
+    transform: rotate(0deg);
+  }
+
+  .option {
+    border-radius: 5px;
+    padding: 5px;
+    transition: 300ms;
+    background-color: #2a2f3b;
+    width: 150px;
+    font-size: 15px;
+  }
+
+  .option:hover {
+    background-color: #323741;
+  }
+
+  .options input[type="radio"] {
+    display: none;
+  }
+
+  .options label {
+    display: inline-block;
+  }
+
+  .options label::before {
+    content: attr(data-txt);
+  }
+
+  .options input[type="radio"]:checked + label {
+    display: none;
+  }
+
+.options input[type="radio"]#all:checked + label {
+  display: none;
+}
+
+.select:has(.options input[type="radio"]#all:checked) .selected::before {
+  content: attr(data-default);
+}
+.select:has(.options input[type="radio"]#option-1:checked) .selected::before {
+  content: attr(data-one);
+}
+.select:has(.options input[type="radio"]#option-2:checked) .selected::before {
+  content: attr(data-two);
+}
+.select:has(.options input[type="radio"]#option-3:checked) .selected::before {
+  content: attr(data-three);
+}
+</style>

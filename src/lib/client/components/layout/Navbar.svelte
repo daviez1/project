@@ -3,6 +3,7 @@
   import * as animate from '$lib/common/constants/animate';
   import 'animate.css';
   import { onMount } from 'svelte';
+  import LogoHanoi from './LogoHanoi.svelte';
 
   let showMenu = false;
 
@@ -13,10 +14,9 @@
 
 <div class="fixed top-0 w-full z-10">
   <nav class="bg-white">
-    <div class="container mx-auto px-4">
+    <div class="container">
       <div class="flex justify-between items-center h-16">
-        <a href="/" class="font-bold {animate.animate_bounceInRight} text-xl">Restaurant Hanoi</a>
-        
+        <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-xl">Restaurante Hanoi</a>
         <div class="md:hidden">
           <button on:click={toggleMenu} class="text-gray-700 hover:text-gray-900 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -25,13 +25,7 @@
           </button>
         </div>
 
-        <div class="hidden md:flex space-x-4">
-          <a 
-            href="/" 
-            class="text-gray-700 {animate.animate_bounceInRight} hover:text-gray-900 py-2 rounded-md"
-            class:font-bold={$page.url.pathname === '/'}>
-            Home
-          </a>
+        <div class="hidden md:flex space-x-4 end-0">
           <a 
           href="/chillGuy" 
             class="text-gray-700 {animate.animate_bounceInRight} hover:text-gray-900 px-3 py-2 rounded-md"

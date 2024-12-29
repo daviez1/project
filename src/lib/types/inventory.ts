@@ -14,7 +14,7 @@ export interface InventoryItem {
   }
   
   export interface InventoryFilter {
-    type?: 'menu' | 'kiosk';
+    type?: 'menu' | 'kiosk'| 'todos';
     category?: string;
     available?: boolean;
     lowStock?: boolean;
