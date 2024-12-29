@@ -1,46 +1,19 @@
 <script lang="ts">
-  import { inventory, filteredInventory } from '$lib/common/stores/inventory';
-  import type { InventoryFilter, InventoryItem } from '$lib/types/inventory';
-  import InventoryItemComponent from './InventoryItem.svelte';
-  import SeeMore from '../form/SeeMore.svelte';
-  import Select from '../form/Select.svelte';
-  import Searcher from '../form/Searcher.svelte';
-  import FormAddInventoryItem from '../form/FormAddInventoryItem.svelte';
+    import type { InventoryFilter, InventoryItem } from '$lib/types/inventory';
 
-  export let groupedItems
-  let filter: InventoryFilter = { type: undefined };
-  let searchQuery = '';
-  let filterType: 'menu' | 'kiosk' | 'todos' | undefined = 'todos';
-
-  function handleChange(event: any) {
-    filterType = event.target.value as 'menu' | 'kiosk' | 'todos';
-    filter.type = filterType === 'todos' ? undefined : filterType;
-  }
-
-  function handleSearch(event: CustomEvent) {
-    searchQuery = event.detail.query.toLowerCase();
-  }
-
-  $: items = $filteredInventory(filter).filter(item =>
-    item.name.toLowerCase().includes(searchQuery) ||
-    item.category.toLowerCase().includes(searchQuery)
-  );
-  $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
-
-  // Datos del nuevo producto
-  let newProduct: InventoryItem = {
-    id: '',
-    name: '',
-    description: '',
-    price: 0,
-    quantity: 0,
-    type: 'menu',
-    category: '',
-    image: '',
-    available: true,
-    minStock: 0,
-    maxStock: 0,
-    lastRestocked: new Date()
+    let newProduct: InventoryItem = {
+        id: '',
+        name: '',
+        description: '',
+        price: 0,
+        quantity: 0,
+        type: 'menu',
+        category: '',
+        image: '',
+        available: true,
+        minStock: 0,
+        maxStock: 0,
+        lastRestocked: new Date()
   };
 
   function addProduct() {
@@ -65,48 +38,7 @@
   }
 </script>
 
-{#if lowStockItems.length > 0}
-  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-    <div class="flex">
-      <div class="flex-shrink-0">
-        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <div class="ml-3">
-        <p class="text-sm text-yellow-700">
-          {lowStockItems.length} items are running low on stock
-        </p>
-      </div>
-    </div>
-  </div>
-{/if}
-
-<!--Divisor de lista y gestion  -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-8">
-  <ul class="inline">
-    {#each Object.keys(groupedItems) as category}
-      <li class="rounded-lg p-1 mb-2 shadow-md">
-        <div class="flex justify-between items-center">
-          <div>
-            <h3 class="font-bold text-2xl capitalize text-gray-600 ml-2">{category}</h3>
-          </div>
-          <SeeMore/>
-        </div>
-        <div class="details hidden mt-4">
-          <ul class="space-y-2">
-            {#each groupedItems[category] as item (item.id)}
-              <li>
-                <InventoryItemComponent {item} />
-              </li>
-            {/each}
-          </ul>
-        </div>
-      </li>
-    {/each}
-  </ul>
-  <FormAddInventoryItem/>
-  <!-- <div class="inline">
+<div class="inline mx-8 shadow-md p-4 mb-20">
     <h1 class="text-3xl font-bold text-center">Gestión de productos</h1>
     <form on:submit|preventDefault={addProduct} class="space-y-4">
       <div>
@@ -154,5 +86,4 @@
       </div>
       <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm">Agregar producto</button>
     </form>
-  </div> -->
-</div>
+  </div>

@@ -38,14 +38,14 @@
     
     <div class="mt-4 space-y-2">
       <div class="flex justify-center">
-        <span class="font-semibold text-xl ml-2">Cantidad de suministros:</span>
+        <span class="font-semibold text-xl">Cantidad:</span>
         <span class="font-semibold text-xl ml-2" class:text-red-600={item.quantity <= item.minStock}>
           {item.quantity}
         </span>
       </div>
       
       <div class="flex justify-center">
-        <span class="font-semibold mr-2 text-xl">Estado:</span>
+        <span class="font-semibold text-xl">Estado:</span>
         <span class="{item.available ? 'text-green-600' : 'text-red-600'} ml-2 text-xl">
           {item.available ? 'Disponible' : 'No disponible'}
         </span>
@@ -88,7 +88,7 @@
       {/if}
     </div>
   </div>
-  <div class="w-1/2 flex justify-center items-center">
+  <div class="w-1/2 hidden sm:flex justify-center items-center">
     <img 
       src={Hanoi} 
       alt={item.name}
