@@ -8,36 +8,28 @@
   import { createQuery } from '@tanstack/svelte-query';
   import { GetMenuItems } from '$lib/common/constants/queries';
   import Loader from '../form/Loader.svelte';
+  import { fade, fly } from 'svelte/transition';
 
   let showSeeOrders = true;
   let direction = 'down';
-
   const menuItemsQuery = createQuery({
     queryKey: [GetMenuItems],
-    queryFn: async()=> await cart.fetchMenuItems(),
+    queryFn: async () => await cart.fetchMenuItems(),
   });
 
+  let paginateMenu: MenuItem[] = [];
 
-//   import { createQuery } from '@tanstack/svelte-query'
+  onMount(() => {
+    const updatePaginateMenu = () => {
+      const data = $menuItemsQuery.data;
+      if (data) {
+        const start = Math.floor(Math.random() * (data.length - 3));
+        paginateMenu = data.slice(start, start + 3);
+      }
+    };
 
-//   const endpoint = 'http://localhost:5173/api/data'
-
-//   let intervalMs = 1000
-
-//   const query = createQuery({
-//     queryKey: ['refetch'],
-//     queryFn: async () => await fetch(endpoint).then((r) => r.json()),
-//     refetchInterval: intervalMs,
-//   })
-// <input type="number" bind:value={intervalMs} />
-
-
-  onMount(async () => {
-    // setInterval(async () => {
-    //   let inicio = 0, fin = 2;
-    //   $menuItemsQuery.data.slice(inicio, fin);
-    //   inicio += 3; fin += 2;
-    // }, 3000);
+    updatePaginateMenu();
+    const interval = setInterval(updatePaginateMenu, 10000);
 
     const cartElement = document.getElementById('cart');
     const observer = new IntersectionObserver((entries) => {
@@ -53,6 +45,8 @@
     if (cartElement) {
       observer.observe(cartElement);
     }
+
+    return () => clearInterval(interval);
   });
 </script>
 
@@ -65,8 +59,8 @@
       {:else if $menuItemsQuery.isError}
         <p>Error: {$menuItemsQuery.error.message}</p>
       {:else if $menuItemsQuery.isSuccess}
-        {#each $menuItemsQuery.data as item}
-          <DishCard {item} />
+        {#each paginateMenu as item (item.id)}
+          <DishCard {item}/>
         {/each}
       {/if}
     </div>

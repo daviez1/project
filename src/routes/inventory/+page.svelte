@@ -3,6 +3,7 @@
   import type { InventoryFilter } from '$lib/types/inventory';
   import InventoryList from '$lib/client/components/inventory/InventoryList.svelte';
   import Searcher from '$lib/client/components/form/Searcher.svelte';
+  import { onMount } from 'svelte';
 
   let filter: InventoryFilter = { type: undefined };
   let searchQuery = '';
@@ -16,6 +17,10 @@
   function handleSearch(event: CustomEvent) {
     searchQuery = event.detail.query.toLowerCase();
   }
+
+  onMount(async () => {
+    await inventory.fetchInventoryItems();
+  });
 
   $: items = $filteredInventory(filter).filter(item =>
     item.name.toLowerCase().includes(searchQuery) ||

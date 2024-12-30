@@ -1,6 +1,4 @@
-import * as KioskoTypes from "$lib/types/kiosko";
-import KioskoCategory from "$lib/common/Schemas/KioskoCategory";
-import KioskoItem from "$lib/common/Schemas/KioskoItem";
+import * as InventoryItemTypes from '$lib/types/inventory';
 import { dbConnect } from "../config/db";
 import InventoryItem from "$lib/common/Schemas/InventoryItem";
 
@@ -26,33 +24,23 @@ try{
 }
 }
 
-export const getInventoryCategories = async (): Promise<KioskoTypes.KioskoCategory[]> => {
-try{   
-    await dbConnect()
-    const kiskoCategories = await KioskoCategory.find()
-    return kiskoCategories;
-} catch (error:any) {
-    console.log(`error: ${error}`)
-    throw new Error('Error al obtener la categoria del producto en el kiosko')
-}
-}
 
-export const createInventoryItem = async ( kioskoItem: KioskoTypes.KioskoItem ) => {
+export const createInventoryItem = async ( inventoryItem: InventoryItemTypes.InventoryItem ) => {
     try {
-        await KioskoItem.insertMany(kioskoItem);
+        await InventoryItem.insertMany(inventoryItem);
     } catch (error:any) {
         console.log(`error: ${error}`)
-        throw new Error('Error al crear el plato')
+        throw new Error('Error al crear el producto en el inventario')
     }
 };
 
-export const getInventoryCategoryById = async ( id:string ) => {
-    try {
-        await dbConnect()
-        const kioskoCategory = await KioskoCategory.findById(id)
-        return kioskoCategory;
-    } catch (error:any) {
-        console.log(`error: ${error}`)
-        throw new Error('Error al obtener la categoria')
-    }
-};
+// export const getInventoryCategoryById = async ( id:string ) => {
+//     try {
+//         await dbConnect()
+//         const kioskoCategory = await KioskoCategory.findById(id)
+//         return kioskoCategory;
+//     } catch (error:any) {
+//         console.log(`error: ${error}`)
+//         throw new Error('Error al obtener la categoria')
+//     }
+// };

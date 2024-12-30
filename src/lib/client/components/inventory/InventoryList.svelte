@@ -1,86 +1,26 @@
 <script lang="ts">
-  import { inventory, filteredInventory } from '$lib/common/stores/inventory';
+  import { filteredInventory, inventory } from '$lib/common/stores/inventory';
   import type { InventoryFilter, InventoryItem } from '$lib/types/inventory';
   import InventoryItemComponent from './InventoryItem.svelte';
   import SeeMore from '../form/SeeMore.svelte';
-  import Select from '../form/Select.svelte';
-  import Searcher from '../form/Searcher.svelte';
   import FormAddInventoryItem from '../form/FormAddInventoryItem.svelte';
+  import Loader from '../form/Loader.svelte';
 
-  export let groupedItems
+  export let groupedItems;
   let filter: InventoryFilter = { type: undefined };
   let searchQuery = '';
-  let filterType: 'menu' | 'kiosk' | 'todos' | undefined = 'todos';
 
-  function handleChange(event: any) {
-    filterType = event.target.value as 'menu' | 'kiosk' | 'todos';
-    filter.type = filterType === 'todos' ? undefined : filterType;
-  }
-
-  function handleSearch(event: CustomEvent) {
-    searchQuery = event.detail.query.toLowerCase();
+  function handleItemAdded(event: CustomEvent) {
+    const newItem: InventoryItem = event.detail.item;
+    inventory.updateItem(newItem);
   }
 
   $: items = $filteredInventory(filter).filter(item =>
-    item.name.toLowerCase().includes(searchQuery) ||
-    item.category.toLowerCase().includes(searchQuery)
+    (item.name?.toLowerCase() || '').includes(searchQuery) ||
+    (item.category?.toLowerCase() || '').includes(searchQuery)
   );
   $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
-
-  // Datos del nuevo producto
-  let newProduct: InventoryItem = {
-    id: '',
-    name: '',
-    description: '',
-    price: 0,
-    quantity: 0,
-    type: 'menu',
-    category: '',
-    image: '',
-    available: true,
-    minStock: 0,
-    maxStock: 0,
-    lastRestocked: new Date()
-  };
-
-  function addProduct() {
-    console.log('Hacer funcion crear producto');
-    
-    // $inventory.(newProduct);
-    // // Reiniciar el formulario
-    // newProduct = {
-    //   id: '',
-    //   name: '',
-    //   description: '',
-    //   price: 0,
-    //   quantity: 0,
-    //   type: 'menu',
-    //   category: '',
-    //   image: '',
-    //   available: true,
-    //   minStock: 0,
-    //   maxStock: 0,
-    //   lastRestocked: new Date()
-    // };
-  }
 </script>
-
-{#if lowStockItems.length > 0}
-  <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-    <div class="flex">
-      <div class="flex-shrink-0">
-        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-        </svg>
-      </div>
-      <div class="ml-3">
-        <p class="text-sm text-yellow-700">
-          {lowStockItems.length} items are running low on stock
-        </p>
-      </div>
-    </div>
-  </div>
-{/if}
 
 <!--Divisor de lista y gestion  -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-8">
@@ -105,54 +45,5 @@
       </li>
     {/each}
   </ul>
-  <FormAddInventoryItem/>
-  <!-- <div class="inline">
-    <h1 class="text-3xl font-bold text-center">Gestión de productos</h1>
-    <form on:submit|preventDefault={addProduct} class="space-y-4">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Nombre del producto</label>
-        <input type="text" id="name" bind:value={newProduct.name} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Nombre del producto" required />
-      </div>
-      <div>
-        <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
-        <textarea id="description" bind:value={newProduct.description} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Descripción del producto" required></textarea>
-      </div>
-      <div>
-        <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
-        <input type="number" id="price" bind:value={newProduct.price} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Precio" required />
-      </div>
-      <div>
-        <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
-        <input type="number" id="quantity" bind:value={newProduct.quantity} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Cantidad" required />
-      </div>
-      <div>
-        <label for="type" class="block text-sm font-medium text-gray-700">Tipo</label>
-        <select id="type" bind:value={newProduct.type} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-          <option value="menu">Restaurante</option>
-          <option value="kiosk">Kiosko</option>
-        </select>
-      </div>
-      <div>
-        <label for="category" class="block text-sm font-medium text-gray-700">Categoría</label>
-        <input type="text" id="category" bind:value={newProduct.category} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Categoría" required />
-      </div>
-      <div>
-        <label for="image" class="block text-sm font-medium text-gray-700">Imagen (URL)</label>
-        <input type="text" id="image" bind:value={newProduct.image} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="URL de la imagen" required />
-      </div>
-      <div>
-        <label for="minStock" class="block text-sm font-medium text-gray-700">Stock mínimo</label>
-        <input type="number" id="minStock" bind:value={newProduct.minStock} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Stock mínimo" required />
-      </div>
-      <div>
-        <label for="maxStock" class="block text-sm font-medium text-gray-700">Stock máximo</label>
-        <input type="number" id="maxStock" bind:value={newProduct.maxStock} class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Stock máximo" required />
-      </div>
-      <div>
-        <label for="available" class="block text-sm font-medium text-gray-700">Disponible</label>
-        <input type="checkbox" id="available" bind:checked={newProduct.available} class="mt-1 block rounded-md border-gray-300 shadow-sm" />
-      </div>
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm">Agregar producto</button>
-    </form>
-  </div> -->
+  <FormAddInventoryItem on:itemAdded={handleItemAdded} />
 </div>

@@ -10,7 +10,7 @@
     }
   </script>
   
-  <spani class="search-bar mt-4">
+  <spani class="search-bar mt-4 w-full md:w-auto">
     <input
       type="text"
       placeholder="Buscar productos..."

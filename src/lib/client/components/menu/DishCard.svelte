@@ -1,11 +1,9 @@
 <script lang="ts">
   import type { MenuItem } from '$lib/types/menu';
   import { cart } from '$lib/common/stores/cart';
+  import { fade, fly } from 'svelte/transition';
 
   export let item: MenuItem;
-  let menuItems
-
-  const keydown =(event:any)=> event.key === 'Enter' || event.key === ' ' &&  addToCart()
         
   function addToCart() {
   cart.addItem({
@@ -14,18 +12,15 @@
     quantity: 1
   });
   
-  // if ($page.url.pathname !== '/ordenar' && $page.url.pathname !== '/kiosko') {
-  //   goto('/ordenar');
-  // }
 }
 
 </script>
 
-<div class="div w-80 rounded-lg shadow-md overflow-hidden m-auto mb-5 border flex flex-col">
-  <img src={item.image} alt={item.name} class="w-full block h-72 object-cover" />
-  <div class="p-4 flex flex-col flex-grow">
+<div in:fade={{ duration: 500 }} out:fly={{ x: 200, duration: 500 }} class="div w-80 rounded-lg shadow-md overflow-hidden m-auto mb-5 border flex flex-col">
+  <img src={item.image} alt={item.name} class="w-80 block h-72 object-cover" />
+  <div class="p-4 flex flex-col flex-grow h-48">
     <h3 class="text-xl font-semibold mb-2">{item.name}</h3>
-    <p class="text-gray-600 mb-4 flex-grow">{item.description}</p>
+    <p class="text-gray-600 mb-1 flex-grow">{item.description}</p>
     <div class="mt-auto flex justify-between items-center">
       <span class="text-lg font-bold">${item.price.toFixed(2)}</span>
       <button
@@ -43,5 +38,4 @@
   .div{
     width: 20em;
   }
-  @import './styles.scss';
 </style>
