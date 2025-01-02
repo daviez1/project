@@ -23,8 +23,8 @@
   });
 
   $: items = $filteredInventory(filter).filter(item =>
-    item.name.toLowerCase().includes(searchQuery) ||
-    item.category.toLowerCase().includes(searchQuery)
+    item.name?.toLowerCase().includes(searchQuery) ||
+    item.category?.toLowerCase().includes(searchQuery)
   );
   $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
 

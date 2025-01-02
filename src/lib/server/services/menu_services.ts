@@ -44,10 +44,25 @@ export const createMenuItem = async ( menuItem: TypesMenu.MenuItem ) => {
     }
 };
 
+export const createMenuCategory = async (menuCategory: TypesMenu.MenuCategory) => {
+    try {
+        const categoryExist = await MenuCategory.find({id: menuCategory.id})
+        if (categoryExist.length>0) {
+            throw new Error("Ya existe la categoria")
+        }
+        const newMenuCategory = await MenuCategory.create(menuCategory);
+        return await newMenuCategory.populate('items');
+    } catch (error: any) {
+        console.log(`error: ${error}`);
+        throw new Error('Error al crear la categoria del plato');
+    }
+};
+
+
 export const getMenuCategory = async () => {
     try {
         await dbConnect()
-        const menuCategories = await MenuCategory.find()
+        const menuCategories = await MenuCategory.find().populate('items')
         return menuCategories;
     } catch (error:any) {
         console.log(`error: ${error}`)

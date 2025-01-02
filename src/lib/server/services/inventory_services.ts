@@ -1,6 +1,8 @@
 import * as InventoryItemTypes from '$lib/types/inventory';
 import { dbConnect } from "../config/db";
 import InventoryItem from "$lib/common/Schemas/InventoryItem";
+import MenuItem from '$lib/common/Schemas/MenuItem';
+import MenuCategory from '$lib/common/Schemas/MenuCategory';
 
 export const getInventoryItem = async () => {
 try{   
@@ -25,14 +27,19 @@ try{
 }
 
 
-export const createInventoryItem = async ( inventoryItem: InventoryItemTypes.InventoryItem ) => {
+export const createInventoryItem = async (inventoryItem: InventoryItemTypes.InventoryItem) => {
     try {
         await InventoryItem.insertMany(inventoryItem);
-    } catch (error:any) {
-        console.log(`error: ${error}`)
-        throw new Error('Error al crear el producto en el inventario')
+        //const { id, name, description, price, image, category, available } = inventoryItem;
+        //const menuItem = await MenuItem.create({ id, name, description, price, image, category, available });
+        //const menuCategory = { id: category, name: category.toLowerCase(), menuItems: [menuItem._id] }; // Usar menuItem._id
+        //await MenuCategory.create(menuCategory);
+    } catch (error: any) {
+        console.log(`error: ${error}`);
+        throw new Error('Error al crear el producto en el inventario');
     }
 };
+
 
 // export const getInventoryCategoryById = async ( id:string ) => {
 //     try {
