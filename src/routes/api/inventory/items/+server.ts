@@ -16,6 +16,7 @@ export const GET: RequestHandler = async (  ) => {
 export const POST: RequestHandler = async ({ request }) => {
     try { 
         const inventoryItem: InventoryItemTypes.InventoryItem = await request.json(); 
+        
         const newInventoryItem = await createInventoryItem(inventoryItem); 
         return new Response(JSON.stringify({ message: 'Producto del inventario creado', newInventoryItem }), 
         { status: 201, headers: { 'Content-Type': 'application/json' } }); 

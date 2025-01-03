@@ -28,7 +28,7 @@ try{
 export const getKioskoCategories = async (): Promise<KioskoTypes.KioskoCategory[]> => {
 try{   
     await dbConnect()
-    const kiskoCategories = await KioskoCategory.find()
+    const kiskoCategories = await KioskoCategory.find().populate('items')
     return kiskoCategories;
 } catch (error:any) {
     console.log(`error: ${error}`)
@@ -53,5 +53,33 @@ export const getKioskoCategoryById = async ( id:string ) => {
     } catch (error:any) {
         console.log(`error: ${error}`)
         throw new Error('Error al obtener la categoria')
+    }
+};
+
+export const createKioskoCategory = async (kioskoCategory: KioskoTypes.KioskoCategory) => {
+    try {
+        const categoryExist = await KioskoCategory.findOne({ id: kioskoCategory.id });
+        if (categoryExist) {
+            throw new Error("Ya existe la categoria");
+        }
+
+        const itemIds = [];
+        for (const newItem of kioskoCategory.items) {
+            let item = await KioskoItem.findOne({ id: newItem.id });
+            if (!item) {
+                item = await KioskoItem.create(newItem);
+            }
+            itemIds.push(item._id);
+        }
+
+        const newKioskoCategory = await KioskoCategory.create({
+            ...kioskoCategory,
+            items: itemIds
+        });
+
+        return await newKioskoCategory.populate('items');
+    } catch (error: any) {
+        console.log(`error: ${error}`);
+        throw new Error('Error al crear la categoria del plato');
     }
 };

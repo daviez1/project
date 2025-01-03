@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const KioskoCategorySchema = new mongoose.Schema({
   id: { type: String, required: true },
   name: { type: String, required: true },
-  items: [{ type: mongoose.Schema.Types.ObjectId, ref: 'KioskoItem' }]
+  items: [{ type: mongoose.Schema.Types.Mixed, ref: 'KioskoItem' }]
 });
 
 const KioskoCategory = mongoose.models.KioskoCategory || mongoose.model('KioskoCategory', KioskoCategorySchema);
