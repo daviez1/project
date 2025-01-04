@@ -3,6 +3,9 @@ import Order from "$lib/common/Schemas/Order"
 import OrderItem from "$lib/common/Schemas/OrderItem"
 import { dbConnect } from "../config/db"
 import * as OrderTypes from '$lib/types/order'
+import mongoose from "mongoose";
+import { statusPlus } from "$lib/client/utils/statusPlus";
+import { translateStatus } from "$lib/client/utils/translate";
 
 // export const getOrder = async () => {
 //     try {
@@ -47,6 +50,22 @@ export const getOrderItem = async ( id:string | undefined ) => {
 
     
 };
+
+export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId) => {
+    try {
+        const order = await Order.findById(orderId);
+        if (!order) {
+            throw new Error('Pedido no encontrado');
+        }
+        const newStatus = statusPlus(order.status);
+        const toUpdate = await Order.findByIdAndUpdate(orderId, { status: newStatus }, { new: true });
+        return toUpdate;
+    } catch (error) {
+        console.error('Error al actualizar el estado del pedido:', error);
+        throw new Error('Error al actualizar el estado del pedido');
+    }
+};
+
 
 // export const getOrderItem = async() =>{
 //     try {

@@ -9,8 +9,6 @@
   import '../menu/Menu_Kiosko.css'
   import { capitalize } from '$lib/client/utils/capitalize';
 
-  capitalize('croqueta')
-
   const menuCategoryQuery = createQuery({
     queryKey: [GetCategoryItems],
     queryFn: async () => await cart.fetchMenuCategories(),

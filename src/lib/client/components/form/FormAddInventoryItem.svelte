@@ -1,12 +1,19 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import { inventory } from '$lib/common/stores/inventory';
   import type { InventoryItem } from '$lib/types/inventory';
+  import { goto } from '$app/navigation';
+
+  let items: InventoryItem[] = [];
+
+  onMount(async () => {
+    items = await inventory.fetchInventoryItems();
+  });
 
   const dispatch = createEventDispatcher();
 
   let newProduct: InventoryItem = {
-    id: '6',
+    id: '',
     name: '',
     description: '',
     price: 0,
@@ -21,14 +28,17 @@
   };
 
   function addProduct() {
-    console.log('Hacer funcion crear producto');
+    // Encontrar el ID más alto en el array de items
+    const highestId = items.reduce((max, item) => Math.max(max, Number(item.id)), 0);
+    newProduct.id = String(highestId + 1);
 
+    // Agregar el nuevo producto al inventario
     inventory.addInventoryItem(newProduct);
     dispatch('itemAdded', { item: newProduct });
 
     // Reiniciar el formulario
     newProduct = {
-      id: String(Number(newProduct.id) + 1),
+      id: '',
       name: '',
       description: '',
       price: 0,
@@ -41,10 +51,11 @@
       maxStock: 0,
       lastRestocked: new Date()
     };
+    location.reload();
   }
 </script>
 
-<div class="inline mx-8 shadow-md p-4 mb-20">
+<div class="inline mx-8 h-fit shadow-md p-4 mb-20">
   <h1 class="text-3xl font-bold text-center mb-8">Gestión de productos</h1>
   <form on:submit|preventDefault={addProduct} class="space-y-4">
     <div>
@@ -93,7 +104,6 @@
     <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm">Agregar producto</button>
   </form>
 </div>
-
 <style>
   input {
     padding: .3em;

@@ -5,6 +5,7 @@
   import SeeMore from '../form/SeeMore.svelte';
   import FormAddInventoryItem from '../form/FormAddInventoryItem.svelte';
   import Loader from '../form/Loader.svelte';
+  import { onMount } from 'svelte';
 
   export let groupedItems;
   let filter: InventoryFilter = { type: undefined };

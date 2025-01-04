@@ -4,9 +4,9 @@ import InventoryItem from "$lib/common/Schemas/InventoryItem";
 import MenuItem from '$lib/common/Schemas/MenuItem';
 import MenuCategory from '$lib/common/Schemas/MenuCategory';
 import KioskoItem from '$lib/common/Schemas/KioskoItem';
-import { capitalize } from '$lib/client/utils/capitalize';
 import KioskoCategory from '$lib/common/Schemas/KioskoCategory';
 import { handleCategoryCreation } from '../../../../hooks.server';
+import mongoose from 'mongoose';
 
 export const getInventoryItem = async () => {
 try{   
@@ -34,7 +34,7 @@ try{
 export const createInventoryItem = async (inventoryItem: InventoryItemTypes.InventoryItem) => {
     try {
         const item = { 
-            id: '12', 
+            id: inventoryItem.id, 
             name: inventoryItem.name, 
             description: inventoryItem.description, 
             price: inventoryItem.price, 
@@ -63,7 +63,9 @@ export const createInventoryItem = async (inventoryItem: InventoryItemTypes.Inve
     }
 };
 
-
+export const deleteInventoryItem = async( id:mongoose.Types.ObjectId ) =>{
+    await InventoryItem.findByIdAndDelete(id)
+}
 
 // export const getInventoryCategoryById = async ( id:string ) => {
 //     try {

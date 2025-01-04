@@ -4,7 +4,9 @@
   import Hanoi from "../../../../../assets/Hanoi.jpg";
   
   export let item: InventoryItem;
+  const _id = item._id
   
+
   let isUpdating = false;
   let updateQuantity = 0;
   
@@ -14,7 +16,7 @@
       id: item.id,
       quantity: updateQuantity,
       type: 'add'
-    });
+    }, _id);
     isUpdating = false;
     updateQuantity = 0;
   }
@@ -25,7 +27,7 @@
       id: item.id,
       quantity: updateQuantity,
       type: 'remove'
-    });
+    }, _id);
     isUpdating = false;
     updateQuantity = 0;
   }

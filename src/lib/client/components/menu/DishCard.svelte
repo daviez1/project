@@ -11,7 +11,6 @@
     name: item.name,
     quantity: 1
   });
-  
 }
 
 </script>

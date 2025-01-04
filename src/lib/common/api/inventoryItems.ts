@@ -1,3 +1,4 @@
+import { inventory } from '../stores/inventory';
 export const get = async (customFetch = fetch) => {
     const response = await customFetch('/api/inventory/items');
     const inventoryItems = await response.json();

@@ -12,7 +12,7 @@ const InventoryItemSchema = new mongoose.Schema({
   available: { type: Boolean, required: true },
   minStock: { type: Number, required: true },
   maxStock: { type: Number, required: true },
-  lastRestocked: { type: String, required: false }
+  lastRestocked: { type: Date, required: false }
 });
 
 const InventoryItem = mongoose.models.InventoryItem || mongoose.model('InventoryItem', InventoryItemSchema);
