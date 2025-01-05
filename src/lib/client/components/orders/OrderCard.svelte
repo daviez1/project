@@ -9,7 +9,6 @@
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrders } from '$lib/common/constants/queries';
   import { cart } from '$lib/common/stores/cart';
-  import Loader from '../form/Loader.svelte';
 
   export let order: Order;
   let showToast = false
@@ -24,7 +23,7 @@
 });
   const ordersQuery = createQuery({ 
   queryKey: [GetOrders], 
-  queryFn: async () => await orders.getOrder()      
+  queryFn: async () => await orders.fetchOrders()      
 });
 
     $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
@@ -48,7 +47,8 @@
       showToast = true;
     } else {
       const newStatus = statusPlus(order.status);
-      orders.updateStatus(order.id, newStatus);
+      console.log(newStatus);
+      orders.updateStatus(order._id);
     }
   }
 

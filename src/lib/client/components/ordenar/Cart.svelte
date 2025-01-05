@@ -2,16 +2,17 @@
   import { cart } from '$lib/common/stores/cart';
   import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import Toast from '$lib/client/components/notifications/Toast.svelte';
-  import { onMount } from 'svelte';
   import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrdersLastId } from '$lib/common/constants/queries';
   import { getMenuItemQuery } from '$lib/common/data/menu';
+  import * as OrderTypes from "$lib/types/order";
+  
 
   let showToast = false;
   let toastMessage = '';
-  let newOrder: Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
+  let newOrder: OrderTypes.Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
 
   const menuItemsQuery = createQuery({ 
   queryKey: [GetMenuItems], 
@@ -20,7 +21,7 @@
   const ordersLastIdQuery = createQuery({ 
   queryKey: [GetOrdersLastId], 
   queryFn: async () => {
-   const ordersData:Order[] = await orders.getOrder();
+   const ordersData:Order[] = await orders.fetchOrders();
    return ordersData[ordersData.length-1].id
   }      
 });
@@ -48,7 +49,7 @@
     newOrder.id = String(Number(ordersLastId) + 1)
     newOrder.items = items
     newOrder.total = total
-    orders.addOrderDB(newOrder);
+    orders.post(newOrder);
     cart.clear();
     // Muestra el toast
     toastMessage = 'Pedido confirmado!';

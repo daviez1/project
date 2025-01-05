@@ -7,7 +7,7 @@
   let ordersDB: Order[] = []
 
 onMount(async()=>{
-  ordersDB = await orders.getOrder()
+  ordersDB = await orders.fetchOrders()
 })
 
   $: pendingOrders = ordersDB.filter(order => 

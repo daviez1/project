@@ -51,7 +51,7 @@
       maxStock: 0,
       lastRestocked: new Date()
     };
-    location.reload();
+    // location.reload();
   }
 </script>
 

@@ -2,9 +2,10 @@
   import type { InventoryItem } from '$lib/types/inventory';
   import { inventory } from '$lib/common/stores/inventory';
   import Hanoi from "../../../../../assets/Hanoi.jpg";
+  import mongoose from 'mongoose';
   
   export let item: InventoryItem;
-  const _id = item._id
+  const _id:mongoose.Types.ObjectId | any = item._id
   
 
   let isUpdating = false;

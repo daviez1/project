@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface InventoryItem {
-    _id: mongoose.Types.ObjectId
+    _id?: mongoose.Types.ObjectId
     id: string;
     name: string;
     description: string;

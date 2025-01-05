@@ -15,6 +15,7 @@ function createInventoryStore() {
       } else {
         console.error("No data returned from API");
       }
+      return items
     } catch (error) {
       console.error("Error fetching inventory items:", error);
     }
@@ -30,7 +31,7 @@ function createInventoryStore() {
       throw new Error('Error al crear el producto en el inventario');
     }
     const newItem = await response.json();
-    update(inventorys => [...inventorys, newItem]);
+    update(inventory => [...inventory, newItem]);
   };
 
   const updateStock = async (stockUpdate: StockUpdate, id:mongoose.Types.ObjectId) => {

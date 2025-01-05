@@ -7,16 +7,16 @@
   import { GetOrders } from '$lib/common/constants/queries';
   import Loader from '../form/Loader.svelte';
 
-  let ordersDB: Order[] = []
+  // let ordersDB: Order[] = []
 
   const ordersQuery = createQuery({ 
   queryKey: [GetOrders], 
-  queryFn: async () => await orders.getOrder()      
+  queryFn: async () => await orders.fetchOrders()      
 });
 
-  onMount(async()=>{
-    ordersDB = await orders.getOrder()
-  })
+  // onMount(async()=>{
+  //   ordersDB = await orders.fetchOrders()
+  // })
 
 </script>
 
