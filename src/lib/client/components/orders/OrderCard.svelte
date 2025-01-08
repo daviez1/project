@@ -3,8 +3,8 @@
   import { getMenuItemQuery } from '$lib/common/data/menu';
   import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import { translateStatus } from '$lib/client/utils/translate';
-  import { statusPlus, statusPlusBackend } from '$lib/client/utils/statusPlus';
-  import Toast from '../notifications/Toast.svelte';
+  import { statusPlus } from '$lib/client/utils/statusPlus';
+  import ToastComplete from '../notifications/ToastComplete.svelte';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrders } from '$lib/common/constants/queries';
@@ -12,31 +12,31 @@
   import mongoose from 'mongoose';
 
   export let order: Order;
-  let showToast = false
+  let showToast = false;
 
   const menuItemsQuery = createQuery({ 
-  queryKey: [GetMenuItems], 
-  queryFn: async () => await cart.fetchMenuItems()      
-});
+    queryKey: [GetMenuItems], 
+    queryFn: async () => await cart.fetchMenuItems()      
+  });
   const kioskoItemsQuery = createQuery({ 
-  queryKey: [GetKioskoItems], 
-  queryFn: async () => await cart.fetchKioskoItems()      
-});
+    queryKey: [GetKioskoItems], 
+    queryFn: async () => await cart.fetchKioskoItems()      
+  });
   const ordersQuery = createQuery({ 
-  queryKey: [GetOrders], 
-  queryFn: async () => await orders.fetchOrders()      
-});
+    queryKey: [GetOrders], 
+    queryFn: async () => await orders.fetchOrders()      
+  });
 
-    $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
-    $: kioskoItems = $kioskoItemsQuery.data || [];
+  $: menuItems = $menuItemsQuery.data || [];
+  $: kioskoItems = $kioskoItemsQuery.data || [];
 
-  const statusColors: { pending:string, preparing:string, ready:string, completed:string } = {
+  const statusColors: { pending: string, preparing: string, ready: string, completed: string } = {
     pending: 'bg-yellow-100 text-yellow-800',
     preparing: 'bg-blue-100 text-blue-800',
     ready: 'bg-green-100 text-green-800',
     completed: 'bg-gray-100 text-gray-800'
   };
-  const statusColorsPlus: { pending:string, preparing:string, ready:string, completed:string } = {
+  const statusColorsPlus: { pending: string, preparing: string, ready: string, completed: string } = {
     pending: 'bg-blue-100 text-blue-800',
     preparing: 'bg-green-100 text-green-800',
     ready: 'bg-gray-100 text-gray-800',
@@ -46,6 +46,7 @@
   function handleStatusChange(id: mongoose.Types.ObjectId) {
     if (id) {
       orders.updateStatus(id);
+      showToast = true; // Mostrar el toast cuando se actualiza el estado
     } else {
       console.error('Order ID is undefined');
     }
@@ -75,7 +76,6 @@
   </div>
   
   <div class="space-y-2 mb-4">
-
     {#each order.items as item}
       {@const menuItem = getMenuItemQuery(item.menuItemId, menuItems) ?? getKioskoItemQuery(item.menuItemId, kioskoItems)}
       <div class="flex justify-between">
@@ -84,8 +84,8 @@
       </div>
     {/each}
   </div>
-  {#if order.status == 'completed'}
-  <Toast message='Pedido entregado' onClose={closeToast} />
+  {#if showToast && order.status == 'completed'}
+    <ToastComplete message='Pedido entregado' onClose={closeToast} type='success' duration={3000} />
   {/if}
   <div class="border-t pt-4 flex justify-between items-center">
     <span class="font-semibold">Total:</span>

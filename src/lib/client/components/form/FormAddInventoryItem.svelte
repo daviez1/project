@@ -2,8 +2,13 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import { inventory } from '$lib/common/stores/inventory';
   import type { InventoryItem } from '$lib/types/inventory';
+  import ToastComplete from "$lib/client/components/notifications/ToastComplete.svelte";
 
   let items: InventoryItem[] = [];
+  let showToast = false;
+  const onClose = () => {
+    showToast = false;
+  }
 
   onMount(async () => {
     items = await inventory.fetchInventoryItems();
@@ -50,6 +55,10 @@
       maxStock: 0,
       lastRestocked: new Date()
     };
+    showToast = true;
+    setTimeout(() => {
+      showToast = false;
+    }, 4000);
   }
 </script>
 
@@ -101,7 +110,12 @@
     </div>
     <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm">Agregar producto</button>
   </form>
+  {#if showToast}
+    <ToastComplete message="Creado con exito" type="success" onClose={onClose}/>
+  {/if}
 </div>
+
+
 <style>
   input {
     padding: .3em;

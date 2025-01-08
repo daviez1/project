@@ -8,6 +8,7 @@
   import { GetKioskoItems, GetMenuItems, GetOrdersLastId } from '$lib/common/constants/queries';
   import { getMenuItemQuery } from '$lib/common/data/menu';
   import * as OrderTypes from "$lib/types/order";
+  import ToastComplete from '../notifications/ToastComplete.svelte';
   
 
   let showToast = false;
@@ -54,6 +55,9 @@
     // Muestra el toast
     toastMessage = 'Pedido confirmado!';
     showToast = true;
+    setTimeout(() => {
+      showToast = false;
+    }, 3000);
   }
 
   function closeToast() {
@@ -103,6 +107,6 @@
   {/if}
 
   {#if showToast}
-    <Toast message={toastMessage} onClose={closeToast} />
+    <ToastComplete type={'success'} message={toastMessage} onClose={closeToast} />
   {/if}
 </div>
