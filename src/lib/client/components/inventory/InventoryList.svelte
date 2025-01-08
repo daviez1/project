@@ -4,16 +4,17 @@
   import InventoryItemComponent from './InventoryItem.svelte';
   import SeeMore from '../form/SeeMore.svelte';
   import FormAddInventoryItem from '../form/FormAddInventoryItem.svelte';
-  import Loader from '../form/Loader.svelte';
   import { onMount } from 'svelte';
+
+  onMount( ()=> console.log('montado'));
 
   export let groupedItems;
   let filter: InventoryFilter = { type: undefined };
   let searchQuery = '';
 
-  function handleItemAdded(event: CustomEvent) {
+  async function handleItemAdded(event: CustomEvent) {
     const newItem: InventoryItem = event.detail.item;
-    inventory.updateItem(newItem);
+    await inventory.addInventoryItem(newItem);
   }
 
   $: items = $filteredInventory(filter).filter(item =>

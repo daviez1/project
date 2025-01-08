@@ -6,7 +6,8 @@ export default defineConfig({
     server: {
         fs: {
             allow: [
-                'C:/Users/David/Desktop/Programacion/Desarrollo Web/project/assets'
+                'C:/Users/David/Desktop/Programacion/Desarrollo Web/project/assets',
+                'C:/Users/DEMO/Desktop/Tesis/Hanoi_web/assets'
             ]
         }
     }

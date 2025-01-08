@@ -33,8 +33,6 @@ declare module '$env/static/private' {
 	export const SECRETORPRIVATEKEY: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
-	export const ChocolateyInstall: string;
-	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
@@ -44,17 +42,24 @@ declare module '$env/static/private' {
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_6832: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
+	export const FP_NO_HOST_CHECK: string;
 	export const GIT_ASKPASS: string;
+	export const GOOGLE_API_KEY: string;
+	export const GOOGLE_DEFAULT_CLIENT_ID: string;
+	export const GOOGLE_DEFAULT_CLIENT_SECRET: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
 	export const INIT_CWD: string;
+	export const INTEL_DEV_REDIST: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
+	export const MIC_LD_LIBRARY_PATH: string;
+	export const MSMPI_BIN: string;
+	export const NINJA_WELCOME_SHOWN: string;
 	export const NODE: string;
 	export const NODE_ENV: string;
 	export const npm_command: string;
@@ -77,8 +82,6 @@ declare module '$env/static/private' {
 	export const npm_package_name: string;
 	export const npm_package_version: string;
 	export const NUMBER_OF_PROCESSORS: string;
-	export const NVM_HOME: string;
-	export const NVM_SYMLINK: string;
 	export const OneDrive: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
@@ -93,10 +96,8 @@ declare module '$env/static/private' {
 	export const ProgramW6432: string;
 	export const PROMPT: string;
 	export const PSModulePath: string;
-	export const PT7HOME: string;
-	export const PT8HOME: string;
 	export const PUBLIC: string;
-	export const QT_DEVICE_PIXEL_RATIO: string;
+	export const SEGAV_INSTALLED: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -104,6 +105,7 @@ declare module '$env/static/private' {
 	export const TERM_PROGRAM: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const TMP: string;
+	export const UOIPME_REG_PATH: string;
 	export const USERDOMAIN: string;
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
@@ -114,6 +116,7 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
+	export const windows_tracing_flags: string;
 }
 
 /**
@@ -150,8 +153,6 @@ declare module '$env/dynamic/private' {
 		SECRETORPRIVATEKEY: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
-		ChocolateyInstall: string;
-		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
 		COLORTERM: string;
@@ -161,17 +162,24 @@ declare module '$env/dynamic/private' {
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_6832: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
+		FP_NO_HOST_CHECK: string;
 		GIT_ASKPASS: string;
+		GOOGLE_API_KEY: string;
+		GOOGLE_DEFAULT_CLIENT_ID: string;
+		GOOGLE_DEFAULT_CLIENT_SECRET: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
 		INIT_CWD: string;
+		INTEL_DEV_REDIST: string;
 		LANG: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
+		MIC_LD_LIBRARY_PATH: string;
+		MSMPI_BIN: string;
+		NINJA_WELCOME_SHOWN: string;
 		NODE: string;
 		NODE_ENV: string;
 		npm_command: string;
@@ -194,8 +202,6 @@ declare module '$env/dynamic/private' {
 		npm_package_name: string;
 		npm_package_version: string;
 		NUMBER_OF_PROCESSORS: string;
-		NVM_HOME: string;
-		NVM_SYMLINK: string;
 		OneDrive: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
@@ -210,10 +216,8 @@ declare module '$env/dynamic/private' {
 		ProgramW6432: string;
 		PROMPT: string;
 		PSModulePath: string;
-		PT7HOME: string;
-		PT8HOME: string;
 		PUBLIC: string;
-		QT_DEVICE_PIXEL_RATIO: string;
+		SEGAV_INSTALLED: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
@@ -221,6 +225,7 @@ declare module '$env/dynamic/private' {
 		TERM_PROGRAM: string;
 		TERM_PROGRAM_VERSION: string;
 		TMP: string;
+		UOIPME_REG_PATH: string;
 		USERDOMAIN: string;
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
@@ -231,6 +236,7 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
 		windir: string;
+		windows_tracing_flags: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}

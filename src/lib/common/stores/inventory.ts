@@ -31,7 +31,10 @@ function createInventoryStore() {
       throw new Error('Error al crear el producto en el inventario');
     }
     const newItem = await response.json();
-    update(inventory => [...inventory, newItem]);
+    update(inventory => {
+      return [...inventory, newItem.newInventoryItem]
+    });
+    return newItem;
   };
 
   const updateStock = async (stockUpdate: StockUpdate, id:mongoose.Types.ObjectId) => {

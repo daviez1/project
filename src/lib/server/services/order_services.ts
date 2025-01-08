@@ -4,7 +4,7 @@ import OrderItem from "$lib/common/Schemas/OrderItem"
 import { dbConnect } from "../config/db"
 import * as OrderTypes from '$lib/types/order'
 import mongoose from "mongoose";
-import { statusPlus } from "$lib/client/utils/statusPlus";
+import { statusPlus, statusPlusBackend } from "$lib/client/utils/statusPlus";
 
 export const getOrder = async () => {
     try {
@@ -30,16 +30,23 @@ export const getOrderItem = async ( id:string | undefined ) => {
 
 export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId) => {
     try {
-        const order:OrderTypes.Order|null = await Order.findById(orderId);
-        if (!order) {
-            throw new Error('Pedido no encontrado');
-        }
-        if(order.status !== 'completed'){
-            order.status = statusPlus(order.status)
-            order.createdAt = new Date()
-            await (order as unknown as mongoose.Document).save()
-            return order
-        }else throw new Error('Ya se completó el pedido')
+        if (!mongoose.Types.ObjectId.isValid(orderId)) throw new Error('Invalid orderId');
+
+        const order = await Order.findById(orderId);
+        if (!order) throw new Error('Order not found');
+
+        const newStatus = statusPlusBackend(order.status); // Calcula el nuevo estado basado en el estado actual
+
+        const orderUpdated = await Order.findByIdAndUpdate(
+            orderId, 
+            { status: newStatus, updatedAt: new Date()}, 
+            { new: true } // Para devolver el documento actualizado
+        );
+
+        if (!orderUpdated) throw new Error('Order not found');
+
+        await orderUpdated.save();
+        return orderUpdated;
     } catch (error) {
         console.error('Error al actualizar el estado del pedido:', error);
         throw new Error('Error al actualizar el estado del pedido');

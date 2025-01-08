@@ -1,0 +1,312 @@
+[{
+  "_id": {
+    "$oid": "6766294ddcf9c25a4b8b0baa"
+  },
+  "id": "1",
+  "items": [
+    {
+      "quantity": 2,
+      "notes": "Extra cheese",
+      "name": "Classic Burger",
+      "menuItemId": "1"
+    },
+    {
+      "quantity": 1,
+      "menuItemId": "2",
+      "name": "Margherita Pizza"
+    }
+  ],
+  "status": "completed",
+  "total": 25.5,
+  "createdAt": "2024-12-20T18:10:20.000Z",
+  "updatedAt": "2024-12-20T18:10:20.000Z"
+},
+{
+  "_id": {
+    "$oid": "6766294ddcf9c25a4b8b0bab"
+  },
+  "id": "2",
+  "items": [
+    {
+      "quantity": 3,
+      "notes": "No onions",
+      "menuItemId": "3",
+      "name": "Caesar Salad"
+    },
+    {
+      "quantity": 1,
+      "notes": "Gluten-free",
+      "name": "Margherita Pizza",
+      "menuItemId": "2"
+    }
+  ],
+  "status": "preparing",
+  "total": 30,
+  "createdAt": "2024-12-20T18:10:20.000Z",
+  "updatedAt": "2024-12-20T18:10:20.000Z"
+},
+{
+  "_id": {
+    "$oid": "67677f5d355f569b5710c6b5"
+  },
+  "id": "3",
+  "items": [
+    {
+      "menuItemId": "1",
+      "name": "Classic Burger",
+      "quantity": 2,
+      "notes": "Extra cheese",
+      "_id": {
+        "$oid": "67677f5d355f569b5710c6b6"
+      }
+    },
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "67677f5d355f569b5710c6b7"
+      }
+    }
+  ],
+  "status": "completed",
+  "total": 25.5,
+  "createdAt": {
+    "$date": "2024-12-20T18:10:20.000Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-20T18:10:20.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67687ac7df277aecaee4cf58"
+  },
+  "id": "4",
+  "items": [
+    {
+      "menuItemId": "1",
+      "name": "Classic Burger",
+      "quantity": 1,
+      "_id": {
+        "$oid": "67687ac7df277aecaee4cf59"
+      }
+    },
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "67687ac7df277aecaee4cf5a"
+      }
+    },
+    {
+      "menuItemId": "3",
+      "name": "Caesar Salad",
+      "quantity": 1,
+      "_id": {
+        "$oid": "67687ac7df277aecaee4cf5b"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 37.97,
+  "createdAt": {
+    "$date": "2024-12-22T20:46:13.120Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-22T20:46:13.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676e15a0ccc4010a61af55bc"
+  },
+  "id": "5",
+  "items": [
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "676e15a0ccc4010a61af55bd"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 14.99,
+  "createdAt": {
+    "$date": "2024-12-27T02:48:59.283Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-27T02:48:59.283Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676e1982ccc4010a61af59c2"
+  },
+  "id": "6",
+  "items": [
+    {
+      "menuItemId": "3",
+      "name": "Caesar Salad",
+      "quantity": 1,
+      "_id": {
+        "$oid": "676e1982ccc4010a61af59c3"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 9.99,
+  "createdAt": {
+    "$date": "2024-12-27T03:04:44.453Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-27T03:04:44.453Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "676e1c68ccc4010a61af5ba7"
+  },
+  "id": "7",
+  "items": [
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "676e1c68ccc4010a61af5ba8"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 14.99,
+  "createdAt": {
+    "$date": "2024-12-27T03:17:48.931Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-27T03:17:48.931Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677209f7e3e82517b309d6be"
+  },
+  "id": "8",
+  "items": [
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "677209f7e3e82517b309d6bf"
+      }
+    },
+    {
+      "menuItemId": "1",
+      "name": "Classic Burger",
+      "quantity": 7,
+      "_id": {
+        "$oid": "677209f7e3e82517b309d6c0"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 105.92,
+  "createdAt": {
+    "$date": "2024-12-30T02:47:52.806Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-30T02:47:52.806Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67746da13eef979271e1a12e"
+  },
+  "id": "9",
+  "items": [
+    {
+      "menuItemId": "2",
+      "name": "Margherita Pizza",
+      "quantity": 1,
+      "_id": {
+        "$oid": "67746da13eef979271e1a12f"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 14.99,
+  "createdAt": {
+    "$date": "2024-12-31T22:18:03.366Z"
+  },
+  "updatedAt": {
+    "$date": "2024-12-31T22:18:03.366Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6779984ffe10b7d458b3a56e"
+  },
+  "id": "10",
+  "items": [
+    {
+      "menuItemId": "15",
+      "name": "Brownie",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6779984ffe10b7d458b3a56f"
+      }
+    },
+    {
+      "menuItemId": "4",
+      "name": "Greek Salad",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6779984ffe10b7d458b3a570"
+      }
+    },
+    {
+      "menuItemId": "store-7",
+      "name": "Grilled Salmon",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6779984ffe10b7d458b3a571"
+      }
+    },
+    {
+      "menuItemId": "3",
+      "name": "Caesar Salad",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6779984ffe10b7d458b3a572"
+      }
+    },
+    {
+      "menuItemId": "6",
+      "name": "Spaghetti Carbonara",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6779984ffe10b7d458b3a573"
+      }
+    }
+  ],
+  "status": "pending",
+  "total": 53.96,
+  "createdAt": {
+    "$date": "2025-01-04T20:20:42.312Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-04T20:20:42.312Z"
+  },
+  "__v": 0
+}]

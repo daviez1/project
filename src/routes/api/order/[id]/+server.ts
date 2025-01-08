@@ -18,18 +18,18 @@ export const GET: RequestHandler = async ( requestEvent: RequestEvent ) => {
 export const PUT: RequestHandler = async (requestEvent) => {
     try {
         const orderId = requestEvent.params.id;
-        if (!orderId) {
-            throw new Error('Debe ingresar el id');
-        }
+        if (!orderId) throw new Error('Debe ingresar el id');
 
         // Convierte el id a ObjectId
         const objectId = new mongoose.Types.ObjectId(orderId);
 
         const orderItemtoUpdate = await updateOrderStatusBackend(objectId);
-        return new Response(JSON.stringify({ Item: orderItemtoUpdate }), {
+        
+        const response = new Response(JSON.stringify( orderItemtoUpdate ), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
+        return response;
     } catch (error) {
         console.error('Error al actualizar el estado del pedido:', error);
         return new Response(JSON.stringify({ error: 'Error al actualizar estado del pedido' }), {

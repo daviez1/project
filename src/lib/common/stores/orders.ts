@@ -22,13 +22,14 @@ function createOrdersStore() {
   const updateStatus = async (id: mongoose.Types.ObjectId) => {
     const response = await fetch(`/api/order/${id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     });
     if (!response.ok) {
       throw new Error('Error al actualizar el estado del pedido');
     }
     const updatedOrder = await response.json();
-    update(orders => orders.map(order => (order._id === id ? updatedOrder : order)));
+    update(orders =>
+      orders.map(order => order.id === updatedOrder.id ? updatedOrder : order));
   };
 
   const fetchOrders = async () => {

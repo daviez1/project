@@ -3,12 +3,13 @@
   import { getMenuItemQuery } from '$lib/common/data/menu';
   import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import { translateStatus } from '$lib/client/utils/translate';
-  import { statusPlus } from '$lib/client/utils/statusPlus';
+  import { statusPlus, statusPlusBackend } from '$lib/client/utils/statusPlus';
   import Toast from '../notifications/Toast.svelte';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrders } from '$lib/common/constants/queries';
   import { cart } from '$lib/common/stores/cart';
+  import mongoose from 'mongoose';
 
   export let order: Order;
   let showToast = false
@@ -42,13 +43,11 @@
     completed: 'bg-yellow-100 text-gray-800',
   };
 
-  function handleStatusChange() {
-    if (order.status == 'completed') {
-      showToast = true;
+  function handleStatusChange(id: mongoose.Types.ObjectId) {
+    if (id) {
+      orders.updateStatus(id);
     } else {
-      const newStatus = statusPlus(order.status);
-      console.log(newStatus);
-      orders.updateStatus(order._id);
+      console.error('Order ID is undefined');
     }
   }
 
@@ -66,12 +65,12 @@
       </p>
     </div>
     <span class={`px-3 py-1 rounded-full capitalize text-sm font-medium ${statusColors[order.status]}`}>
-      {order.status === 'completed' ? 'Entregado!' : `${translateStatus(order.status)}!` }
+      {`${ order.status === 'completed' ? 'Completado' : translateStatus(order.status)}!`}
     </span>
-    <button class={`btn-change-status px-3 py-1 rounded-full capitalize text-sm font-medium ${statusColorsPlus[order.status]}`} 
-    on:click={handleStatusChange}
+    <button class={`btn-change-status px-3 py-1 rounded-full capitalize text-sm font-medium ${statusColorsPlus[order.status]} ${order.status === 'completed' && 'hidden'}`} 
+    on:click={()=> order._id && handleStatusChange(order._id)}
     disabled={order.status=='completed'}>
-      {translateStatus(statusPlus(order.status))}
+      { translateStatus(statusPlus(order.status))}
     </button>
   </div>
   

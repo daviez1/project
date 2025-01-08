@@ -14,24 +14,16 @@
   queryFn: async () => await orders.fetchOrders()      
 });
 
-  // onMount(async()=>{
-  //   ordersDB = await orders.fetchOrders()
-  // })
-
 </script>
 
 <div class="space-y-6">
-  <!-- {#if $ordersQuery.data.length === 0}
-    <p class="text-center text-gray-500 py-8">Todavía no se han realizado pedidos</p>
-  {:else} -->
     {#if $ordersQuery.isLoading}
       <Loader />
     {:else if $ordersQuery.isError}
       <p>Error: {$ordersQuery.error.message}</p>
     {:else if $ordersQuery.isSuccess}
-      {#each $ordersQuery.data as order}
+      {#each $orders as order}
         <OrderCard {order} />
       {/each}
     {/if}
-  <!-- {/if} -->
 </div>

@@ -2,7 +2,6 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import { inventory } from '$lib/common/stores/inventory';
   import type { InventoryItem } from '$lib/types/inventory';
-  import { goto } from '$app/navigation';
 
   let items: InventoryItem[] = [];
 
@@ -33,7 +32,7 @@
     newProduct.id = String(highestId + 1);
 
     // Agregar el nuevo producto al inventario
-    inventory.addInventoryItem(newProduct);
+    // inventory.addInventoryItem(newProduct);
     dispatch('itemAdded', { item: newProduct });
 
     // Reiniciar el formulario
@@ -51,7 +50,6 @@
       maxStock: 0,
       lastRestocked: new Date()
     };
-    // location.reload();
   }
 </script>
 

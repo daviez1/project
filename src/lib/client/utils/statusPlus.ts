@@ -1,11 +1,17 @@
-export const statusPlus:any = (status: string) =>{
-    if (status == 'pending') return status = 'preparing'
-    if (status == 'preparing') return status = 'ready'
-    if (status == 'ready') return status = 'completed'
-    if (status == 'completed') return status = 'completed'
+export function statusPlus(currentStatus: string): string {
+    switch (currentStatus) {
+        case 'pending':
+            return 'preparing';
+        case 'preparing':
+            return 'ready';
+        case 'ready':
+            return 'completed';
+        default:
+            return 'completed';
+    }
 }
 
-const statusPlusBackend = (currentStatus: string): string => {
+export const statusPlusBackend = (currentStatus: string): string => {
     const statusOrder = ['pending', 'preparing', 'ready', 'completed'];
     const currentIndex = statusOrder.indexOf(currentStatus);
     if (currentIndex === -1 || currentIndex === statusOrder.length - 1) {

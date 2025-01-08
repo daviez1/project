@@ -44,17 +44,17 @@ export const createInventoryItem = async (inventoryItem: InventoryItemTypes.Inve
             type: inventoryItem.type
         };
 
-        const categoryInventoryExist = await InventoryItem.findOne({ name: item.name });
-        if (!categoryInventoryExist) {
-            await InventoryItem.insertMany(inventoryItem);
-        }else{
-            throw new Error(`Ya existe el producto ${item.name} en el inventario`)
-        }
-
         if (inventoryItem.type === 'menu') {
             await handleCategoryCreation(item, MenuItem, MenuCategory);
         } else if (inventoryItem.type === 'kiosk') {
             await handleCategoryCreation(item, KioskoItem, KioskoCategory);
+        }
+        const categoryInventoryExist = await InventoryItem.findOne({ name: item.name });
+        if (!categoryInventoryExist) {
+            const newInventoryItem = await InventoryItem.create(inventoryItem);
+            return newInventoryItem;
+        }else{
+            throw new Error(`Ya existe el producto ${item.name} en el inventario`)
         }
 
     } catch (error: any) {

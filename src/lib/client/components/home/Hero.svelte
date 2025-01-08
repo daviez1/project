@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition';
-  import Hanoi from '../../../../../assets/Hanoi.jpg'
+  import Hanoi from './Hanoi.jpg'
 </script>
 
 <section class="relative h-[600px] flex items-center justify-center bg-gray-900 mt-16 text-white">
