@@ -8,14 +8,7 @@
   let showSeeOrders = false;
   let direction = 'down'; // Define direction como una variable reactiva
 
-  // function updateDirection() {
-  //   direction = window.innerWidth > 1024 ? 'up' : 'down';
-  // }
-
   onMount(() => {
-    // updateDirection();
-    // window.addEventListener('resize', updateDirection);
-
     const cartElement = document.getElementById('cart');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -27,10 +20,6 @@
       observer.observe(cartElement);
     }
   });
-
-  // onDestroy(() => {
-  //   window.removeEventListener('resize', updateDirection);
-  // });
 </script>
 
 <svelte:head>
@@ -39,7 +28,6 @@
 
 <div class="container mx-auto px-4 py-8 mt-10">
   <h1 class="text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
-  
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div class="lg:col-span-2">
       <OrdenarPedido />

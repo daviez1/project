@@ -14,7 +14,7 @@
   </div>
   
   <div class="relative z-0 text-center px-4" in:fly>
-    <h1 class="text-5xl font-bold mb-4">Bienvenido a nuestro Restaurant</h1>
+    <h1 class="text-5xl font-bold mb-4">Bienvenido a nuestro Restaurante</h1>
     <p class="text-2xl font-bold mb-8">Disfruta de la deliciosa comida de esta ciudad</p>
     <div class="space-x-4">
       <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray/10">

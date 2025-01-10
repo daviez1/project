@@ -1,16 +1,13 @@
 <script lang="ts">
   import { cart } from '$lib/common/stores/cart';
-  import { getKioskoItemQuery } from '$lib/common/data/kiosko';
-  import Toast from '$lib/client/components/notifications/Toast.svelte';
   import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrdersLastId } from '$lib/common/constants/queries';
-  import { getMenuItemQuery } from '$lib/common/data/menu';
   import * as OrderTypes from "$lib/types/order";
   import ToastComplete from '../notifications/ToastComplete.svelte';
+  import { getKioskoItem, getMenuItem } from '$lib/client/utils/getItemsFromCart';
   
-
   let showToast = false;
   let toastMessage = '';
   let newOrder: OrderTypes.Order = { id: '', items: [], status: 'pending', createdAt: new Date(), updatedAt: new Date(), total: 0 };
@@ -38,7 +35,7 @@
   // Componente Cart 
   $: items = $cart.map(item => ({
     ...item, 
-    menuItem: getMenuItemQuery(item.menuItemId, menuItems) ?? getKioskoItemQuery(item.menuItemId,kioskoItems), 
+    menuItem: getMenuItem(item.menuItemId, menuItems) ?? getKioskoItem(item.menuItemId,kioskoItems), 
   }));
   
   $: total = items.reduce((sum, item) => 

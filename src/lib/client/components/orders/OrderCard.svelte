@@ -1,7 +1,5 @@
 <script lang="ts">
   import type { Order } from '$lib/types/order';
-  import { getMenuItemQuery } from '$lib/common/data/menu';
-  import { getKioskoItemQuery } from '$lib/common/data/kiosko';
   import { translateStatus } from '$lib/client/utils/translate';
   import { statusPlus } from '$lib/client/utils/statusPlus';
   import ToastComplete from '../notifications/ToastComplete.svelte';
@@ -10,6 +8,7 @@
   import { GetKioskoItems, GetMenuItems, GetOrders } from '$lib/common/constants/queries';
   import { cart } from '$lib/common/stores/cart';
   import mongoose from 'mongoose';
+  import { getKioskoItem, getMenuItem } from '$lib/client/utils/getItemsFromCart';
 
   export let order: Order;
   let showToast = false;
@@ -76,20 +75,24 @@
   </div>
   
   <div class="space-y-2 mb-4">
-    {#each order.items as item}
-      {@const menuItem = getMenuItemQuery(item.menuItemId, menuItems) ?? getKioskoItemQuery(item.menuItemId, kioskoItems)}
-      <div class="flex justify-between">
-        <span>{item.name} x {item.quantity}</span>
-        <span>${((menuItem?.price || 0) * item.quantity).toFixed(2)}</span>
-      </div>
-    {/each}
+    {#if $menuItemsQuery.isSuccess && $kioskoItemsQuery.isSuccess}
+      {#each order.items as item}
+        {@const menuItem = getMenuItem(item.menuItemId, $menuItemsQuery.data) ?? getKioskoItem(item.menuItemId, $kioskoItemsQuery.data)}
+        <div class="flex justify-between">
+          <span>{item.name} x {item.quantity}</span>
+          <span>${((menuItem?.price || 0) * item.quantity)?.toFixed(2)}</span>
+        </div>
+      {/each}
+    {:else}
+      <p>Cargando elementos del menú...</p>
+    {/if}
   </div>
   {#if showToast && order.status == 'completed'}
     <ToastComplete message='Pedido entregado' onClose={closeToast} type='success' duration={3000} />
   {/if}
   <div class="border-t pt-4 flex justify-between items-center">
     <span class="font-semibold">Total:</span>
-    <span class="font-semibold">${order.total.toFixed(2)}</span>
+    <span class="font-semibold">${order.total.toFixed(2) ?? 0}</span>
   </div>
 </div>
 

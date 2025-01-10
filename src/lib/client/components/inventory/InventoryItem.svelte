@@ -1,13 +1,10 @@
 <script lang="ts">
   import type { InventoryItem } from '$lib/types/inventory';
   import { inventory } from '$lib/common/stores/inventory';
-  import Hanoi from "../../../../../assets/Hanoi.jpg";
   import mongoose from 'mongoose';
   
   export let item: InventoryItem;
   const _id:mongoose.Types.ObjectId | any = item._id
-  
-
   let isUpdating = false;
   let updateQuantity = 0;
   
@@ -36,7 +33,7 @@
 
 <div class="bg-gray-100 rounded-lg shadow-md p-6 flex">
   <div class="w-1/2 p-4">
-    <h3 class="font-semibold text-2xl text-center">{item.name}</h3>
+    <h3 class="font-semibold text-2xl text-center capitalize">{item.name}</h3>
     <p class="text-sm text-gray-600 text-center">{item.type} - {item.category}</p>
     
     <div class="mt-4 space-y-2">
@@ -93,7 +90,7 @@
   </div>
   <div class="w-1/2 hidden sm:flex justify-center items-center">
     <img 
-      src={Hanoi} 
+      src={item.image} 
       alt={item.name}
       class="w-full h-52 object-cover rounded-lg"
     />

@@ -9,6 +9,7 @@
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoCategoryItems } from '$lib/common/constants/queries';
   import '$lib/client/components/menu/Menu_Kiosko.css'
+  import Empty from '$lib/client/components/form/Empty.svelte';
 
   const kioskoCategoryQuery = createQuery({
     queryKey: [GetKioskoCategoryItems],
@@ -49,19 +50,24 @@
   {:else if $kioskoCategoryQuery.isError}
     <p>Error: {$kioskoCategoryQuery.error.message}</p>
   {:else if $kioskoCategoryQuery.isSuccess}
-  {#each $kioskoCategoryQuery.data as category}
-    <KioskoCategory {category} />
-  {/each}
-  {/if}
-  </div>
-  {#if $cart.length > 0}
-    <div id="cart">
-      <Cart />
-    </div>
-    {#if showSeeOrders}
-      <div class="fixed top-20 right-4 z-50">
-        <ButtonSeeOrders {direction} />
-      </div>
+    {#if $kioskoCategoryQuery.data.length > 0}
+      {#each $kioskoCategoryQuery.data as category}
+        <KioskoCategory {category} />
+      {/each}
+      {#if $cart.length > 0}
+        <div id="cart">
+          <Cart />
+        </div>
+          {#if showSeeOrders}
+          <div class="fixed top-20 right-4 z-50">
+            <ButtonSeeOrders {direction} />
+          </div>
+          {/if}
+      {/if}
+    {:else}
+      <Empty /> 
     {/if}
   {/if}
+
+</div>
 </div>

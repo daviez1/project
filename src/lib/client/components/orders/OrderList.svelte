@@ -1,8 +1,6 @@
 <script lang="ts">
   import { orders } from '$lib/common/stores/orders';
-  import { onMount } from 'svelte';
   import OrderCard from './OrderCard.svelte';
-  import type { Order } from '$lib/types/order';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetOrders } from '$lib/common/constants/queries';
   import Loader from '../form/Loader.svelte';
