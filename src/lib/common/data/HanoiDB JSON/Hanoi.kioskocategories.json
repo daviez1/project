@@ -1,0 +1,106 @@
+[{
+  "_id": {
+    "$oid": "6776bf0bdb011cde12cad654"
+  },
+  "id": "cookies",
+  "name": "Cookies & Baked Goods",
+  "items": [
+    {
+      "$oid": "67603386b8e783c16bba0349"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776bf43db011cde12cad658"
+  },
+  "id": "nuts",
+  "name": "Nuts & Trail Mixes",
+  "items": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776bfbbdb011cde12cad65d"
+  },
+  "id": "candy",
+  "name": "Candy & Sweets",
+  "items": [
+    {
+      "$oid": "676033cdb8e783c16bba034f"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776c036db011cde12cad663"
+  },
+  "id": "chips",
+  "name": "Chips & Savory Snacks",
+  "items": [
+    {
+      "$oid": "676033bcb8e783c16bba034d"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776c90fdb011cde12cad6a1"
+  },
+  "id": "drinks",
+  "name": "Drinks",
+  "items": [
+    {
+      "$oid": "676033f2b8e783c16bba0353"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776cdc1db011cde12cad6b4"
+  },
+  "id": "pan",
+  "name": "Panes",
+  "items": [
+    {
+      "$oid": "6776cdc1db011cde12cad6b2"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6777f944b9a97725a394a028"
+  },
+  "id": "waffles",
+  "name": "Waffles",
+  "items": [
+    {
+      "$oid": "6777f944b9a97725a394a025"
+    },
+    {
+      "$oid": "6777f993b9a97725a394a072"
+    },
+    {
+      "$oid": "6777fcdfb9a97725a394a0dd"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677936d3817d76c86d6eecc6"
+  },
+  "id": "sandwiches",
+  "name": "Sandwiches",
+  "items": [
+    {
+      "$oid": "677936d3817d76c86d6eecc3"
+    }
+  ],
+  "__v": 0
+}]

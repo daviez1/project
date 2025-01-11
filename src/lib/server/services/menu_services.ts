@@ -2,7 +2,6 @@ import * as TypesMenu from '$lib/common/models/menu';
 import MenuCategory from '$lib/common/Schemas/MenuCategory';
 import MenuItem from '$lib/common/Schemas/MenuItem';
 import { dbConnect } from '../config/db';
-import { menuCategories } from '../../common/data/menu';
 
 export const getMenuItems = async () => {
     try {
@@ -18,7 +17,7 @@ export const getMenuItems = async () => {
 export const getMenuItemById = async ( id: string | undefined):Promise<TypesMenu.MenuItem> => {
     try {
         await dbConnect()
-        const menuItem = await MenuItem.findById( id );
+        const menuItem = await MenuItem.findOne( {id} );
         return menuItem;
     } catch (error:any) {
         console.log(`error: ${error}`)
@@ -38,17 +37,46 @@ export const deleteMenuItemById = async ( id: string | undefined) => {
 
 export const createMenuItem = async ( menuItem: TypesMenu.MenuItem ) => {
     try {
-        await MenuItem.insertMany(menuItem);
+        await MenuItem.create(menuItem);
     } catch (error:any) {
         console.log(`error: ${error}`)
         throw new Error('Error al crear el plato')
     }
 };
 
+export const createMenuCategory = async (menuCategory: TypesMenu.MenuCategory) => {
+    try {
+        const categoryExist = await MenuCategory.findOne({ id: menuCategory.id });
+        if (categoryExist) {
+            throw new Error("Ya existe la categoria");
+        }
+
+        const itemIds = [];
+        for (const newItem of menuCategory.items) {
+            let item = await MenuItem.findOne({ id: newItem.id });
+            if (!item) {
+                item = await MenuItem.create(newItem);
+            }
+            itemIds.push(item._id);
+        }
+
+        const newKioskoCategory = await MenuCategory.create({
+            ...menuCategory,
+            items: itemIds
+        });
+
+        return await newKioskoCategory.populate('items');
+    } catch (error: any) {
+        console.log(`error: ${error}`);
+        throw new Error('Error al crear la categoria del plato');
+    }
+};
+
+
 export const getMenuCategory = async () => {
     try {
         await dbConnect()
-        const menuCategories = await MenuCategory.find()
+        const menuCategories = await MenuCategory.find().populate('items')
         return menuCategories;
     } catch (error:any) {
         console.log(`error: ${error}`)

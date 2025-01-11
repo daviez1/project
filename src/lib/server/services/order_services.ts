@@ -2,28 +2,9 @@ import MenuItem from "$lib/common/Schemas/MenuItem";
 import Order from "$lib/common/Schemas/Order"
 import OrderItem from "$lib/common/Schemas/OrderItem"
 import { dbConnect } from "../config/db"
-
-// export const getOrder = async () => {
-//     try {
-//         await dbConnect();
-//         const orders = await Order.find().lean().exec();
-
-//         // Obtener los nombres de los MenuItems
-//         for (let order of orders) {
-//             for (let item of order.items) {
-//                 const menuItem = await MenuItem.findOne({ id: item.id });
-//                 if (menuItem) {
-//                     item.name = menuItem.name;
-//                 }
-//             }
-//         }
-
-//         console.log(orders[0].items);
-//         return orders;
-//     } catch (error) {
-//         throw new Error(`Error al obtener pedidos: ${error}`);
-//     }
-// };
+import * as OrderTypes from '$lib/types/order'
+import mongoose from "mongoose";
+import { statusPlus, statusPlusBackend } from "$lib/client/utils/statusPlus";
 
 export const getOrder = async () => {
     try {
@@ -35,32 +16,48 @@ export const getOrder = async () => {
     }
 };
 
-export const getOrderItem = async () => {
+export const getOrderItem = async ( id:string | undefined ) => {
     try {
         await dbConnect();
-        const orderItems = await OrderItem.find().lean().exec();
-
-        // Obtener los nombres de los MenuItems
-        for (let item of orderItems) {
-            const menuItem = await MenuItem.findOne({ id: item.menuItemId }).exec();
-            if (menuItem) {
-                item.name = menuItem.name;
-            }
-        }
-
-        console.log(orderItems);
-        return orderItems;
-    } catch (error) {
+        const orderItem = await OrderItem.findOne({menuItemId: id})
+        return orderItem;}
+    catch(error){
         throw new Error(`Error al obtener pedidos: ${error}`);
+    }    
+
+    
+};
+
+export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(orderId)) throw new Error('Invalid orderId');
+
+        const order = await Order.findById(orderId);
+        if (!order) throw new Error('Order not found');
+
+        const newStatus = statusPlusBackend(order.status); // Calcula el nuevo estado basado en el estado actual
+
+        const orderUpdated = await Order.findByIdAndUpdate(
+            orderId, 
+            { status: newStatus, updatedAt: new Date()}, 
+            { new: true } // Para devolver el documento actualizado
+        );
+
+        if (!orderUpdated) throw new Error('Order not found');
+
+        await orderUpdated.save();
+        return orderUpdated;
+    } catch (error) {
+        console.error('Error al actualizar el estado del pedido:', error);
+        throw new Error('Error al actualizar el estado del pedido');
     }
 };
 
-// export const getOrderItem = async() =>{
-//     try {
-//         await dbConnect()
-//         const orderItem = await OrderItem.find().populate('')
-//         return orderItem
-//     } catch (error) {
-//         throw new Error(`Error al obtener pedidos: ${error}`)
-//     }
-// }
+export async function createOrder(order: OrderTypes.Order): Promise<OrderTypes.Order> {
+    try {
+        const newOrder = await Order.create(order);
+        return newOrder;
+    } catch (error) {
+        throw new Error('Error al crear el pedido');
+    }
+}

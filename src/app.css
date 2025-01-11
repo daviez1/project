@@ -5,5 +5,18 @@
 @layer base {
   body {
     @apply bg-gray-50;
+    min-width: 355px;
   }
+}
+
+/* global.css */
+body {
+  background-image: url('./lib/client/assets/background.avif') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Arial', sans-serif; /* Puedes cambiar la fuente según tu preferencia */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

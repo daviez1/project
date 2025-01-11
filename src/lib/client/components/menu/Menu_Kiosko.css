@@ -1,0 +1,21 @@
+summary {
+    list-style: none; /* Quita el triángulo negro */
+    display: flex;
+    justify-content: space-between;
+  }
+
+  summary::marker {
+    display: none; /* Asegura que el marcador no se muestre */
+  }
+
+  .view-more {
+    font-size: 1rem;
+    color: gray;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  summary:hover .view-more {
+    font-size: 1.2rem;
+    transition: ease .5s;
+  }

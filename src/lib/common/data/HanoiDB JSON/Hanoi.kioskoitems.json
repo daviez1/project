@@ -1,0 +1,137 @@
+[{
+  "_id": {
+    "$oid": "67603386b8e783c16bba0349"
+  },
+  "name": "Chocolate Chip Cookies",
+  "price": 4.99,
+  "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e",
+  "category": "cookies",
+  "available": true,
+  "id": "store-1",
+  "description": "Pack of 12 freshly baked cookies"
+},
+{
+  "_id": {
+    "$oid": "676033aeb8e783c16bba034b"
+  },
+  "id": "store-2",
+  "name": "Mixed Nuts",
+  "description": "Premium roasted nuts selection",
+  "price": 6.99,
+  "image": "https://images.unsplash.com/photo-1536591375315-4c2b939d0756",
+  "category": "nuts",
+  "available": true
+},
+{
+  "_id": {
+    "$oid": "676033bcb8e783c16bba034d"
+  },
+  "id": "store-3",
+  "name": "Potato Chips",
+  "description": "Classic salted potato chips",
+  "price": 3.49,
+  "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b",
+  "category": "chips",
+  "available": true
+},
+{
+  "_id": {
+    "$oid": "676033cdb8e783c16bba034f"
+  },
+  "id": "store-4",
+  "name": "Gummy Bears",
+  "description": "Assorted fruit flavored gummies",
+  "price": 2.99,
+  "image": "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f",
+  "category": "candy",
+  "available": true
+},
+{
+  "_id": {
+    "$oid": "676033ddb8e783c16bba0351"
+  },
+  "id": "store-5",
+  "name": "Dark Chocolate Bar",
+  "description": "70% cocoa premium chocolate",
+  "price": 3.99,
+  "image": "https://images.unsplash.com/photo-1548907040-4baa42d10919",
+  "category": "chocolate",
+  "available": true
+},
+{
+  "_id": {
+    "$oid": "676033f2b8e783c16bba0353"
+  },
+  "id": "store-6",
+  "name": "Trail Mix",
+  "description": "Nuts, dried fruits, and chocolate mix",
+  "price": 5.99,
+  "image": "https://images.unsplash.com/photo-1594489428504-5c0c480a15fd",
+  "category": "nuts",
+  "available": true
+},
+{
+  "_id": {
+    "$oid": "6776cdc1db011cde12cad6b2"
+  },
+  "id": "store-7",
+  "name": "Bagget",
+  "description": "Refreshing cola beverage",
+  "price": 1.99,
+  "image": "https://images.unsplash.com/photo-1551024601-bec78aea704b",
+  "category": "pan",
+  "available": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6777f944b9a97725a394a025"
+  },
+  "id": "12",
+  "name": "biscocho",
+  "description": "A tasty veggie burger made with a blend of vegetables and spices.",
+  "price": 7.99,
+  "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+  "category": "waffles",
+  "available": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6777f993b9a97725a394a072"
+  },
+  "id": "12",
+  "name": "Biscocho",
+  "description": "A tasty veggie burger made with a blend of vegetables and spices.",
+  "price": 7.99,
+  "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+  "category": "waffles",
+  "available": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6777fcdfb9a97725a394a0dd"
+  },
+  "id": "12",
+  "name": "Sorbetos",
+  "description": "A tasty veggie burger made with a blend of vegetables and spices.",
+  "price": 7.99,
+  "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+  "category": "waffles",
+  "available": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677936d3817d76c86d6eecc3"
+  },
+  "id": "10",
+  "name": "Spicy Chicken Sandwich",
+  "description": "Spicy grilled chicken with lettuce, tomato, and mayo",
+  "price": 13.49,
+  "image": "https://images.unsplash.com/photo-1604908177520-4295e5e5d5c5",
+  "category": "sandwiches",
+  "available": true,
+  "__v": 0
+}]

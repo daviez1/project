@@ -1,5 +1,14 @@
 {
 	"/": [],
+	"/api/inventory/items": [
+		"src/routes/api/inventory/items/+server.ts"
+	],
+	"/api/inventory/items/stocks/[id]": [
+		"src/routes/api/inventory/items/stocks/[id]/+server.ts"
+	],
+	"/api/inventory/items/[id]": [
+		"src/routes/api/inventory/items/[id]/+server.ts"
+	],
 	"/api/kiosko": [
 		"src/routes/api/kiosko/+server.ts"
 	],
@@ -27,11 +36,12 @@
 	"/api/order": [
 		"src/routes/api/order/+server.ts"
 	],
-	"/api/order/item": [
-		"src/routes/api/order/item/+server.ts"
+	"/api/order/[id]": [
+		"src/routes/api/order/[id]/+server.ts"
 	],
 	"/chillGuy": [],
 	"/gestionarPedidos": [],
+	"/inventory": [],
 	"/kiosko": [],
 	"/ordenar": [
 		"src/routes/ordenar/+page.server.ts"

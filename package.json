@@ -24,10 +24,13 @@
   },
   "type": "module",
   "dependencies": {
+    "@material/web": "^2.2.0",
     "@sveltejs/adapter-netlify": "^2.0.8",
+    "@tanstack/svelte-query": "^5.62.9",
     "animate.css": "^4.1.1",
     "dotenv": "^16.4.7",
     "mongodb": "^6.12.0",
-    "mongoose": "^8.9.0"
+    "mongoose": "^8.9.0",
+    "vanilla-lazyload": "^19.1.3"
   }
 }

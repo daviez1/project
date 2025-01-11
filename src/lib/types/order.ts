@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface OrderItem {
   menuItemId: string;
   name: string;
@@ -6,6 +8,7 @@ export interface OrderItem {
 }
 
 export interface Order {
+  _id?: mongoose.Types.ObjectId;
   id: string;
   items: OrderItem[];
   status: 'pending' | 'preparing' | 'ready' | 'completed';

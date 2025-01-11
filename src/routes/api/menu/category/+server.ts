@@ -1,5 +1,6 @@
-import { getMenuCategory } from '$lib/server/services/menu_services';
+import { createMenuCategory, getMenuCategory } from '$lib/server/services/menu_services';
 import { RequestHandler } from '@sveltejs/kit';
+import { MenuCategory } from "$lib/common/models/menu";
 
 export const GET: RequestHandler = async () => {
     try {
@@ -15,3 +16,14 @@ export const GET: RequestHandler = async () => {
         });
     }
 };
+
+export const POST: RequestHandler = async ({ request }) => {
+    try { 
+        const menuCategory: MenuCategory = await request.json(); 
+        const newMenuCategory = await createMenuCategory(menuCategory); 
+        return new Response(JSON.stringify({ message: 'Categoria creada', category: newMenuCategory }), 
+        { status: 201, headers: { 'Content-Type': 'application/json' } }); 
+    } catch (error:any) { 
+        return new Response(JSON.stringify({ message: 'Error al crear la categoria del plato', error: error.message }), 
+        { status: 500, headers: { 'Content-Type': 'application/json' } }); } 
+    };

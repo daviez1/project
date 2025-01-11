@@ -1,0 +1,151 @@
+[{
+  "_id": {
+    "$oid": "677696d5e1536d28b8e3a964"
+  },
+  "id": "entrantes",
+  "name": "Entrantes",
+  "items": [
+    {
+      "$oid": "67759e51e35bbd6ef46bf27b"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67769718e1536d28b8e3a967"
+  },
+  "id": "postres",
+  "name": "Postres",
+  "items": [
+    {
+      "$oid": "67759e51e35bbd6ef46bf27b"
+    },
+    {
+      "$oid": "677939dd817d76c86d6eecfc"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776981ce1536d28b8e3a97c"
+  },
+  "id": "pizzas",
+  "name": "Pizzas",
+  "items": [
+    {
+      "$oid": "675facf5eb347e106a9fe4ce"
+    },
+    {
+      "$oid": "6777eeb3b9a97725a3949df7"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677698f2e1536d28b8e3a987"
+  },
+  "id": "salads",
+  "name": "Salads",
+  "items": [
+    {
+      "$oid": "675fad01eb347e106a9fe4d0"
+    },
+    {
+      "$oid": "6768b1457cdfc781f04aa263"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67769999e1536d28b8e3a992"
+  },
+  "id": "desserts",
+  "name": "Desserts",
+  "items": [
+    {
+      "$oid": "676e0fbf68ed4e314b84e573"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677699e8e1536d28b8e3a995"
+  },
+  "id": "pastas",
+  "name": "Pastas",
+  "items": [
+    {
+      "$oid": "6768b1687cdfc781f04aa265"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67769a3ce1536d28b8e3a99e"
+  },
+  "id": "burgers",
+  "name": "Burgers",
+  "items": [
+    {
+      "$oid": "675fa4eeeb347e106a9fe4cc"
+    },
+    {
+      "$oid": "676a28eb3a73d7f3be83a862"
+    },
+    {
+      "$oid": "676a28eb3a73d7f3be83a863"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6776ce5edb011cde12cad6bc"
+  },
+  "id": "pescados",
+  "name": "Pescados",
+  "items": [
+    {
+      "$oid": "6776ce5edb011cde12cad6ba"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6777f7c2b9a97725a3949fc4"
+  },
+  "id": "viandas",
+  "name": "Viandas",
+  "items": [
+    {
+      "$oid": "6777f7c2b9a97725a3949fc1"
+    },
+    {
+      "$oid": "6777fdcbb9a97725a394a0f4"
+    },
+    {
+      "$oid": "6779394f817d76c86d6eecf3"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67793ed1817d76c86d6eee56"
+  },
+  "id": "arroz",
+  "name": "Arroz",
+  "items": [
+    {
+      "$oid": "67793ed1817d76c86d6eee53"
+    }
+  ],
+  "__v": 0
+}]

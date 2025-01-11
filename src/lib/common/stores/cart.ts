@@ -3,6 +3,7 @@ import type { OrderItem } from '$lib/types/order';
 import * as ApiMenuItems from '../api/menuItems';
 import * as ApiMenuCategory from '../api/menuCategories';
 import * as ApiKioskoCategory from '../api/kioskoCategories';
+import * as ApiKioskoItems from '../api/kioskoItems';
 
 function createCartStore() {
   const { subscribe, set, update } = writable<OrderItem[]>([]);
@@ -13,6 +14,7 @@ function createCartStore() {
     fetchMenuItemsById: async( id:string ) => await ApiMenuItems.search( id ),
     fetchMenuCategories: async() => await ApiMenuCategory.get(),
     fetchKioskoCategories: async() => await ApiKioskoCategory.get(),
+    fetchKioskoItems: async() => await ApiKioskoItems.get(),
     addItem: (item: OrderItem) => update(items => {
       const existingItemIndex = items.findIndex(i => i.menuItemId === item.menuItemId);
       

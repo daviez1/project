@@ -8,6 +8,7 @@
   function addToCart() {
       cart.addItem({
         menuItemId: item.id,
+        name: item.name,
         quantity: 1
       });
   }
@@ -23,27 +24,10 @@
       <button
         on:click={addToCart}
         disabled={!item.available}
-        class="bg-green-500 text-white p-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        class="bg-gray-500 text-white p-1 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {item.available ? 'Añadir a pedidos' : 'No disponible'}
       </button>
-      <button
-        on:click={()=> goto('/ordenar')}
-        disabled={!item.available}
-        class="bg-green-500 text-white p-3 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        Ver Pedidos
-      </button>
-
     </div>
   </div>
 </div>
-
-<style>
-  button{
-    height: fit-content;
-    width: fit-content;
-    padding: 0 1.2px;
-    margin: 0 0 0 4px;
-  }
-</style>
