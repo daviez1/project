@@ -59,7 +59,7 @@ declare module '$env/static/private' {
 	export const LOGONSERVER: string;
 	export const MIC_LD_LIBRARY_PATH: string;
 	export const MSMPI_BIN: string;
-	export const NINJA_WELCOME_SHOWN: string;
+	export const NINJA_ENV: string;
 	export const NODE: string;
 	export const NODE_ENV: string;
 	export const npm_command: string;
@@ -179,7 +179,7 @@ declare module '$env/dynamic/private' {
 		LOGONSERVER: string;
 		MIC_LD_LIBRARY_PATH: string;
 		MSMPI_BIN: string;
-		NINJA_WELCOME_SHOWN: string;
+		NINJA_ENV: string;
 		NODE: string;
 		NODE_ENV: string;
 		npm_command: string;

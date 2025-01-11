@@ -1,0 +1,424 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "ButtonSeeOrders.css": {
+    "file": "_app/immutable/assets/ButtonSeeOrders.2208015d.css",
+    "src": "ButtonSeeOrders.css"
+  },
+  "DishCardInSection.css": {
+    "file": "_app/immutable/assets/DishCardInSection.5e19bed4.css",
+    "src": "DishCardInSection.css"
+  },
+  "Loader.css": {
+    "file": "_app/immutable/assets/Loader.bd99c7ef.css",
+    "src": "Loader.css"
+  },
+  "ToastComplete.css": {
+    "file": "_app/immutable/assets/ToastComplete.318929df.css",
+    "src": "ToastComplete.css"
+  },
+  "_ButtonSeeOrders.svelte_svelte_type_style_lang.js": {
+    "css": [
+      "_app/immutable/assets/ButtonSeeOrders.2208015d.css",
+      "_app/immutable/assets/ToastComplete.318929df.css"
+    ],
+    "file": "chunks/ButtonSeeOrders.svelte_svelte_type_style_lang.js",
+    "imports": [
+      "_ssr.js",
+      "_Loader.js"
+    ]
+  },
+  "_DishCardInSection.js": {
+    "css": [
+      "_app/immutable/assets/DishCardInSection.5e19bed4.css"
+    ],
+    "file": "chunks/DishCardInSection.js",
+    "imports": [
+      "_ssr.js",
+      "_capitalize.js",
+      "_animate.js"
+    ]
+  },
+  "_Empty.js": {
+    "file": "chunks/Empty.js",
+    "imports": [
+      "_ssr.js",
+      "_stores.js"
+    ]
+  },
+  "_InventoryItem.js": {
+    "file": "chunks/InventoryItem.js"
+  },
+  "_KioskoCategory.js": {
+    "file": "chunks/KioskoCategory.js"
+  },
+  "_Loader.js": {
+    "css": [
+      "_app/immutable/assets/Loader.bd99c7ef.css"
+    ],
+    "file": "chunks/Loader.js",
+    "imports": [
+      "_index2.js",
+      "_context.js",
+      "_ssr.js"
+    ]
+  },
+  "_MenuCategory.js": {
+    "file": "chunks/MenuCategory.js"
+  },
+  "_MenuItem.js": {
+    "file": "chunks/MenuItem.js"
+  },
+  "_animate.js": {
+    "file": "chunks/animate.js"
+  },
+  "_capitalize.js": {
+    "file": "chunks/capitalize.js"
+  },
+  "_context.js": {
+    "file": "chunks/context.js",
+    "imports": [
+      "_ssr.js",
+      "_index2.js"
+    ]
+  },
+  "_db.js": {
+    "file": "chunks/db.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "_inventory_services.js": {
+    "file": "chunks/inventory_services.js",
+    "imports": [
+      "_db.js",
+      "_InventoryItem.js",
+      "_MenuItem.js",
+      "_MenuCategory.js",
+      "_KioskoCategory.js",
+      "_capitalize.js"
+    ]
+  },
+  "_kiosko_services.js": {
+    "file": "chunks/kiosko_services.js",
+    "imports": [
+      "_KioskoCategory.js",
+      "_db.js"
+    ]
+  },
+  "_menu_services.js": {
+    "file": "chunks/menu_services.js",
+    "imports": [
+      "_MenuCategory.js",
+      "_MenuItem.js",
+      "_db.js"
+    ]
+  },
+  "_order_services.js": {
+    "file": "chunks/order_services.js",
+    "imports": [
+      "_MenuItem.js",
+      "_db.js",
+      "_statusPlus.js"
+    ]
+  },
+  "_ssr.js": {
+    "file": "chunks/ssr.js"
+  },
+  "_statusPlus.js": {
+    "file": "chunks/statusPlus.js"
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "imports": [
+      "_ssr.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_internal.js",
+      "_index.js",
+      "_index2.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/lib/client/assets/columpio de chill guy.jpg": {
+    "file": "_app/immutable/assets/columpio de chill guy.e32466a1.jpg",
+    "src": "src/lib/client/assets/columpio de chill guy.jpg"
+  },
+  "src/lib/client/components/home/Hanoi.jpg": {
+    "file": "_app/immutable/assets/Hanoi.433ebbd3.jpg",
+    "src": "src/lib/client/components/home/Hanoi.jpg"
+  },
+  "src/routes/+error.svelte": {
+    "file": "entries/pages/_error.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+error.svelte"
+  },
+  "src/routes/+layout.css": {
+    "file": "_app/immutable/assets/_layout.e60824ab.css",
+    "src": "src/routes/+layout.css"
+  },
+  "src/routes/+layout.svelte": {
+    "css": [
+      "_app/immutable/assets/_layout.e60824ab.css"
+    ],
+    "file": "entries/pages/_layout.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_stores.js",
+      "_animate.js",
+      "_context.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.svelte"
+  },
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page.f9092b6a.css",
+    "src": "src/routes/+page.css"
+  },
+  "src/routes/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/Hanoi.433ebbd3.jpg",
+      "_app/immutable/assets/columpio de chill guy.e32466a1.jpg"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.f9092b6a.css"
+    ],
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Loader.js",
+      "_ButtonSeeOrders.svelte_svelte_type_style_lang.js",
+      "_Empty.js",
+      "_animate.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/api/inventory/items/+server.ts": {
+    "file": "entries/endpoints/api/inventory/items/_server.ts.js",
+    "imports": [
+      "_inventory_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/inventory/items/+server.ts"
+  },
+  "src/routes/api/inventory/items/[id]/+server.ts": {
+    "file": "entries/endpoints/api/inventory/items/_id_/_server.ts.js",
+    "imports": [
+      "_inventory_services.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/inventory/items/[id]/+server.ts"
+  },
+  "src/routes/api/inventory/items/stocks/[id]/+server.ts": {
+    "file": "entries/endpoints/api/inventory/items/stocks/_id_/_server.ts.js",
+    "imports": [
+      "_InventoryItem.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/inventory/items/stocks/[id]/+server.ts"
+  },
+  "src/routes/api/kiosko/+server.ts": {
+    "file": "entries/endpoints/api/kiosko/_server.ts.js",
+    "imports": [
+      "_kiosko_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/kiosko/+server.ts"
+  },
+  "src/routes/api/kiosko/[id]/+server.ts": {
+    "file": "entries/endpoints/api/kiosko/_id_/_server.ts.js",
+    "imports": [
+      "_kiosko_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/kiosko/[id]/+server.ts"
+  },
+  "src/routes/api/kiosko/category/+server.ts": {
+    "file": "entries/endpoints/api/kiosko/category/_server.ts.js",
+    "imports": [
+      "_kiosko_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/kiosko/category/+server.ts"
+  },
+  "src/routes/api/kiosko/category/[id]/+server.ts": {
+    "file": "entries/endpoints/api/kiosko/category/_id_/_server.ts.js",
+    "imports": [
+      "_kiosko_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/kiosko/category/[id]/+server.ts"
+  },
+  "src/routes/api/menu/+server.ts": {
+    "file": "entries/endpoints/api/menu/_server.ts.js",
+    "imports": [
+      "_menu_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/menu/+server.ts"
+  },
+  "src/routes/api/menu/[id]/+server.ts": {
+    "file": "entries/endpoints/api/menu/_id_/_server.ts.js",
+    "imports": [
+      "_menu_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/menu/[id]/+server.ts"
+  },
+  "src/routes/api/menu/category/+server.ts": {
+    "file": "entries/endpoints/api/menu/category/_server.ts.js",
+    "imports": [
+      "_menu_services.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/menu/category/+server.ts"
+  },
+  "src/routes/api/menu/category/[id]/+server.ts": {
+    "file": "entries/endpoints/api/menu/category/_id_/_server.ts.js",
+    "imports": [
+      "_menu_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/menu/category/[id]/+server.ts"
+  },
+  "src/routes/api/order/+server.ts": {
+    "file": "entries/endpoints/api/order/_server.ts.js",
+    "imports": [
+      "_order_services.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/order/+server.ts"
+  },
+  "src/routes/api/order/[id]/+server.ts": {
+    "file": "entries/endpoints/api/order/_id_/_server.ts.js",
+    "imports": [
+      "_order_services.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/api/order/[id]/+server.ts"
+  },
+  "src/routes/chillGuy/+page.css": {
+    "file": "_app/immutable/assets/_page.ba3c19e6.css",
+    "src": "src/routes/chillGuy/+page.css"
+  },
+  "src/routes/chillGuy/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.ba3c19e6.css"
+    ],
+    "file": "entries/pages/chillGuy/_page.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/chillGuy/+page.svelte"
+  },
+  "src/routes/gestionarPedidos/+page.css": {
+    "file": "_app/immutable/assets/_page.48fd3972.css",
+    "src": "src/routes/gestionarPedidos/+page.css"
+  },
+  "src/routes/gestionarPedidos/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.48fd3972.css",
+      "_app/immutable/assets/ToastComplete.318929df.css"
+    ],
+    "file": "entries/pages/gestionarPedidos/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_Loader.js",
+      "_statusPlus.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/gestionarPedidos/+page.svelte"
+  },
+  "src/routes/inventory/+page.css": {
+    "file": "_app/immutable/assets/_page.e6060e67.css",
+    "src": "src/routes/inventory/+page.css"
+  },
+  "src/routes/inventory/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.e6060e67.css",
+      "_app/immutable/assets/ToastComplete.318929df.css"
+    ],
+    "file": "entries/pages/inventory/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_index2.js",
+      "_Empty.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/inventory/+page.svelte"
+  },
+  "src/routes/kiosko/+page.css": {
+    "file": "_app/immutable/assets/_page.834180da.css",
+    "src": "src/routes/kiosko/+page.css"
+  },
+  "src/routes/kiosko/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.834180da.css"
+    ],
+    "file": "entries/pages/kiosko/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_DishCardInSection.js",
+      "_ButtonSeeOrders.svelte_svelte_type_style_lang.js",
+      "_Loader.js",
+      "_Empty.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/kiosko/+page.svelte"
+  },
+  "src/routes/ordenar/+page.css": {
+    "file": "_app/immutable/assets/_page.bc8dc825.css",
+    "src": "src/routes/ordenar/+page.css"
+  },
+  "src/routes/ordenar/+page.server.ts": {
+    "file": "entries/pages/ordenar/_page.server.ts.js",
+    "isEntry": true,
+    "src": "src/routes/ordenar/+page.server.ts"
+  },
+  "src/routes/ordenar/+page.svelte": {
+    "css": [
+      "_app/immutable/assets/_page.bc8dc825.css"
+    ],
+    "file": "entries/pages/ordenar/_page.svelte.js",
+    "imports": [
+      "_ssr.js",
+      "_ButtonSeeOrders.svelte_svelte_type_style_lang.js",
+      "_Loader.js",
+      "_DishCardInSection.js",
+      "_Empty.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/ordenar/+page.svelte"
+  }
+}

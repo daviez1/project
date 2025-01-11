@@ -1,0 +1,1 @@
+summary{list-style:none;display:flex;justify-content:space-between}summary::marker{display:none}.view-more{font-size:1rem;color:gray;cursor:pointer;text-decoration:none}summary:hover .view-more{font-size:1.2rem;transition:ease .5s}
