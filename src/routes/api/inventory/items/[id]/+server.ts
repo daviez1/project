@@ -1,15 +1,12 @@
 import { deleteInventoryItem } from "$lib/server/services/inventory_services";
 import { RequestHandler } from "@sveltejs/kit";
-import mongoose from "mongoose";
 
 export const DELETE: RequestHandler = async ({ params }) => {
     try {
         const id = params.id;
-        if (!id) {
-            throw new Error('ID no proporcionado');
-        }
-        const objectId = new mongoose.Types.ObjectId(id);
-        const deletedItem = await deleteInventoryItem(objectId);
+        if (!id) throw new Error('ID no proporcionado');
+        
+        const deletedItem = await deleteInventoryItem(id);
         return new Response(JSON.stringify({ message: 'Producto del inventario eliminado', deletedItem }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }

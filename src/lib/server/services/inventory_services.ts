@@ -63,17 +63,8 @@ export const createInventoryItem = async (inventoryItem: InventoryItemTypes.Inve
     }
 };
 
-export const deleteInventoryItem = async( id:mongoose.Types.ObjectId ) =>{
-    await InventoryItem.findByIdAndDelete(id)
+export const deleteInventoryItem = async( category:string ) =>{
+    await MenuItem.deleteMany( { category } )
+    await MenuCategory.findOneAndDelete( { id: category } ) 
+    return await InventoryItem.findOneAndDelete({category})
 }
-
-// export const getInventoryCategoryById = async ( id:string ) => {
-//     try {
-//         await dbConnect()
-//         const kioskoCategory = await KioskoCategory.findById(id)
-//         return kioskoCategory;
-//     } catch (error:any) {
-//         console.log(`error: ${error}`)
-//         throw new Error('Error al obtener la categoria')
-//     }
-// };

@@ -15,7 +15,7 @@ function createInventoryStore() {
       } else {
         console.error("No data returned from API");
       }
-      return items
+      return items;
     } catch (error) {
       console.error("Error fetching inventory items:", error);
     }
@@ -32,12 +32,12 @@ function createInventoryStore() {
     }
     const newItem = await response.json();
     update(inventory => {
-      return [...inventory, newItem.newInventoryItem]
+      return [...inventory, newItem.newInventoryItem];
     });
     return newItem;
   };
 
-  const updateStock = async (stockUpdate: StockUpdate, id:mongoose.Types.ObjectId) => {
+  const updateStock = async (stockUpdate: StockUpdate, id: mongoose.Types.ObjectId) => {
     const response = await fetch(`/api/inventory/items/stocks/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -54,10 +54,20 @@ function createInventoryStore() {
     );
   };
 
+  const deleteInventoryItem = async (category: string) => {
+    try {
+      await InventoryApi.DELETE(category);
+      update(inventory => inventory.filter(item => item.category !== category));
+    } catch (error) {
+      console.error('Error al eliminar el elemento del inventario:', error);
+    }
+  };
+
   return {
     subscribe,
     fetchInventoryItems,
     addInventoryItem,
+    deleteInventoryItem,
     updateStock,
     updateAvailability: (id: string, available: boolean) =>
       update(items =>
