@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Order } from '$lib/types/order';
-  import { translateStatus } from '$lib/client/utils/translate';
+  import { translateStatusBtn, translateStatusSpan } from '$lib/client/utils/translate';
   import { statusPlus } from '$lib/client/utils/statusPlus';
   import ToastComplete from '../notifications/ToastComplete.svelte';
   import { orders } from '$lib/common/stores/orders';
@@ -65,12 +65,12 @@
       </p>
     </div>
     <span class={`px-3 py-1 rounded-full capitalize text-sm font-medium ${statusColors[order.status]}`}>
-      {`${ order.status === 'completed' ? 'Completado' : translateStatus(order.status)}!`}
+      {`${ order.status === 'completed' ? 'Completado' : translateStatusSpan(order.status)}!`}
     </span>
     <button class={`btn-change-status px-3 py-1 rounded-full capitalize text-sm font-medium ${statusColorsPlus[order.status]} ${order.status === 'completed' && 'hidden'}`} 
     on:click={()=> order._id && handleStatusChange(order._id)}
     disabled={order.status=='completed'}>
-      { translateStatus(statusPlus(order.status))}
+      { translateStatusBtn(statusPlus(order.status))}
     </button>
   </div>
   

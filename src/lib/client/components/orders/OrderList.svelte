@@ -8,9 +8,9 @@
   // let ordersDB: Order[] = []
 
   const ordersQuery = createQuery({ 
-  queryKey: [GetOrders], 
-  queryFn: async () => await orders.fetchOrders()      
-});
+    queryKey: [GetOrders], 
+    queryFn: async () => await orders.fetchOrders()      
+  });
 
 </script>
 

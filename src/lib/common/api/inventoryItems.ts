@@ -26,6 +26,7 @@ export const DELETE = async ( category: string ) => {
     }
 
     const inventoryItem = await response.json();    
+    console.log(inventoryItem);
     return inventoryItem.deletedItem as InventoryItem;
 };
 

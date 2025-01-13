@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MenuItem } from '$lib/types/menu';
   import { cart } from '$lib/common/stores/cart';
-  import { fade, fly } from 'svelte/transition';
+  import { fade, fly, slide, blur } from 'svelte/transition';
 
   export let item: MenuItem;
         
@@ -15,7 +15,7 @@
 
 </script>
 
-<div class="div w-100 rounded-lg shadow-md overflow-hidden m-auto mb-5 border flex flex-col bg-white">
+<div in:blur={{ duration: 500 }} class="div w-100 rounded-lg shadow-md overflow-hidden m-auto mb-5 border flex flex-col bg-white">
   <img src={item.image} alt={item.name} class="w-full p-2 block h-80 object-cover" />
   <div class="p-4 flex flex-col flex-grow h-40 ">
     <h3 class="text-xl font-semibold mb-2 capitalize">{item.name}</h3>

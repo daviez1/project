@@ -1,17 +1,10 @@
 <script lang="ts">
-  import { translateStatus } from '$lib/client/utils/translate';
+  import { translateStatusSpan } from '$lib/client/utils/translate';
   import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
-  import { onMount } from 'svelte';
 
-  let ordersDB: Order[] = []
-
-onMount(async()=>{
-  ordersDB = await orders.fetchOrders()
-})
-
-  $: pendingOrders = ordersDB.filter(order => 
-    order.status === 'pending' || order.status === 'preparing' || order.status === 'ready' || order.status === 'completed'
+  $: pendingOrders = $orders.filter(order => 
+    order.status === 'pending' || order.status === 'preparing' || order.status === 'ready'
   );
 
 </script>
@@ -28,7 +21,7 @@ onMount(async()=>{
           <div>
             <span class="font-semibold">Pedido #{order.id}</span>
             <p class="text-sm text-gray-600">
-              Estado: <span class="font-medium capitalize">{ translateStatus(order.status) }</span>
+              Estado: <span class="font-medium capitalize">{ translateStatusSpan(order.status) }</span>
             </p>
           </div>
           {#if order.status === 'ready'}

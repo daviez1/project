@@ -16,7 +16,7 @@
   <nav class="bg-gradient-to-r from-gray-200 via-gray-300 to-white shadow-lg">
     <div>
       <div class="flex justify-between items-center h-16">
-        <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-xl ml-8 text-gray-800">Restaurante Hanoi</a>
+        <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-2xl ml-8 text-gray-800">Restaurante Hanoi</a>
         <div class="md:hidden">
           <button on:click={toggleMenu} class="text-gray-800 hover:text-gray-600 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -26,6 +26,13 @@
         </div>
 
         <div class="hidden md:flex space-x-4 text-right mr-12">
+          
+          <a 
+            href="/reservations" 
+            class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 px-3 py-2 rounded-md"
+            class:font-bold={$page.url.pathname === '/reservations'}>
+            Reservaciones
+          </a>
           <a 
             href="/kiosko" 
             class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 px-3 py-2 rounded-md"
@@ -54,6 +61,12 @@
       </div>
       
       <div class={`md:hidden ${showMenu ? 'block' : 'hidden'} text-center bg-gradient-to-r from-gray-200 via-gray-300 to-white border-t border-gray-300`}>
+        <a 
+          href="/reservations" 
+          class="block text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md"
+          class:font-bold={$page.url.pathname === '/reservations'} on:click={toggleMenu}>
+          Reservaciones
+        </a>
         <a 
           href="/" 
           class="block text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md"

@@ -2,21 +2,6 @@
   import Hero from "$lib/client/components/home/Hero.svelte";
   import FeaturedDishes from '$lib/client/components/home/FeaturedDishes.svelte';
   import WelcomeText from "$lib/client/components/home/WelcomeText.svelte";
-  // import { onMount } from 'svelte';
-  // import LazyLoad from 'vanilla-lazyload';
-  
-  // let lazyLoadInstance;
-
-  // onMount(() => {
-  //   // Seleccionar todas las imágenes y agregar la clase 'lazy'
-  //   const images = document.querySelectorAll('img');
-  //   images.forEach(img => img.classList.add('lazy'));
-
-  //   // Inicializar LazyLoad
-  //   lazyLoadInstance = new LazyLoad({
-  //     elements_selector: ".lazy"
-  //   });
-  // });
 </script>
 
 <svelte:head>
@@ -26,3 +11,4 @@
 <Hero />
 <WelcomeText/>
 <FeaturedDishes />
+<h1>Las reservas por diverso</h1>

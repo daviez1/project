@@ -3,9 +3,12 @@
   import { inventory } from '$lib/common/stores/inventory';
   import type { InventoryItem } from '$lib/types/inventory';
   import ToastComplete from "$lib/client/components/notifications/ToastComplete.svelte";
+  import * as formErrors from '$lib/client/utils/formErrors';
 
   let items: InventoryItem[] = [];
   let showToast = false;
+  let stockInvalid = formErrors.stockInvalid.activate;
+  let productExistActivate = formErrors.productExist.activate;
   let showError = false;
   const onClose = () => {
     showToast = false;
@@ -33,16 +36,16 @@
   };
 
   function addProduct() {
-    if (newProduct.maxStock <= newProduct.minStock) {
-      showError = true;
-      return;
-    }
+    if (newProduct.maxStock <= newProduct.minStock) return stockInvalid = true;  
+    stockInvalid = false;
 
-    showError = false;
+    const productExist = items.find( item => item.name == newProduct.name )
+    if (productExist) return productExistActivate = true
 
     // Encontrar el ID más alto en el array de items
     const highestId = items.reduce((max, item) => Math.max(max, Number(item.id)), 0);
     newProduct.id = String(highestId + 1);
+
 
     // Agregar el nuevo producto al inventario
     // inventory.addInventoryItem(newProduct);
@@ -63,6 +66,13 @@
       maxStock: 0,
       lastRestocked: new Date()
     };
+
+
+    // for (const item of items) {
+    //   let itemExist = item.name == newProduct.name;
+
+    // }
+
     showToast = true;
     setTimeout(() => {
       showToast = false;
@@ -76,6 +86,9 @@
     <div>
       <label for="name" class="block text-sm font-medium text-gray-700">Nombre del producto</label>
       <input type="text" id="name" bind:value={newProduct.name} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Nombre del producto" required />
+      {#if productExistActivate}
+        <p class="text-red-500 text-sm mt-1">{formErrors.productExist.message}</p>
+      {/if}
     </div>
     <div>
       <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
@@ -111,8 +124,8 @@
     <div>
       <label for="maxStock" class="block text-sm font-medium text-gray-700">Stock máximo</label>
       <input type="number" id="maxStock" bind:value={newProduct.maxStock} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Stock máximo" required />
-      {#if showError}
-        <p class="text-red-500 text-sm mt-1">El stock máximo debe ser mayor que el stock mínimo.</p>
+      {#if stockInvalid}
+        <p class="text-red-500 text-sm mt-1">{formErrors.stockInvalid.message}</p>
       {/if}
     </div>
     <div>
