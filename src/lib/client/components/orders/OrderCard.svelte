@@ -21,10 +21,6 @@
     queryKey: [GetKioskoItems], 
     queryFn: async () => await cart.fetchKioskoItems()      
   });
-  const ordersQuery = createQuery({ 
-    queryKey: [GetOrders], 
-    queryFn: async () => await orders.fetchOrders()      
-  });
 
   $: menuItems = $menuItemsQuery.data || [];
   $: kioskoItems = $kioskoItemsQuery.data || [];
@@ -92,7 +88,7 @@
   {/if}
   <div class="border-t pt-4 flex justify-between items-center">
     <span class="font-semibold">Total:</span>
-    <span class="font-semibold">${order.total.toFixed(2) ?? 0}</span>
+    <span class="font-semibold">${order.total?.toFixed(2) ?? 0}</span>
   </div>
 </div>
 

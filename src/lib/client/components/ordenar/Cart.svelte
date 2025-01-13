@@ -44,7 +44,7 @@
 
   async function checkout() {
     if (items.length === 0) return;
-    newOrder.id = String(Number(ordersLastId) + 1)
+    newOrder.id = String(Number($orders.slice(-1)[0].id) + 1)
     newOrder.items = items
     newOrder.total = total
     orders.post(newOrder);

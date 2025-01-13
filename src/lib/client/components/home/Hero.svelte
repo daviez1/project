@@ -20,8 +20,8 @@
       <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray/10">
         Ver Menú
       </a>
-      <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray-40">
-        Ordenar ahora
+      <a href="/reservations" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray-40">
+        Reservar ahora
       </a>
     </div>
   </div>

@@ -7,7 +7,7 @@
 
   // let ordersDB: Order[] = []
 
-  const ordersQuery = createQuery({ 
+  $: ordersQuery = createQuery({ 
     queryKey: [GetOrders], 
     queryFn: async () => await orders.fetchOrders()      
   });

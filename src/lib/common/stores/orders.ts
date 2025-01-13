@@ -16,7 +16,7 @@ function createOrdersStore() {
       throw new Error('Error al crear el pedido');
     }
     const newOrder = await response.json();
-    update(orders => [...orders, newOrder]);
+    update(orders => [...orders, newOrder.order]);
   };
 
   const updateStatus = async (id: mongoose.Types.ObjectId) => {

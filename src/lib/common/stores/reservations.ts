@@ -54,7 +54,7 @@ function createReservationStore() {
       const availableSlots = this.getAvailableTimeSlots(date, guests);
       const slot = [...availableSlots.lunch, ...availableSlots.dinner].find(s => s.time === time);
       if (slot && slot.available) {
-        const availableTable = slot.tables.find(table => table.capacity >= guests);
+        const availableTable = slot.tables.find((table:Table) => table.capacity >= guests);
         return availableTable ? availableTable.id : null;
       }
       return null;
