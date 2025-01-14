@@ -29,7 +29,7 @@ function createOrdersStore() {
     }
     const updatedOrder = await response.json();
     update(orders =>
-      orders.map(order => order.id === updatedOrder.id ? updatedOrder : order));
+      orders.map(order => order.id === updatedOrder.id ? updatedOrder : order));  
   };
 
   const fetchOrders = async () => {

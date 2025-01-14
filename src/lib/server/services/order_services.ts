@@ -10,7 +10,7 @@ export const getOrder = async () => {
     try {
         await dbConnect();
         const orders = await Order.find()
-        return orders;
+        return orders.reverse();
     } catch (error) {
         throw new Error(`Error al obtener pedidos: ${error}`);
     }
@@ -23,9 +23,7 @@ export const getOrderItem = async ( id:string | undefined ) => {
         return orderItem;}
     catch(error){
         throw new Error(`Error al obtener pedidos: ${error}`);
-    }    
-
-    
+    }   
 };
 
 export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId) => {

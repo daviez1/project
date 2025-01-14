@@ -11,4 +11,3 @@
 <Hero />
 <WelcomeText/>
 <FeaturedDishes />
-<h1>Las reservas por diverso</h1>

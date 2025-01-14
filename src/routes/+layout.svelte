@@ -22,7 +22,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
-
+  
   .agbalumo-regular {
   font-family: "Agbalumo", serif;
   font-weight: 400;

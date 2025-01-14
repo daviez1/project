@@ -41,6 +41,7 @@
   function handleStatusChange(id: mongoose.Types.ObjectId) {
     if (id) {
       orders.updateStatus(id);
+      if (order.status === 'completed') console.log('todo delete if order is completed')
       showToast = true; // Mostrar el toast cuando se actualiza el estado
     } else {
       console.error('Order ID is undefined');

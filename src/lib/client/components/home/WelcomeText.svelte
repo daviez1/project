@@ -10,7 +10,7 @@
         <p class="text-3xl leading-8 font-extrabold tracking-tight text-gray-700 sm:text-4xl">
           {welcome[0].header}
         </p>
-        <p class="mt-4 mr-4 text-xl text-gray-500">
+        <p class="mt-4 mr-4 sm:mt-8 text-xl text-gray-500">
           {welcome[0].text}
         </p>
       </div>

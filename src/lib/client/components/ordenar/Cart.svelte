@@ -38,9 +38,7 @@
     menuItem: getMenuItem(item.menuItemId, menuItems) ?? getKioskoItem(item.menuItemId,kioskoItems), 
   }));
   
-  $: total = items.reduce((sum, item) => 
-    sum + (item.menuItem?.price || 0) * item.quantity, 0
-  );
+  $: total = items.reduce((sum, item) => sum + (item.menuItem?.price || 0) * item.quantity, 0);
 
   async function checkout() {
     if (items.length === 0) return;
@@ -57,9 +55,7 @@
     }, 3000);
   }
 
-  function closeToast() {
-    showToast = false;
-  }
+  const closeToast = () => showToast = false;
 </script>
 
 <div class="bg-white div mt-5 rounded-lg shadow-md p-6">

@@ -3,7 +3,7 @@
   import Hanoi from './Hanoi.jpg'
 </script>
 
-<section class="relative h-[600px] flex items-center justify-center bg-gray-900 mt-16 text-white">
+<section class="relative h-[40rem] flex items-center justify-center bg-gray-900 mt-16 text-white">
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute inset-0 bg-black/60 z-0"></div>
     <img 

@@ -4,6 +4,7 @@
     import { capitalize } from '$lib/client/utils/capitalize';
     import type { KioskoItem } from '$lib/types/kiosko';
   import { animate__pulse_infinite } from '$lib/common/constants/animate';
+  import { slide } from 'svelte/transition';
   
     export let item: MenuItem | KioskoItem;
     let showModal = false;
@@ -21,12 +22,12 @@
     }
   </script>
   
-  <div class="w-full rounded-lg shadow-md overflow-hidden mx-auto border flex flex-col bg-white">
+  <div in:slide|global = {{duration:400}} class="w-full rounded-lg shadow-md overflow-hidden mx-auto border flex flex-col bg-white">
     <div class="p-4 flex flex-col flex-grow h-fit">
       <div class="flex justify-between items-center mb-2">
         <h3 class="text-xl font-semibold capitalize">{item.name}</h3>
         <span class="text-lg font-bold">Precio: ${item.price.toFixed(2)}</span>
-        <button on:click={toggleModal} class="text-sm text-gray-500 hover:underline { animate__pulse_infinite }">Ver imagen de { capitalize( item.name ) }</button>
+        <button on:click={toggleModal} class="text-sm text-green-800 hover:underline { animate__pulse_infinite }">Ver imagen de { capitalize( item.name ) }</button>
       </div>
       <div class="flex justify-between items-center mb-1 flex-grow">
         <p class="text-gray-600 w-8/12">{item.description}</p>
