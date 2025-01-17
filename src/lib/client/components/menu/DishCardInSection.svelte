@@ -30,7 +30,7 @@
         <button on:click={toggleModal} class="text-sm text-green-800 hover:underline { animate__pulse_infinite }">Ver imagen de { capitalize( item.name ) }</button>
       </div>
       <div class="flex justify-between items-center mb-1 flex-grow">
-        <p class="text-gray-600 w-8/12">{item.description}</p>
+        <p class="text-gray-600 w-8/12">{capitalize(item.description)}</p>
         <button
           on:click={addToCart}
           disabled={!item.available}
@@ -43,12 +43,12 @@
   </div>
   
   {#if showModal}
-    <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" on:click={toggleModal}>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" on:click={toggleModal}>
       <div class="bg-gray-100 p-2 rounded-lg shadow-lg max-w-lg w-3/5 h-fit relative" on:click|stopPropagation>
         <button on:click={toggleModal} class="absolute top-2 right-2 text-4xl text-red-500 hover:text-gray-700 bg-gray-100 h-12 w-12 rounded border">
           &times;
         </button>
-        <img src={ item.image } alt="Imagen del {item.category}" class="w-full h-96 object-cover rounded-lg" />
+        <img src={`/api/images/${item.image}`} alt="image" class="w-full h-96 object-cover rounded-lg" />
       </div>
     </div>
   {/if}

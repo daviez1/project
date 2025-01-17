@@ -8,7 +8,7 @@ export interface InventoryItem {
     price: number;
     quantity: number;
     type: 'menu' | 'kiosk';
-    category: string;
+    category: 'entrantes' | 'platos fuertes' | 'acompañantes' | 'bebidas' | 'menu infantil' | 'especiales del dia' | 'vegetarianas' | 'Sin gluten/Sin lactosa' | 'postres';
     image: string;
     available: boolean;
     minStock: number;

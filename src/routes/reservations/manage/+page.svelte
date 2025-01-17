@@ -1,7 +1,6 @@
 <script lang="ts">
   import { reservationStore } from '$lib/common/stores/reservations';
   import { reservationSettings } from '$lib/common/data/reservationSettings';
-  import { onMount } from 'svelte';
   
   let userEmail = '';
   let userReservations: any[] = [];

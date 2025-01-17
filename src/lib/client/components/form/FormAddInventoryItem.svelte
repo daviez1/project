@@ -4,7 +4,9 @@
   import type { InventoryItem } from '$lib/types/inventory';
   import ToastComplete from "$lib/client/components/notifications/ToastComplete.svelte";
   import * as formErrors from '$lib/client/utils/formErrors';
+  import { capitalize } from '$lib/client/utils/capitalize';
 
+  let categories = ['entrantes' , 'platos fuertes' , 'acompañantes' , 'bebidas' , 'menu infantil' , 'especiales del dia' , 'vegetarianas' , 'Sin gluten/Sin lactosa' , 'postres']
   let items: InventoryItem[] = [];
   let showToast = false;
   let stockInvalid = formErrors.stockInvalid.activate;
@@ -27,7 +29,7 @@
     price: 0,
     quantity: 0,
     type: 'menu',
-    category: '',
+    category: 'entrantes',
     image: '',
     available: true,
     minStock: 0,
@@ -35,7 +37,7 @@
     lastRestocked: new Date()
   };
 
-  function addProduct() {
+  async function addProduct() {
     if (newProduct.maxStock <= newProduct.minStock) return stockInvalid = true;  
     stockInvalid = false;
 
@@ -46,9 +48,22 @@
     const highestId = items.reduce((max, item) => Math.max(max, Number(item.id)), 0);
     newProduct.id = String(highestId + 1);
 
+    // Cargar la imagen a MongoDB usando GridFS
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    if (fileInput && fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/uploads', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      newProduct.image = result.fileId; // Asigna el ID del archivo cargado
+    }
 
     // Agregar el nuevo producto al inventario
-    // inventory.addInventoryItem(newProduct);
     dispatch('itemAdded', { item: newProduct });
 
     // Reiniciar el formulario
@@ -59,19 +74,13 @@
       price: 0,
       quantity: 0,
       type: 'menu',
-      category: '',
+      category: 'entrantes',
       image: '',
       available: true,
       minStock: 0,
       maxStock: 0,
       lastRestocked: new Date()
     };
-
-
-    // for (const item of items) {
-    //   let itemExist = item.name == newProduct.name;
-
-    // }
 
     showToast = true;
     setTimeout(() => {
@@ -111,11 +120,20 @@
     </div>
     <div>
       <label for="category" class="block text-sm font-medium text-gray-700">Categoría</label>
-      <input type="text" id="category" bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Categoría" required />
+      <select id="category"  bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+        {#each categories as category }
+        <option value={category} class="capitalize">{capitalize( category )}</option>
+        {/each}
+        </select>
     </div>
-    <div>
+    <!-- <div>
       <label for="image" class="block text-sm font-medium text-gray-700">Imagen (URL)</label>
       <input type="text" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="URL de la imagen" required />
+    </div> -->
+    <div> 
+      <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label> 
+      <input type="file" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Inserte la imagen" required /> 
+      <!-- <input type="file" id="image" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required />  -->
     </div>
     <div>
       <label for="minStock" class="block text-sm font-medium text-gray-700">Stock mínimo</label>

@@ -67,8 +67,8 @@ export interface TableReservation {
   id: string;
   tableId: string;
   reservationId: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string; //era Date
+  endTime: string; //era Date
   status: string;
 }
 

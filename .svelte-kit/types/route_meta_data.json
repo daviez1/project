@@ -1,5 +1,8 @@
 {
 	"/": [],
+	"/api/images/[id]": [
+		"src/routes/api/images/[id]/+server.ts"
+	],
 	"/api/inventory/items": [
 		"src/routes/api/inventory/items/+server.ts"
 	],
@@ -38,6 +41,9 @@
 	],
 	"/api/order/[id]": [
 		"src/routes/api/order/[id]/+server.ts"
+	],
+	"/api/uploads": [
+		"src/routes/api/uploads/+server.ts"
 	],
 	"/chillGuy": [],
 	"/gestionarPedidos": [],

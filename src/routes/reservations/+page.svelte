@@ -1,6 +1,9 @@
 <script lang="ts">
   import { waitlist } from '$lib/common/stores/waitlist';
   import { reservationSettings } from '$lib/common/data/reservationSettings';
+  import { reservationStore } from '$lib/common/stores/reservations';
+  import type { TableReservation, WaitlistEntry } from '$lib/types/reservation';
+  import Manage from '$lib/client/components/reservations/Manage.svelte';
   
   let date: string = '';
   let preferredTimes: string[] = [];
@@ -17,8 +20,7 @@
   
   function handleSubmit() {
     if (!date || preferredTimes.length === 0) return;
-    
-    const entry = {
+    const entry: WaitlistEntry = {
       id: crypto.randomUUID(),
       date: new Date(date),
       preferredTimes,
@@ -30,8 +32,20 @@
       status: 'waiting' as 'waiting',
       createdAt: new Date()
     };
+
+  const tableReservation:TableReservation[] = [{
+  id: '1',
+  tableId: '1',
+  reservationId: entry.id,
+  startTime: entry.preferredTimes[0],
+  endTime: entry.preferredTimes[0],
+  status: 'reserved'
+}]
+    
+    console.log(tableReservation);
     
     waitlist.add(entry);
+    reservationStore.setReservations(tableReservation)
     alert('Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.');
     
     // Reset form
@@ -40,7 +54,12 @@
   }
 </script>
 
-<!-- <div class="container mx-auto px-4 py-12 max-w-4xl">
+<!-- Manage -->
+ <Manage />
+<!-- Manage -->
+<!-- 
+
+<div class="container mx-auto px-4 py-12 max-w-4xl">
   <div class="bg-white rounded-lg shadow-lg p-8">
     <h1 class="text-3xl font-bold mb-4 text-center">Reserva tu mesa</h1>
     
@@ -58,13 +77,8 @@
         Lista de espera
       </a>
     </div> 
-    
-    ... rest of the existing reservation form ...
   </div>
-</div>-->
-
-<hr>
-
+</div> -->
 <div class="container mx-auto px-4 py-28 max-w-4xl">
   <div class="bg-white rounded-lg shadow-lg p-8">
     <h1 class="text-3xl font-bold mb-8 text-center">Reserve su mesa</h1>

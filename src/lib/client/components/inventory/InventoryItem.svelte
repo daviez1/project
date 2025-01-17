@@ -90,7 +90,7 @@
   </div>
   <div class="w-1/2 hidden sm:flex justify-center items-center">
     <img 
-      src={item.image} 
+    src={`/api/images/${item.image}`} 
       alt={item.name}
       class="w-full h-52 object-cover rounded-lg"
     />

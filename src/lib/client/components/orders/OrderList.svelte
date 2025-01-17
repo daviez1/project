@@ -17,16 +17,14 @@
     queryKey: [GetOrders], 
     queryFn: async () => await orders.fetchOrders()      
   });
-
-  $: pendingOrders = $orders.filter(order => 
-  order.status === 'pending' || order.status === 'preparing' || order.status === 'ready'
-);
   
   function paginate() {
-    if ($orders.length > 0) {
+    if ($orders.length > 0) {      
       const start = (currentPage - 1) * itemsPerPage;
       const end = start + itemsPerPage;
-      paginatedOrders.set($orders.slice(start, end));
+      paginatedOrders.set($orders.filter(order => 
+      order.status === 'pending' || order.status === 'preparing' || order.status === 'ready'
+      ).slice(start, end));
     }
   }
 

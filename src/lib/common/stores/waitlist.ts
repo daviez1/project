@@ -14,8 +14,7 @@ function createWaitlistStore() {
           entry.id === id ? { ...entry, status } : entry
         )
       ),
-    remove: (id: string) =>
-      update(entries => entries.filter(entry => entry.id !== id)),
+    remove: (id: string) => update(entries => entries.filter(entry => entry.id !== id)),
     getActiveEntries: (date: Date) => {
       let activeEntries: WaitlistEntry[] = [];
       const unsubscribe = waitlist.subscribe(entries => {

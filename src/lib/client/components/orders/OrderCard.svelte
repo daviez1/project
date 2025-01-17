@@ -9,6 +9,8 @@
   import { cart } from '$lib/common/stores/cart';
   import mongoose from 'mongoose';
   import { getKioskoItem, getMenuItem } from '$lib/client/utils/getItemsFromCart';
+  import { statusColors, statusColorsPlus } from '$lib/common/constants/ordersColors';
+  import { onDestroy } from 'svelte';
 
   export let order: Order;
   let showToast = false;
@@ -25,32 +27,18 @@
   $: menuItems = $menuItemsQuery.data || [];
   $: kioskoItems = $kioskoItemsQuery.data || [];
 
-  const statusColors: { pending: string, preparing: string, ready: string, completed: string } = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    preparing: 'bg-blue-100 text-blue-800',
-    ready: 'bg-green-100 text-green-800',
-    completed: 'bg-gray-100 text-gray-800'
-  };
-  const statusColorsPlus: { pending: string, preparing: string, ready: string, completed: string } = {
-    pending: 'bg-blue-100 text-blue-800',
-    preparing: 'bg-green-100 text-green-800',
-    ready: 'bg-gray-100 text-gray-800',
-    completed: 'bg-yellow-100 text-gray-800',
-  };
-
   function handleStatusChange(id: mongoose.Types.ObjectId) {
     if (id) {
       orders.updateStatus(id);
-      if (order.status === 'completed') console.log('todo delete if order is completed')
+      if (order.status === 'completed') console.log('to do delete if order is completed')
       showToast = true; // Mostrar el toast cuando se actualiza el estado
     } else {
       console.error('Order ID is undefined');
     }
   }
 
-  function closeToast() {
-    showToast = false;
-  }
+  const closeToast = () => showToast = false;
+
 </script>
 
 <div class="bg-white rounded-lg shadow-md p-6">
