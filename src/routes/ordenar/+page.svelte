@@ -26,21 +26,36 @@
   <title>Menú-Pedidos</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 mt-10">
-  <h1 class="text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <div class="lg:col-span-2">
-      <OrdenarPedido />
-    </div>
-    <div class="h-fit" id="cart">
-      <Cart />
-    </div>
-  </div>
-  {#if $cart.length > 0}
-    {#if showSeeOrders}
-      <div class="fixed right-4 z-50 {direction == 'up' ? 'bottom-44' : 'top-20'}">
-        <ButtonSeeOrders {direction} />
+<div class="bg-fixed">
+  <div class="container mx-auto px-4 py-8 mt-10">
+    <h1 class="txt-gradient text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <OrdenarPedido />
       </div>
+      <div class="h-fit" id="cart">
+        <Cart />
+      </div>
+    </div>
+    {#if $cart.length > 0}
+      {#if showSeeOrders}
+        <div class="fixed right-4 z-50 {direction == 'up' ? 'bottom-44' : 'top-20'}">
+          <ButtonSeeOrders {direction} />
+        </div>
+      {/if}
     {/if}
-  {/if}
+  </div>
 </div>
+
+<style>
+  .bg-fixed{
+    background-image: url('../../lib/client/assets/french-fries-2300928_1280.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .txt-gradient{
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 100% );
+    background-clip: text;
+    color: transparent;
+  }
+</style>

@@ -15,12 +15,6 @@
       <h3 class="text-4xl text-white font-semibold capitalize text-center">{item.name}</h3>
     </div>
   </div>
-  <!--<div class="flex flex-col flex-grow text-center h-fit bg-white rounded-b-lg p-4">
-     <div class="flex justify-between items-center">
-      <p class="text-gray-600 w-7/10">{capitalize(item.description)}</p>
-      <span class="text-gray-700 font-bold w-3/10 text-right">Precio: ${item.price.toFixed(2)}</span>
-    </div> 
-  </div>-->
 </div>
 
 <style>

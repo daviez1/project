@@ -41,33 +41,46 @@
   <title>Kiosko - Galletas & Más</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 mt-10">
-  <h1 class="text-4xl font-bold text-center mb-8">Kiosko</h1>
-  <p class="text-center text-gray-600 mb-12">Encuentra comida rápida y picadera</p>
-  <div class="space-y-12">
-  {#if $kioskoCategoryQuery.isLoading}
-    <Loader />
-  {:else if $kioskoCategoryQuery.isError}
-    <p>Error: {$kioskoCategoryQuery.error.message}</p>
-  {:else if $kioskoCategoryQuery.isSuccess}
-    {#if $kioskoCategoryQuery.data.length > 0}
-      {#each $kioskoCategoryQuery.data as category}
-        <KioskoCategory {category} />
-      {/each}
-      <!-- {#if $cart.length > 0} -->
-        <div id="cart">
-          <Cart />
-        </div>
-          {#if showSeeOrders}
-          <div class="fixed top-20 right-4 z-50">
-            <ButtonSeeOrders {direction} />
+<div class="bg-fixed">
+  <div class="container mx-auto px-4 py-8 mt-10">
+    <h1 class="txt-gradient text-gray-300 text-4xl font-bold text-center mb-2">Kiosko</h1>
+    <span class="bg-black"><p class="text-center text-gray-200 rounded mb-8">Encuentra comida rápida y picadera</p></span>
+    <div class="space-y-12">
+      {#if $kioskoCategoryQuery.isLoading}
+      <Loader />
+    {:else if $kioskoCategoryQuery.isError}
+      <p>Error: {$kioskoCategoryQuery.error.message}</p>
+    {:else if $kioskoCategoryQuery.isSuccess}
+      {#if $kioskoCategoryQuery.data.length > 0}
+        {#each $kioskoCategoryQuery.data as category}
+          <KioskoCategory {category} />
+        {/each}
+        <!-- {#if $cart.length > 0} -->
+          <div id="cart">
+            <Cart />
           </div>
-          {/if}
-      <!-- {/if} -->
-    {:else}
+            {#if showSeeOrders}
+            <div class="fixed top-20 right-4 z-50">
+              <ButtonSeeOrders {direction} />
+            </div>
+            {/if}
+        <!-- {/if} -->
+      {:else}
       <Empty /> 
-    {/if}
-  {/if}
+      {/if}
+      {/if}      
+    </div>
+  </div>
+</div>
 
-</div>
-</div>
+<style>
+  .bg-fixed{
+    background-image: url('../../lib/client/assets/bg3.jpg');
+    background-attachment: fixed;
+  }
+  .txt-gradient{
+    background: linear-gradient(to right, #ffffff 0%, #ff6fff 100% );
+    background-clip: text;
+    color: transparent;
+  }
+</style>
