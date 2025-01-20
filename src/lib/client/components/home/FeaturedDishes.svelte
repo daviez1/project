@@ -17,8 +17,6 @@
     queryKey: [GetMenuItems],
     queryFn: async () => {
       let items: MenuItem[] = await cart.fetchMenuItems();
-      console.log(items);
-      
       return items.filter(item => item.category === 'platos fuertes');
     },
   });

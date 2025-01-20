@@ -11,7 +11,7 @@
 
 /* global.css */
 body {
-  background-image: url('./lib/client/assets/OIP(1).jpg') !important;
+  background: linear-gradient(to bottom, rgb(197, 196, 196), rgb(252, 246, 246));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,4 +19,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-width: 355px;
 }
+

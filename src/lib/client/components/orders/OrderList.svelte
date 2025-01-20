@@ -57,6 +57,6 @@
       </div>
     {/if}
 
-    <Pagination {currentPage} {itemsPerPage} totalItems={$orders.length} on:pageChange={handlePageChange} />
+    <Pagination {currentPage} {itemsPerPage} totalItems={$paginatedOrders.length} on:pageChange={handlePageChange} />
   {/if}
 </div>

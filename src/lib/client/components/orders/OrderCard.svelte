@@ -10,10 +10,11 @@
   import mongoose from 'mongoose';
   import { getKioskoItem, getMenuItem } from '$lib/client/utils/getItemsFromCart';
   import { statusColors, statusColorsPlus } from '$lib/common/constants/ordersColors';
-  import { onDestroy } from 'svelte';
+  import { writable } from 'svelte/store';
 
   export let order: Order;
-  let showToast = false;
+  let showToast = writable(false);
+  let toastMessage = writable('');
 
   const menuItemsQuery = createQuery({ 
     queryKey: [GetMenuItems], 
@@ -24,20 +25,20 @@
     queryFn: async () => await cart.fetchKioskoItems()      
   });
 
-  $: menuItems = $menuItemsQuery.data || [];
-  $: kioskoItems = $kioskoItemsQuery.data || [];
-
   function handleStatusChange(id: mongoose.Types.ObjectId) {
     if (id) {
-      orders.updateStatus(id);
-      if (order.status === 'completed') console.log('to do delete if order is completed')
-      showToast = true; // Mostrar el toast cuando se actualiza el estado
+      if (order.status === 'ready') {
+        orders.updateStatus(id);
+        showToast.set(true); // Mostrar el toast cuando se actualiza el estado
+        toastMessage.set(`Pedido ${order.id} entregado!`);
+      } else {
+        orders.updateStatus(id);
+      }
     } else {
       console.error('Order ID is undefined');
     }
   }
-
-  const closeToast = () => showToast = false;
+  const closeToast = () => showToast.set(false);
 
 </script>
 
@@ -72,8 +73,8 @@
       <p>Cargando elementos del menú...</p>
     {/if}
   </div>
-  {#if showToast && order.status == 'completed'}
-    <ToastComplete message='Pedido entregado' onClose={closeToast} type='success' duration={3000} />
+  {#if $showToast}
+    <ToastComplete message={$toastMessage} onClose={closeToast} type='success' />
   {/if}
   <div class="border-t pt-4 flex justify-between items-center">
     <span class="font-semibold">Total:</span>
