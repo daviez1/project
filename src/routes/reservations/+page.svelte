@@ -42,8 +42,6 @@
   status: 'reserved'
 }]
     
-    console.log(tableReservation);
-    
     waitlist.add(entry);
     reservationStore.setReservations(tableReservation)
     alert('Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.');
@@ -54,31 +52,11 @@
   }
 </script>
 
-<!-- Manage -->
- <Manage />
-<!-- Manage -->
-<!-- 
+<svelte:head>
+  <title>Reservaciones</title>
+</svelte:head>
 
-<div class="container mx-auto px-4 py-12 max-w-4xl">
-  <div class="bg-white rounded-lg shadow-lg p-8">
-    <h1 class="text-3xl font-bold mb-4 text-center">Reserva tu mesa</h1>
-    
-    <div class="flex justify-center gap-4 mb-8">
-      <a
-        href="/reservations/manage"
-        class="text-blue-600 hover:text-blue-700 font-medium"
-      >
-        Gestionar reservas
-      </a>
-      <a
-        href="/reservations/waitlist"
-        class="text-blue-600 hover:text-blue-700 font-medium"
-      >
-        Lista de espera
-      </a>
-    </div> 
-  </div>
-</div> -->
+<Manage />
 <div class="container mx-auto px-4 py-28 max-w-4xl">
   <div class="bg-white rounded-lg shadow-lg p-8">
     <h1 class="text-3xl font-bold mb-8 text-center">Reserve su mesa</h1>

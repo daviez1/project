@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-  <title>Pedidos</title>
+  <title>Menú-Pedidos</title>
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8 mt-10">

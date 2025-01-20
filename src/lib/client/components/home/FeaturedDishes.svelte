@@ -55,7 +55,7 @@
 </script>
 
 <section>
-  <div class="mx-0 md:mx-8 mt-8 rounded">
+  <div class="mx-0 md:mx-8 rounded">
     <div>
       {#if $menuItemsQuery.isLoading}
       <Loader />
@@ -63,8 +63,8 @@
       <p>Error: {$menuItemsQuery.error.message}</p>
       {:else if $menuItemsQuery.isSuccess}
       {#if $menuItemsQuery.data.length > 0}
-      <h2 class="text-3xl font-bold text-center leading-8 font-extrabold tracking-tight mb-8 text-gray-700 sm:text-4xl">Algunos de nuestros platos</h2>
-          <div class="grid grid-cols-1 h-fit w-full flex justify-center items-center">
+      <div class="grid grid-cols-1 h-fit w-full flex justify-center items-center">
+            <h2 class="text-3xl font-bold text-center leading-8 font-extrabold tracking-tight mt-2 mb-4 text-gray-700 sm:text-4xl">Algunos de nuestros platos</h2>
             {#each paginateMenu as item (item.id)}
              <DishCard {item}/>
             {/each}

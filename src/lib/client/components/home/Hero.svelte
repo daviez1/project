@@ -3,7 +3,7 @@
   import Hanoi from './Hanoi.jpg'
 </script>
 
-<section class="relative h-[80vh] md:h-[60vh] flex items-center justify-center bg-gray-900 mt-16 text-white">
+<section class="relative h-3/5 md:h-3/5 flex items-center justify-center bg-gray-900 mt-8 text-white">
   <div class="absolute inset-0 overflow-hidden">
     <div class="absolute inset-0 bg-black/60 z-0"></div>
     <img 
@@ -14,13 +14,13 @@
   </div>
   
   <div class="relative z-0 text-center px-4" in:fly>
-    <h1 class="text-5xl font-bold mb-4">Bienvenido a nuestro Restaurante</h1>
-    <p class="text-2xl font-bold mb-8">Disfruta de la deliciosa comida de esta ciudad</p>
+    <h1 class="text-3xl md:text-5xl font-bold mb-8 md:mb-4">Bienvenido a nuestro Restaurante</h1>
+    <p class="hidden md:block text-center md:text-2xl font-bold mb-8">Disfruta de la deliciosa comida de esta ciudad</p>
     <div class="space-x-4">
-      <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray/10">
+      <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-2 md:px-4 py-1 md:py-2 rounded-lg font-semibold hover:bg-gray/10">
         Ver Menú
       </a>
-      <a href="/reservations" class="bg-white text-gray-900 border-2 border-gray px-6 py-3 rounded-lg font-semibold hover:bg-gray-40">
+      <a href="/reservations" class="bg-white text-gray-900 border-2 border-gray px-2 md:px-4 py-1 md:py-2 rounded-lg font-semibold hover:bg-gray-40">
         Reservar ahora
       </a>
     </div>

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { cart } from '$lib/common/stores/cart';
-  import { Order } from '$lib/common/models/order';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
   import { GetKioskoItems, GetMenuItems, GetOrdersLastId } from '$lib/common/constants/queries';
@@ -51,7 +50,7 @@
 </script>
 
 <div class="bg-white div mt-5 rounded-lg shadow-md p-6">
-  <h2 class="text-2xl font-bold text-gray-700 mb-6">Sus pedidos</h2>
+  <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Sus pedidos</h2>
   
   {#if items.length === 0}
     <p class="text-gray-500 text-center py-4">No ha realizado ningún pedido</p>

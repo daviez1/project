@@ -38,6 +38,10 @@
   }, {});
 </script>
 
+<svelte:head>
+  <title>Inventario</title>
+</svelte:head>
+
 <div class="space-y-6 ml-20 mr-20">
   <div class="flex justify-between items-center">
     <h2 class="text-4xl font-bold">Inventario</h2>

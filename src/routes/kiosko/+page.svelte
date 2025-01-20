@@ -54,7 +54,7 @@
       {#each $kioskoCategoryQuery.data as category}
         <KioskoCategory {category} />
       {/each}
-      {#if $cart.length > 0}
+      <!-- {#if $cart.length > 0} -->
         <div id="cart">
           <Cart />
         </div>
@@ -63,7 +63,7 @@
             <ButtonSeeOrders {direction} />
           </div>
           {/if}
-      {/if}
+      <!-- {/if} -->
     {:else}
       <Empty /> 
     {/if}
