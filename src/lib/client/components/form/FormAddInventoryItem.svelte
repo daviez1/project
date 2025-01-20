@@ -7,17 +7,16 @@
   import { capitalize } from '$lib/client/utils/capitalize';
 
   let categories = ['entrantes' , 'platos fuertes' , 'acompañantes' , 'bebidas' , 'menu infantil' , 'especiales del dia' , 'vegetarianas' , 'Sin gluten/Sin lactosa' , 'postres']
-  let items: InventoryItem[] = [];
   let showToast = false;
   let stockInvalid = formErrors.stockInvalid.activate;
   let productExistActivate = formErrors.productExist.activate;
-  let showError = false;
-  const onClose = () => {
-    showToast = false;
-  }
+  let items: InventoryItem[] = []
 
+  const onClose = () => showToast = false
+  
   onMount(async () => {
-    items = await inventory.fetchInventoryItems();
+    items = await inventory.fetchInventoryItems()
+    console.log(String(items.length + 1));
   });
 
   const dispatch = createEventDispatcher();
@@ -41,12 +40,8 @@
     if (newProduct.maxStock <= newProduct.minStock) return stockInvalid = true;  
     stockInvalid = false;
 
-    const productExist = items.find( item => item.name == newProduct.name )
+    const productExist = $inventory.find( item => item.name == newProduct.name )
     if (productExist) return productExistActivate = true
-
-    // Encontrar el ID más alto en el array de items
-    const highestId = items.reduce((max, item) => Math.max(max, Number(item.id)), 0);
-    newProduct.id = String(highestId + 1);
 
     // Cargar la imagen a MongoDB usando GridFS
     const fileInput = document.getElementById('image') as HTMLInputElement;
@@ -64,10 +59,13 @@
     }
 
     // Agregar el nuevo producto al inventario
+    console.log(newProduct);
+    
     dispatch('itemAdded', { item: newProduct });
 
     // Reiniciar el formulario
     newProduct = {
+      // id: String(items.length + 1),
       id: '',
       name: '',
       description: '',
@@ -126,10 +124,6 @@
         {/each}
         </select>
     </div>
-    <!-- <div>
-      <label for="image" class="block text-sm font-medium text-gray-700">Imagen (URL)</label>
-      <input type="text" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="URL de la imagen" required />
-    </div> -->
     <div> 
       <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label> 
       <input type="file" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Inserte la imagen" required /> 

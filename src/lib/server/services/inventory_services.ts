@@ -33,35 +33,36 @@ try{
 
 export const createInventoryItem = async (inventoryItem: InventoryItemTypes.InventoryItem) => {
     try {
+        const items = await InventoryItem.find();
+        const itemsId = items.length + 1;
+
         const item = { 
-            id: inventoryItem.id, 
+            id: itemsId, 
             name: inventoryItem.name, 
             description: inventoryItem.description, 
             price: inventoryItem.price, 
             available: inventoryItem.available, 
             image: inventoryItem.image, 
             category: inventoryItem.category,
-            type: inventoryItem.type
+            type: inventoryItem.type,
+            minStock: inventoryItem.minStock,
+            maxStock: inventoryItem.maxStock,
+            quantity: inventoryItem.quantity
         };
 
-        if (inventoryItem.type === 'menu') {
-            await handleCategoryCreation(item, MenuItem, MenuCategory);
-        } else if (inventoryItem.type === 'kiosk') {
-            await handleCategoryCreation(item, KioskoItem, KioskoCategory);
-        }
         const categoryInventoryExist = await InventoryItem.findOne({ name: item.name });
         if (!categoryInventoryExist) {
-            const newInventoryItem = await InventoryItem.create(inventoryItem);
+            const newInventoryItem = await InventoryItem.create(item);
+            if (inventoryItem.type === 'menu') await handleCategoryCreation(item, MenuItem, MenuCategory);
+            else if (inventoryItem.type === 'kiosk') await handleCategoryCreation(item, KioskoItem, KioskoCategory);
             return newInventoryItem;
-        }else{
-            throw new Error(`Ya existe el producto ${item.name} en el inventario`)
-        }
-
+        } else throw new Error(`Ya existe el producto ${item.name} en el inventario`);
     } catch (error: any) {
         console.log(`error: ${error}`);
         throw new Error('Error al crear el producto en el inventario');
     }
 };
+
 
 export const deleteInventoryItem = async( category:string ) =>{
     await MenuItem.deleteMany( { category } )

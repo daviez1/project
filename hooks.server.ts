@@ -1,6 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { dbConnect } from './src/lib/server/config/db';
 import { capitalize } from './src/lib/client/utils/capitalize';
+import { InventoryItem } from '$lib/types/inventory';
 
 await dbConnect();
 
@@ -10,10 +11,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const handleCategoryCreation = async (item: any, Model:any, CategoryModel:any) => {
+  const items = await Model.find();
+  item.id = items.length + 1 
+ 
   const itemExist = await Model.findOne({ name: item.name });
-  if (itemExist) {
-      throw new Error(`Ya existe ese Producto del ${item.type}`);
-  }
+  if (itemExist) throw new Error(`Ya existe ese Producto del ${item.type}`);
+
   const newItem = await Model.create(item);
 
   const categoryExist = await CategoryModel.findOne({ id: newItem.category });

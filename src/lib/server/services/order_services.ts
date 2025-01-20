@@ -53,6 +53,10 @@ export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId)
 
 export async function createOrder(order: OrderTypes.Order): Promise<OrderTypes.Order> {
     try {
+        const orders = await Order.find();
+        const ordersId = String(orders.length + 1);
+        order.id = ordersId
+
         const newOrder = await Order.create(order);
         return newOrder;
     } catch (error) {

@@ -16,19 +16,11 @@
   queryKey: [GetMenuItems], 
   queryFn: async () => await cart.fetchMenuItems()      
 });
-  const ordersLastIdQuery = createQuery({ 
-  queryKey: [GetOrdersLastId], 
-  queryFn: async () => {
-   const ordersData:Order[] = await orders.fetchOrders();
-   return ordersData[ordersData.length-1].id
-  }      
-});
   const kioskoItemsQuery = createQuery({ 
   queryKey: [GetKioskoItems], 
   queryFn: async () => await cart.fetchKioskoItems()      
 });
 
-    $: ordersLastId = $ordersLastIdQuery.data || ''; // Función para obtener un elemento del menú por su ID 
     $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
     $: kioskoItems = $kioskoItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
     
@@ -42,7 +34,7 @@
 
   async function checkout() {
     if (items.length === 0) return;
-    newOrder.id = String(Number($orders.slice(-1)[0].id) + 1)
+    newOrder.id = ''
     newOrder.items = items
     newOrder.total = total
     orders.post(newOrder);
