@@ -49,7 +49,7 @@
   const closeToast = () => showToast = false;
 </script>
 
-<div class="bg-white div mt-5 rounded-lg shadow-md p-6">
+<div class="bg-white w-full mt-5 rounded-lg shadow-md p-6">
   <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Sus pedidos</h2>
   
   {#if items.length === 0}
@@ -83,7 +83,7 @@
       
       <button
         on:click={checkout}
-        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
+        class="w-full bg-gray-600 text-white py-3 rounded-lg font-semibold hover:bg-gray-700"
       >
         Confirmar
       </button>

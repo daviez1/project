@@ -14,7 +14,7 @@
 
 <div class="fixed top-0 w-full z-10">
   <nav class="bg-gradient-to-r from-gray-200 via-gray-300 to-white shadow-lg">
-    <div>
+    <div class="mr-8">
       <div class="flex justify-between items-center h-16">
         <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-2xl ml-8 text-gray-800">Restaurante Hanoi</a>
         <div class="md:hidden">

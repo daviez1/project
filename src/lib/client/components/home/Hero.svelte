@@ -14,8 +14,10 @@
   </div>
   
   <div class="relative z-0 text-center px-4" in:fly>
-    <h1 class="text-3xl md:text-5xl font-bold mb-8 md:mb-4">Bienvenido a nuestro Restaurante</h1>
-    <p class="hidden md:block text-center md:text-2xl font-bold mb-8">Disfruta de la deliciosa comida de esta ciudad</p>
+    <span class="bg-black-500 z-100">
+      <h1 class="text-3xl md:text-5xl font-bold mb-8 md:mb-4">Bienvenido a nuestro Restaurante</h1>
+      <p class="hidden md:block text-center md:text-2xl font-bold mb-8">Disfruta de la deliciosa comida de esta ciudad</p>
+    </span>
     <div class="space-x-4">
       <a href="/ordenar" class="bg-white text-gray-900 border-2 border-gray px-2 md:px-4 py-1 md:py-2 rounded-lg font-semibold hover:bg-gray/10">
         Ver Menú

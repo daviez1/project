@@ -16,7 +16,6 @@
     queryFn: async () => await cart.fetchKioskoCategories(),
   });
 
-  export let direction = 'down';
   let showSeeOrders = false;
 
   onMount(async () => {
@@ -43,8 +42,10 @@
 
 <div class="bg-fixed">
   <div class="container mx-auto px-4 py-8 mt-10">
-    <h1 class="txt-gradient text-gray-300 text-4xl font-bold text-center mb-2">Kiosko</h1>
-    <span class="bg-black"><p class="text-center text-gray-200 rounded mb-8">Encuentra comida rápida y picadera</p></span>
+    <div class="p-05 bg-stone-950/75 w-fit m-auto pt-2 px-4 rounded">
+      <h1 class="txt-gradient text-4xl font-bold text-center mb-2">Kiosko</h1>
+      <p class="text-center text-gray-200 rounded mb-8">Encuentra comida rápida y picadera</p>
+    </div>
     <div class="space-y-12">
       {#if $kioskoCategoryQuery.isLoading}
       <Loader />
@@ -56,12 +57,12 @@
           <KioskoCategory {category} />
         {/each}
         <!-- {#if $cart.length > 0} -->
-          <div id="cart">
+          <div id="cart" class={$cart.length > 0 ? 'flex' : 'invisible'}>
             <Cart />
           </div>
             {#if showSeeOrders}
             <div class="fixed top-20 right-4 z-50">
-              <ButtonSeeOrders {direction} />
+              <ButtonSeeOrders />
             </div>
             {/if}
         <!-- {/if} -->
@@ -74,12 +75,26 @@
 </div>
 
 <style>
-  .bg-fixed{
-    background-image: url('../../lib/client/assets/bg3.jpg');
+  /* .p-05{
+    padding-bottom: 0 !important ;
+  } */
+  .bg-fixed {
+    background-image: url('../../lib/client/assets/coca-cola.jpg');
     background-attachment: fixed;
+    background-size: cover;
   }
-  .txt-gradient{
-    background: linear-gradient(to right, #ffffff 0%, #ff6fff 100% );
+
+  @media (min-width: 768px) {
+    .bg-fixed {
+      background-image: url('../../lib/client/assets/coca-cola-5779718_1920.jpg');
+    }
+  }
+  div>p{
+    padding-bottom: .5em;
+  }
+
+  .txt-gradient {
+    background: linear-gradient(to right, #ffffff 0%, #ff6fff 100%);
     background-clip: text;
     color: transparent;
   }

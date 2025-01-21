@@ -6,7 +6,6 @@
   import { onMount, onDestroy } from 'svelte';
 
   let showSeeOrders = false;
-  let direction = 'down'; // Define direction como una variable reactiva
 
   onMount(() => {
     const cartElement = document.getElementById('cart');
@@ -39,8 +38,8 @@
     </div>
     {#if $cart.length > 0}
       {#if showSeeOrders}
-        <div class="fixed right-4 z-50 {direction == 'up' ? 'bottom-44' : 'top-20'}">
-          <ButtonSeeOrders {direction} />
+        <div class="fixed right-4 z-50 top-20">
+          <ButtonSeeOrders />
         </div>
       {/if}
     {/if}
