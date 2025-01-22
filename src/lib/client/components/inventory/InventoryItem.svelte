@@ -21,6 +21,7 @@
   
   function removeStock() {
     if (updateQuantity <= 0) return;
+    let inventoryItem = $inventory.find((inventory) => inventory.id == item.id);
     inventory.updateStock({
       id: item.id,
       quantity: updateQuantity,
@@ -34,7 +35,7 @@
 <div class="bg-gray-100 rounded-lg shadow-md p-6 flex">
   <div class="w-1/2 p-4">
     <h3 class="font-semibold text-2xl text-center capitalize">{item.name}</h3>
-    <p class="text-sm text-gray-600 text-center">{item.type} - {item.category}</p>
+    <p class="text-sm text-gray-600 text-center">{item.type === 'kiosk' ? 'Kiosko' : 'Restaurante'} - {item.category}</p>
     
     <div class="mt-4 space-y-2">
       <div class="flex justify-center">
@@ -46,7 +47,7 @@
       
       <div class="flex justify-center">
         <span class="font-semibold text-xl">Estado:</span>
-        <span class="{item.available ? 'text-green-600' : 'text-red-600'} ml-2 text-xl">
+        <span class="{item.available ? 'text-green-600' : 'text-red-600'} ml-2 text-lg">
           {item.available ? 'Disponible' : 'No disponible'}
         </span>
       </div>

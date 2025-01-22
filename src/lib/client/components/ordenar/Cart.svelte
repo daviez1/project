@@ -49,8 +49,8 @@
   const closeToast = () => showToast = false;
 </script>
 
-<div class="bg-white w-full mt-5 rounded-lg shadow-md p-6">
-  <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Sus pedidos</h2>
+<div class="bg w-full mt-5 rounded-lg shadow-md p-6">
+  <h2 class="text-xl md:text-2xl font-bold text-gradient mb-6 text-center">Sus pedidos</h2>
   
   {#if items.length === 0}
     <p class="text-gray-500 text-center py-4">No ha realizado ningún pedido</p>
@@ -59,11 +59,11 @@
       {#each items as item}
         <div class="flex justify-between items-center">
           <div>
-            <h3 class="font-semibold">{item.menuItem?.name}</h3>
+            <h3 class="font-semibold text-md">{item.menuItem?.name}</h3>
             <p class="text-sm text-gray-600">Cantidad: {item.quantity}</p>
           </div>
           <div class="text-right">
-            <p class="font-semibold">${((item.menuItem?.price || 0) * item.quantity).toFixed(2)}</p>
+            <p class="text-sm md:text-md font-semibold">${((item.menuItem?.price || 0) * item.quantity).toFixed(2)}</p>
             <button
               class="text-sm text-red-600 hover:text-red-700"
               on:click={() => cart.removeItem(item.menuItemId)}
@@ -77,16 +77,17 @@
     
     <div class="border-t pt-4">
       <div class="flex justify-between items-center mb-6">
-        <span class="text-lg font-bold">Total:</span>
-        <span class="text-lg font-bold">${total.toFixed(2)}</span>
+        <span class="text-sm md:text-lg font-bold">Total:</span>
+        <span class="text-sm md:text-lg font-bold">${total.toFixed(2)}</span>
       </div>
-      
-      <button
-        on:click={checkout}
-        class="w-full bg-gray-600 text-white py-3 rounded-lg font-semibold hover:bg-gray-700"
-      >
-        Confirmar
-      </button>
+      <div class="flex justify-center">
+        <button
+          on:click={checkout}
+          class="w-fit px-4 md:p-0 md:w-full bg-gray-600 text-white py-1 md:py-3 rounded-lg font-semibold hover:bg-gray-700"
+        >
+          Confirmar
+        </button>
+      </div>  
     </div>
   {/if}
 
@@ -94,3 +95,8 @@
     <ToastComplete type={'success'} message={toastMessage} onClose={closeToast} />
   {/if}
 </div>
+<style>
+  .bg{
+    background-image: radial-gradient(circle at 51% 29%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 95% 73%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 66% 49%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 89% 3%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 84% 66%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 85% 96%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 26% 14%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 59% 13%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 21% 44%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 9% 11%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 70% 60%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 27% 19%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 33% 2%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 91% 36%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 100% 8%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 87% 65%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 36% 37%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 89% 79%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),linear-gradient(90deg, hsla(245,0%,100%,1),hsla(230,0%,100%,1));
+  }
+</style>

@@ -3,7 +3,7 @@
   import Cart from '$lib/client/components/ordenar/Cart.svelte';
   import OrdenarPedido from '$lib/client/components/ordenar/OrdenarPedido.svelte';
   import { cart } from '$lib/common/stores/cart';
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
 
   let showSeeOrders = false;
 
@@ -25,36 +25,21 @@
   <title>Menú-Pedidos</title>
 </svelte:head>
 
-<div class="bg-fixed">
-  <div class="container mx-auto px-4 py-8 mt-10">
-    <h1 class="txt-gradient text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
-        <OrdenarPedido />
-      </div>
-      <div class="h-fit" id="cart">
-        <Cart />
-      </div>
+<div class="container mx-auto px-4 py-8 mt-10">
+  <h1 class="text-gradient text-2xl md:text-4xl font-bold text-center mb-8">Ordenar aquí</h1>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2">
+      <OrdenarPedido />
     </div>
-    {#if $cart.length > 0}
-      {#if showSeeOrders}
-        <div class="fixed right-4 z-50 top-20">
-          <ButtonSeeOrders />
-        </div>
-      {/if}
-    {/if}
+    <div class="h-fit" id="cart">
+      <Cart />
+    </div>
   </div>
+  {#if $cart.length > 0}
+    {#if showSeeOrders}
+      <div class="fixed right-4 z-50 top-20">
+        <ButtonSeeOrders />
+      </div>
+    {/if}
+  {/if}
 </div>
-
-<style>
-  .bg-fixed{
-    background-image: url('../../lib/client/assets/french-fries-2300928_1280.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-  }
-  .txt-gradient{
-    background: linear-gradient(to right, #ffffff 0%, #ffffff 100% );
-    background-clip: text;
-    color: transparent;
-  }
-</style>

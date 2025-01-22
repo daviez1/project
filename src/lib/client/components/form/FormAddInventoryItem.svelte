@@ -15,31 +15,16 @@
   const onClose = () => showToast = false
   
   onMount(async () => {
-    items = await inventory.fetchInventoryItems()
-    console.log(String(items.length + 1));
+    items = await inventory.fetchInventoryItems();
   });
 
   const dispatch = createEventDispatcher();
 
-  let newProduct: InventoryItem = {
-    id: '',
-    name: '',
-    description: '',
-    price: 0,
-    quantity: 0,
-    type: 'menu',
-    category: 'entrantes',
-    image: '',
-    available: true,
-    minStock: 0,
-    maxStock: 0,
-    lastRestocked: new Date()
-  };
+  let newProduct: InventoryItem = {id: '', name: '', description: '', price: 0, quantity: 0, type: 'menu', category: 'entrantes', image: '', available: true, minStock: 0, maxStock: 0, lastRestocked: new Date()};
 
   async function addProduct() {
     if (newProduct.maxStock <= newProduct.minStock) return stockInvalid = true;  
-    stockInvalid = false;
-
+    
     const productExist = $inventory.find( item => item.name == newProduct.name )
     if (productExist) return productExistActivate = true
 
@@ -59,92 +44,80 @@
     }
 
     // Agregar el nuevo producto al inventario
-    console.log(newProduct);
-    
     dispatch('itemAdded', { item: newProduct });
 
     // Reiniciar el formulario
     newProduct = {
       // id: String(items.length + 1),
-      id: '',
-      name: '',
-      description: '',
-      price: 0,
-      quantity: 0,
-      type: 'menu',
-      category: 'entrantes',
-      image: '',
-      available: true,
-      minStock: 0,
-      maxStock: 0,
-      lastRestocked: new Date()
-    };
+      id: '', name: '', description: '', price: 0, quantity: 0, type: 'menu', category: 'entrantes', image: '', available: true, minStock: 0, maxStock: 0, lastRestocked: new Date()};
 
     showToast = true;
-    setTimeout(() => {
-      showToast = false;
-    }, 4000);
+    setTimeout(() => { showToast = false;}, 4000);
   }
 </script>
 
-<div class="inline mx-8 h-fit shadow-md p-4 mb-20 bg-gray-100">
-  <h1 class="text-3xl font-bold text-center mb-8 text-gray-600">Gestión de productos</h1>
-  <form on:submit|preventDefault={addProduct} class="space-y-4">
-    <div>
-      <label for="name" class="block text-sm font-medium text-gray-700">Nombre del producto</label>
-      <input type="text" id="name" bind:value={newProduct.name} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Nombre del producto" required />
+<div class="inline mx-0 md:mx-8 h-fit rounded-xl shadow-md w-vdw md:p-4 mb-4 bg">
+  <h1 class="text-lg md:text-2xl lg:text-3xl font-bold text-center mb-8 text-gradient">Gestión de productos</h1>
+  <form on:submit|preventDefault={addProduct} class="px-3 space-y-4 py-3 md:py-0">
+    <div class="relative">
+      <input type="text" id="name" bind:value={newProduct.name} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder=" " required />
+      <label for="name" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Nombre del producto</label>
       {#if productExistActivate}
-        <p class="text-red-500 text-sm mt-1">{formErrors.productExist.message}</p>
+        <p class="text-red-500 text-xs md:text-sm mt-1">{formErrors.productExist.message}</p>
+      {/if}
+    </div>
+    <div class="relative">
+      <textarea id="description" bind:value={newProduct.description} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder=" " required></textarea>
+      <label for="description" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Descripción</label>
+    </div>
+    <div class="relative">
+      <input type="number" id="price" bind:value={newProduct.price} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder="Precio" required />
+      <label for="price" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Precio</label>
+      {#if productExistActivate}
+      <p class="text-red-500 text-xs md:text-sm mt-1">{formErrors.productExist.message}</p>
       {/if}
     </div>
     <div>
-      <label for="description" class="block text-sm font-medium text-gray-700">Descripción</label>
-      <textarea id="description" bind:value={newProduct.description} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Descripción del producto" required></textarea>
+      <label for="quantity" class="block text-xs md:text-sm font-medium text-gray-700">Cantidad</label>
+      <input type="number" id="quantity" bind:value={newProduct.quantity} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Cantidad" required />
     </div>
     <div>
-      <label for="price" class="block text-sm font-medium text-gray-700">Precio</label>
-      <input type="number" id="price" bind:value={newProduct.price} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Precio" required />
-    </div>
-    <div>
-      <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad</label>
-      <input type="number" id="quantity" bind:value={newProduct.quantity} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Cantidad" required />
-    </div>
-    <div>
-      <label for="type" class="block text-sm font-medium text-gray-700">Tipo</label>
-      <select id="type" bind:value={newProduct.type} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+      <label for="type" class="block text-xs md:text-sm font-medium text-gray-700">Tipo</label>
+      <select id="type" bind:value={newProduct.type} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50">
         <option value="menu">Restaurante</option>
         <option value="kiosk">Kiosko</option>
       </select>
     </div>
     <div>
-      <label for="category" class="block text-sm font-medium text-gray-700">Categoría</label>
-      <select id="category"  bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+      <label for="category" class="block text-xs md:text-sm font-medium text-gray-700">Categoría</label>
+      <select id="category"  bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50">
         {#each categories as category }
         <option value={category} class="capitalize">{capitalize( category )}</option>
         {/each}
         </select>
     </div>
     <div> 
-      <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label> 
-      <input type="file" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Inserte la imagen" required /> 
-      <!-- <input type="file" id="image" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required />  -->
+      <label for="image" class="block text-xs md:text-sm font-medium text-gray-700">Imagen</label> 
+      <input type="file" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Inserte la imagen" required /> 
     </div>
     <div>
-      <label for="minStock" class="block text-sm font-medium text-gray-700">Stock mínimo</label>
-      <input type="number" id="minStock" bind:value={newProduct.minStock} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Stock mínimo" required />
+      <label for="minStock" class="block text-xs md:text-sm font-medium text-gray-700">Stock mínimo</label>
+      <input type="number" id="minStock" bind:value={newProduct.minStock} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Stock mínimo" required />
     </div>
     <div>
-      <label for="maxStock" class="block text-sm font-medium text-gray-700">Stock máximo</label>
-      <input type="number" id="maxStock" bind:value={newProduct.maxStock} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" placeholder="Stock máximo" required />
+      <label for="maxStock" class="block text-xs md:text-sm font-medium text-gray-700">Stock máximo</label>
+      <input type="number" id="maxStock" bind:value={newProduct.maxStock} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Stock máximo" required />
       {#if stockInvalid}
-        <p class="text-red-500 text-sm mt-1">{formErrors.stockInvalid.message}</p>
+        <p class="text-red-500 text-xs md:text-sm mt-1">{formErrors.stockInvalid.message}</p>
       {/if}
     </div>
     <div>
-      <label for="available" class="block text-sm font-medium text-gray-700">Disponible</label>
+      <label for="available" class="block text-xs md:text-sm font-medium text-gray-700">Disponible</label>
       <input type="checkbox" id="available" bind:checked={newProduct.available} class="mt-1 block rounded-md border-gray-300 shadow-sm" />
     </div>
-    <button type="submit" class="w-full bg-gray-700 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700">Agregar producto</button>
+    <div class="flex justify-center">
+      <button type="submit" class="w-2/5 md:w-full bg-gray-700 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-700">Agregar producto</button>
+    </div>    
   </form>
   {#if showToast}
     <ToastComplete message="Creado con éxito" type="success" onClose={onClose}/>
@@ -154,5 +127,14 @@
 <style>
   input, select, textarea {
     padding: .3em;
+  }
+  input:focus {
+  outline: none;
+  }
+  textarea:focus {
+  outline: none;
+  }
+  .bg{
+    background-image: radial-gradient(circle at 51% 29%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 95% 73%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 66% 49%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 89% 3%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 84% 66%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 85% 96%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 26% 14%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 59% 13%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 21% 44%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 9% 11%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 70% 60%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 27% 19%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 33% 2%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 91% 36%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 100% 8%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 87% 65%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 36% 37%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 89% 79%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),linear-gradient(90deg, hsla(245,0%,100%,1),hsla(230,0%,100%,1));
   }
 </style>

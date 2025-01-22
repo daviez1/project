@@ -9,7 +9,7 @@
   <title>Restaurant Hanoi - Bienvenidos</title>
 </svelte:head>
 
-  <div class="h-screen z-100">
+  <div class="h-screen">
     <Hero />
     <WelcomeText/>
   </div>

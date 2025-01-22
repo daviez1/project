@@ -1,14 +1,9 @@
 <script>
-	export let width = 24;
-	export let height = 24;
 	export let color = 'currentColor';
-	export let className = '';
 </script>
 
 <svg
-	class={className}
-	width={width}
-	height={height}
+	class='w-4 md:w-6'
 	viewBox="0 -960 960 960"
 	fill={color}
 >

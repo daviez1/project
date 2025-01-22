@@ -9,7 +9,7 @@
   import EditIcon from '../icons/EditIcon.svelte';
   import Modal from '$lib/client/components/form/Modal.svelte'; // Importa el componente Modal
   import ToastComplete from '$lib/client/components/notifications/ToastComplete.svelte'; // Importa el componente ToastComplete
-  import { blur, crossfade, draw, fade, fly, scale, slide } from 'svelte/transition'; // Importa la transición fly
+  import { slide } from 'svelte/transition'; // Importa la transición fly
 
   export let groupedItems;
   let filter: InventoryFilter = { type: undefined };
@@ -48,18 +48,18 @@
 </script>
 
 <!--Divisor de lista y gestion  -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-8 rounded">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-0 md:mx-8 mt-8 rounded">
   <ul class="inline grid grid-cols-1 gap-4 h-fit py-4 px-0 rounded">
     {#if Object.keys(groupedItems).length > 0}
       {#each Object.keys(groupedItems) as category}
         <li class="bg-gray-100 rounded-lg p-1 mb-2 shadow-md w-full">
           <div class="flex justify-between items-center">
             <div>
-              <h3 class="font-bold text-2xl capitalize text-gray-600 ml-2">{category}</h3>
+              <h3 class="font-bold text-md sm:text-lg md:text-xl xl:text-xl 2xl:text-2xl capitalize text-gray-600 ml-2">{category}</h3>
             </div>
             <div class="flex items-center">
-              <button class="mr-4"><EditIcon /></button>
-              <button on:click={() => confirmDelete(category)} class="mr-4"><DeleteIcon /></button>
+              <!-- <button class="mr-4"><EditIcon /></button> -->
+              <button on:click={() => confirmDelete(category)} class="mr-4 w-1 md:w-4"><DeleteIcon /></button>
               <SeeMore toogleDetail={() => toggleDetails(category)} />
             </div>
           </div>

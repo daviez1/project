@@ -21,4 +21,13 @@ body {
   box-sizing: border-box;
   min-width: 355px;
 }
-
+.text-gradient {
+  background: linear-gradient(to right, #000000 0%, #bdaabd 100%);
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-primary{
+  background: linear-gradient(to right, #251d1d 0%, #555355 100%);
+  background-clip: text;
+  color: transparent;
+}

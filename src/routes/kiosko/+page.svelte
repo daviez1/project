@@ -40,12 +40,9 @@
   <title>Kiosko - Galletas & Más</title>
 </svelte:head>
 
-<div class="bg-fixed">
   <div class="container mx-auto px-4 py-8 mt-10">
-    <div class="p-05 bg-stone-950/75 w-fit m-auto pt-2 px-4 rounded">
-      <h1 class="txt-gradient text-4xl font-bold text-center mb-2">Kiosko</h1>
-      <p class="text-center text-gray-200 rounded mb-8">Encuentra comida rápida y picadera</p>
-    </div>
+      <h1 class="text-2xl md:text-3xl sm:text-4xl text-gradient font-bold text-center mb-2">Kiosko</h1>
+      <p class="text-center text-gray-600 rounded mb-8">Encuentra comida rápida y picadera</p>
     <div class="space-y-12">
       {#if $kioskoCategoryQuery.isLoading}
       <Loader />
@@ -72,30 +69,3 @@
       {/if}      
     </div>
   </div>
-</div>
-
-<style>
-  /* .p-05{
-    padding-bottom: 0 !important ;
-  } */
-  .bg-fixed {
-    background-image: url('../../lib/client/assets/coca-cola.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-  }
-
-  @media (min-width: 768px) {
-    .bg-fixed {
-      background-image: url('../../lib/client/assets/coca-cola-5779718_1920.jpg');
-    }
-  }
-  div>p{
-    padding-bottom: .5em;
-  }
-
-  .txt-gradient {
-    background: linear-gradient(to right, #ffffff 0%, #ff6fff 100%);
-    background-clip: text;
-    color: transparent;
-  }
-</style>

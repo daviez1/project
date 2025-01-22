@@ -24,10 +24,10 @@
     }
   </script>
   
-  <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+  <div class="flex items-center justify-between border-t border-gray-200 bg px-4 py-3 sm:px-6">
     <div class="flex flex-1 justify-between sm:hidden">
-      <button on:click={prevPage} disabled={currentPage === 1} class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</button>
-      <button on:click={nextPage} disabled={currentPage * itemsPerPage >= totalItems} class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
+      <button on:click={prevPage} disabled={currentPage === 1} class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</button>
+      <button on:click={nextPage} disabled={currentPage * itemsPerPage >= totalItems} class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 md:px-4 md:py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
     </div>
     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
       <div>
@@ -64,3 +64,9 @@
       </div>
     </div>
   </div>
+
+<style>
+  .bg{
+    background-image: radial-gradient(circle at 28% 29%, rgba(237, 237, 237,0.04) 0%, rgba(237, 237, 237,0.04) 50%,rgba(136, 136, 136,0.04) 50%, rgba(136, 136, 136,0.04) 100%),radial-gradient(circle at 8% 78%, rgba(156, 156, 156,0.04) 0%, rgba(156, 156, 156,0.04) 50%,rgba(37, 37, 37,0.04) 50%, rgba(37, 37, 37,0.04) 100%),radial-gradient(circle at 29% 46%, rgba(251, 251, 251,0.04) 0%, rgba(251, 251, 251,0.04) 50%,rgba(198, 198, 198,0.04) 50%, rgba(198, 198, 198,0.04) 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+  }
+</style>

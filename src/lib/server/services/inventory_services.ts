@@ -7,6 +7,7 @@ import KioskoItem from '$lib/common/Schemas/KioskoItem';
 import KioskoCategory from '$lib/common/Schemas/KioskoCategory';
 import { handleCategoryCreation } from '../../../../hooks.server';
 import mongoose from 'mongoose';
+import * as InventoryTypes from '$lib/types/inventory.js';
 
 export const getInventoryItem = async () => {
 try{   
@@ -19,6 +20,21 @@ try{
 }
 }
 
+export const updateStock = async( itemStockUpdate: InventoryTypes.StockUpdate, id:mongoose.Types.ObjectId ) =>{
+    let itemInventory: InventoryTypes.InventoryItem 
+    const item = await InventoryItem.findById(id);
+    if (!item) return new Response(JSON.stringify({ error: 'Producto no encontrado' }), { status: 404 });
+    
+    item.quantity = itemStockUpdate.type === 'add' 
+        ? item.quantity + itemStockUpdate.quantity 
+        : Math.max(0, item.quantity - itemStockUpdate.quantity);
+    item.quantity === 0 ? item.available = false : item.available      
+    item.lastRestocked = itemStockUpdate.type === 'add' ? new Date() : item.lastRestocked;
+
+    await item.save();
+    return item
+}
+
 export const getInventoryItemById = async ( id:string ) => {
 try{   
     await dbConnect()
@@ -29,7 +45,6 @@ try{
     throw new Error('Error al obtener el producto del inventario')
 }
 }
-
 
 export const createInventoryItem = async (inventoryItem: InventoryItemTypes.InventoryItem) => {
     try {

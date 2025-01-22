@@ -16,7 +16,7 @@
   <nav class="bg-gradient-to-r from-gray-200 via-gray-300 to-white shadow-lg">
     <div class="mr-8">
       <div class="flex justify-between items-center h-16">
-        <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-2xl ml-8 text-gray-800">Restaurante Hanoi</a>
+        <a href="/" class="font-bold {animate.animate_bounceInRight} inline text-xl sm:text-2xl ml-4 sm:ml-8 text-gradient-primary">Restaurante Hanoi</a>
         <div class="md:hidden">
           <button on:click={toggleMenu} class="text-gray-800 hover:text-gray-600 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -90,6 +90,12 @@
           class="block text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 px-3 py-2 rounded-md"
           class:font-bold={$page.url.pathname === '/gestionarPedidos'} on:click={toggleMenu}>
           Gestionar Pedidos
+        </a>
+        <a 
+          href="/inventory" 
+          class="block text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 px-3 py-2 rounded-md"
+          class:font-bold={$page.url.pathname === '/inventory'} on:click={toggleMenu}>
+          Inventario
         </a>
       </div>
     </div>

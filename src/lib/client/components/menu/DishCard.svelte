@@ -12,7 +12,7 @@
   <div in:fly={{ duration: 1000 }} class="h-4/5 relative">
     <img src={`/api/images/${item.image}`} alt={item.name} class="w-full h-[32rem] object-cover rounded-t-lg" />
     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-      <h3 class="text-4xl text-white font-semibold capitalize text-center">{item.name}</h3>
+      <h3 class="text-2xl md:text-3xl text-white font-semibold capitalize text-center">{item.name}</h3>
     </div>
   </div>
 </div>

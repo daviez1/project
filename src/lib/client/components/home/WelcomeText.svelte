@@ -4,13 +4,13 @@
   import { animate__fadeInLeft, animate__fadeInRight } from "$lib/common/constants/animate";
   </script>
   
-  <div class="mt-2 h-fit">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap h-fit lg:flex-nowrap items-center">
+  <div class="mt-2 lg:mt-8 h-2/5">
+    <div class="max-w-5xl mx-auto flex flex-wrap h-fit lg:flex-nowrap items-center">
       <div class="w-full lg:w-8/12 text-center {animate__fadeInLeft}">
-        <p class="text-xl leading-8 font-extrabold tracking-tight text-gray-700 md:text-4xl">
+        <p class="text-xl leading-8 font-extrabold tracking-tight text-gray-700 sm:text-4xl">
           {welcome[0].header}
         </p>
-        <p class="mt-1 mr-4 md:mt-8 text-md md:text-xl text-gray-500">
+        <p class="responsive-text mt-1 mr-4 sm:mt-8 text-xl sm:text-2xl text-gray-500">
           {welcome[0].text}
         </p>
       </div>
@@ -19,4 +19,12 @@
       </div>
     </div>
   </div>
+  <style>
+    @media (max-width: 400px) {
+      .responsive-text {
+        font-size: 1.125rem; /* 18px */
+        line-height: 1.75rem; /* 28px */
+      }
+    }
+    </style>
   
