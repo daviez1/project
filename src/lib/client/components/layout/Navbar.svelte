@@ -1,10 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import * as animate from '$lib/common/constants/animate';
-  import 'animate.css';
-  import { onMount } from 'svelte';
-  import LogoHanoi from './LogoHanoi.svelte';
-
+  
   let showMenu = false;
 
   function toggleMenu() {
@@ -12,7 +9,7 @@
   }
 </script>
 
-<div class="fixed top-0 w-full z-10">
+<div class="fixed top-0 w-full z-20">
   <nav class="bg-gradient-to-r from-gray-200 via-gray-300 to-white shadow-lg">
     <div class="mr-8">
       <div class="flex justify-between items-center h-16">

@@ -65,7 +65,7 @@
           </div>
           {#if expandedCategory === category}
             <div class="details mt-4" out:slide={{ duration: 200 }} in:slide={{ duration: 400 }}>
-              <ul class="space-y-2">
+              <ul class="rounded-md space-y-2">
                 {#each groupedItems[category] as item (item.id)}
                   <li>
                     <InventoryItemComponent {item} />

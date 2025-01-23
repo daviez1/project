@@ -21,10 +21,10 @@ try{
 }
 
 export const updateStock = async( itemStockUpdate: InventoryTypes.StockUpdate, id:mongoose.Types.ObjectId ) =>{
-    let itemInventory: InventoryTypes.InventoryItem 
     const item = await InventoryItem.findById(id);
     if (!item) return new Response(JSON.stringify({ error: 'Producto no encontrado' }), { status: 404 });
     
+    if (itemStockUpdate.type === 'add') item.available = true; 
     item.quantity = itemStockUpdate.type === 'add' 
         ? item.quantity + itemStockUpdate.quantity 
         : Math.max(0, item.quantity - itemStockUpdate.quantity);

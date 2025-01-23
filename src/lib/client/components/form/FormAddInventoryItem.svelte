@@ -11,6 +11,21 @@
   let stockInvalid = formErrors.stockInvalid.activate;
   let productExistActivate = formErrors.productExist.activate;
   let items: InventoryItem[] = []
+  let fileInput: HTMLInputElement;
+      let fileName: string = '';
+    
+      function triggerFileInput() {
+        fileInput.click();
+      }
+    
+      function handleFileChange(event: Event) {
+        const target = event.target as HTMLInputElement;
+        if (target.files && target.files.length > 0) {
+          fileName = target.files[0].name;
+        } else {
+          fileName = '';
+        }
+      }
 
   const onClose = () => showToast = false
   
@@ -83,23 +98,41 @@
     </div>
     <div>
       <label for="type" class="block text-xs md:text-sm font-medium text-gray-700">Tipo</label>
-      <select id="type" bind:value={newProduct.type} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50">
+      <select id="type" bind:value={newProduct.type} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 text-sm md:text-lg">
         <option value="menu">Restaurante</option>
         <option value="kiosk">Kiosko</option>
       </select>
     </div>
     <div>
       <label for="category" class="block text-xs md:text-sm font-medium text-gray-700">Categoría</label>
-      <select id="category"  bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50">
+      <select id="category"  bind:value={newProduct.category} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 text-sm md:text-lg">
         {#each categories as category }
         <option value={category} class="capitalize">{capitalize( category )}</option>
         {/each}
         </select>
-    </div>
-    <div> 
-      <label for="image" class="block text-xs md:text-sm font-medium text-gray-700">Imagen</label> 
-      <input type="file" id="image" bind:value={newProduct.image} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Inserte la imagen" required /> 
-    </div>
+    </div>   
+    <div class="flex flex-col border-b gap-2"> 
+      <label for="image" class="text-xs md:text-sm font-medium text-gray-700">Imagen</label> 
+      <input 
+        type="file" 
+        id="image" 
+        bind:this={fileInput} 
+        class="hidden" 
+        bind:value={newProduct.image} 
+        on:change={handleFileChange}
+        required 
+      /> 
+      <button 
+        type="button" 
+        on:click={triggerFileInput} 
+        class="mt-1 w-2/5 bg-gray-500 text-white font-semibold py-1 md:py-2 px-2 rounded-lg shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-white-400 focus:ring-opacity-50 text-sm"
+      >
+        Seleccionar archivo
+      </button>
+      {#if fileName}
+        <p class="mt-1 sm:mt-0 text-xs md:text-sm text-gray-600">Archivo seleccionado: {fileName}</p>
+      {/if}
+    </div>               
     <div>
       <label for="minStock" class="block text-xs md:text-sm font-medium text-gray-700">Stock mínimo</label>
       <input type="number" id="minStock" bind:value={newProduct.minStock} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50" placeholder="Stock mínimo" required />
@@ -116,7 +149,7 @@
       <input type="checkbox" id="available" bind:checked={newProduct.available} class="mt-1 block rounded-md border-gray-300 shadow-sm" />
     </div>
     <div class="flex justify-center">
-      <button type="submit" class="w-2/5 md:w-full bg-gray-700 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-700">Agregar producto</button>
+      <button type="submit" class="w-3/5 md:w-full bg-gray-700 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-700">Agregar producto</button>
     </div>    
   </form>
   {#if showToast}

@@ -25,9 +25,9 @@
         {#if category.items.length > 0}      
           <section>
             <details class="border rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
-              <summary class="text-lg md:text-2xl font-bold mb-0 cursor-pointer bg-1 p-2 hover:bg-gray-200">
-                <span class='text-gray-600'>{category.name}</span>
-                <span class="view-more">Ver Más</span>
+              <summary class="text-lg md:text-2xl font-bold mb-0 cursor-pointer bg-1 p-1 md:p-2 hover:bg-gray-200">
+                <span class='text-gray-600 text-md md:text-lg'>{category.name}</span>
+                <span class="text-gray-600 view-more pointer text-sm md:text-md">Ver Más</span>
               </summary>
               <div class="grid gap-6 justify-items-center p-4 bg-1">
                 {#each category.items as item}
@@ -46,7 +46,7 @@
 
 <style>
   section{
-    margin-top: 1em !important;
+    margin-top: .5em !important;
   }
   .bg{
     background-image: radial-gradient(circle at 13% 47%, rgba(140, 140, 140,0.03) 0%, rgba(140, 140, 140,0.03) 25%,transparent 25%, transparent 100%),radial-gradient(circle at 28% 63%, rgba(143, 143, 143,0.03) 0%, rgba(143, 143, 143,0.03) 16%,transparent 16%, transparent 100%),radial-gradient(circle at 81% 56%, rgba(65, 65, 65,0.03) 0%, rgba(65, 65, 65,0.03) 12%,transparent 12%, transparent 100%),radial-gradient(circle at 26% 48%, rgba(60, 60, 60,0.03) 0%, rgba(60, 60, 60,0.03) 6%,transparent 6%, transparent 100%),radial-gradient(circle at 97% 17%, rgba(150, 150, 150,0.03) 0%, rgba(150, 150, 150,0.03) 56%,transparent 56%, transparent 100%),radial-gradient(circle at 50% 100%, rgba(25, 25, 25,0.03) 0%, rgba(25, 25, 25,0.03) 36%,transparent 36%, transparent 100%),radial-gradient(circle at 55% 52%, rgba(69, 69, 69,0.03) 0%, rgba(69, 69, 69,0.03) 6%,transparent 6%, transparent 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));

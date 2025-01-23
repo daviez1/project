@@ -5,6 +5,7 @@
   import type { KioskoItem } from '$lib/types/kiosko';
   import { animate__pulse_infinite } from '$lib/common/constants/animate';
   import { slide } from 'svelte/transition';
+  import 'animate.css'
 
   export let item: MenuItem | KioskoItem;
   let showModal = false;
@@ -23,30 +24,32 @@
 </script>
 
 <div in:slide|global={{duration:400}} class="w-full rounded-lg shadow-md overflow-hidden mx-auto border flex flex-col bg">
-  <div class="p-4 flex flex-col flex-grow h-fit">
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-2">
+  <div class="px-2 py-1 flex flex-col flex-grow h-fit">
+    <div class="flex flex-col sm:flex-row justify-between items-center">
       <div class="flex justify-between w-full">
-        <h3 class="text-md md:text-xl font-semibold capitalize">{item.name}</h3>
-        <span class="text-sm md:text-lg font-bold">Precio: ${item.price.toFixed(2)}</span>
+        <h3 class="text-lg md:text-2xl font-semibold capitalize">{item.name}</h3>
+        <span class="text-md md:text-xl font-bold">Precio: ${item.price.toFixed(2)}</span>
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-1 flex-grow">
-      <p class="text-gray-600 w-full sm:w-8/12 sm:w-70%">{capitalize(item.description)}</p>
-      <button
-        on:click={addToCart}
-        disabled={!item.available}
-        class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-3/12 sm:w-30% mt-2 sm:mt-0"
-      >
-        {item.available ? 'Pedir' : 'Agotado'}
-      </button>
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-2 flex-grow">
+      <p class="text-gray-600 w-full text-sm text-center md:text-left md:text-md sm:w-8/12">{capitalize(item.description)}</p>
+      <div class="flex flex-col sm:flex-row items-center gap-2 mt-2 sm:mt-0">
+        <button on:click={toggleModal} class="text-center text-sm md:text-md text-green-800 hover:underline mr-2 { animate__pulse_infinite }">Ver imagen de { capitalize( item.name ) }</button>
+        <button
+          on:click={addToCart}
+          disabled={!item.available}
+          class="text-sm md:text-md bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+        >
+          {item.available ? 'Pedir' : 'Agotado'}
+        </button>
+      </div>
     </div>
-    <button on:click={toggleModal} class="text-center mr-4 text-xs md:text-sm text-green-800 hover:underline { animate__pulse_infinite } mt-2 sm:mt-0">Ver imagen de { capitalize( item.name ) }</button>
   </div>
 </div>
 
 {#if showModal}
   <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" on:click={toggleModal}>
-    <div class="bg-gray-100 p-2 rounded-lg shadow-lg max-w-lg w-11/12 sm:w-3/5 h-fit relative" on:click|stopPropagation>
+    <div class="bg-gray-100 p-4 rounded-lg shadow-lg max-w-lg w-11/12 sm:w-3/5 h-fit relative" on:click|stopPropagation>
       <button on:click={toggleModal} class="absolute top-2 right-2 text-4xl text-red-500 hover:text-gray-700 bg-gray-100 h-12 w-12 rounded border">
         &times;
       </button>
