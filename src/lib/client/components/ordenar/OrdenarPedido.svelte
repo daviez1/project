@@ -27,7 +27,7 @@
             <details class="border rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
               <summary class="text-lg md:text-2xl font-bold mb-0 cursor-pointer bg-1 p-1 md:p-2 hover:bg-gray-200">
                 <span class='text-gray-600 text-md md:text-lg'>{category.name}</span>
-                <span class="text-gray-600 view-more pointer text-sm md:text-md">Ver Más</span>
+                <span class="text-gray-600 view-more pointer text-sm hover:text-lg md:text-md md:hover:text-lg lg:text-lg lg:hover:text-xl">Ver Más</span>
               </summary>
               <div class="grid gap-6 justify-items-center p-4 bg-1">
                 {#each category.items as item}

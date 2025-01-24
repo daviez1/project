@@ -1,5 +1,5 @@
   <script lang="ts">
-    import type { KioskoCategory } from '$lib/types/kiosko';
+  import type { KioskoCategory } from '$lib/types/kiosko';
   import '../menu/Menu_Kiosko.css'    
   import DishCardInSection from '../menu/DishCardInSection.svelte';
 
@@ -8,9 +8,9 @@
 
   <section>
     <details class="border rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
-      <summary class="text-2xl font-bold mb-0 cursor-pointer bg p-2">
-        <span class="text-gray-600 text-lg sm:text-2xl">{category.name}</span>
-        <span class="view-more">Ver Más</span>
+      <summary class="text-lg md:text-2xl font-bold mb-0 cursor-pointer bg-1 p-1 md:p-2 bg">
+        <span class='text-gray-600 text-md md:text-xl bg'>{category.name}</span>
+        <span class="text-gray-600 view-more pointer text-sm hover:text-lg md:text-md md:hover:text-lg lg:text-lg lg:hover:text-xl">Ver Más</span>
       </summary>
       <div class="grid grid-cols-1 {category.items.length > 1 ? 'md:grid-cols-2' : 'md:grid-cols-1' } gap-6 justify-items-center p-4 bg">
         {#each category.items as item}

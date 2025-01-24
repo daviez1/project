@@ -8,6 +8,6 @@ summary {
     display: none; /* Asegura que el marcador no se muestre */
   }
   summary:hover .view-more {
-    font-size: 1rem;
+    /* font-size: 1rem; */
     transition: ease .5s;
   }
