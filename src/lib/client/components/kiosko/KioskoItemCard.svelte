@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { KioskoItem } from '$lib/types/kiosko';
-  import { goto } from '$app/navigation';
   import { cart } from '$lib/common/stores/cart';
+  import ToastComplete from '../notifications/ToastComplete.svelte';
 
   export let item: KioskoItem;
-
+ 
   function addToCart() {
       cart.addItem({
         menuItemId: item.id,
@@ -12,7 +12,7 @@
         quantity: 1
       });
   }
-</script>
+  </script>
   
 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
   <img src={item.image} alt={item.name} class="w-full h-48 object-cover" />

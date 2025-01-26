@@ -6,7 +6,7 @@
   import Manage from '$lib/client/components/reservations/Manage.svelte';
   
   let date: string = '';
-  let preferredTimes: string[] = [];
+  let preferredTimes: String[] = [];
   let guests = 2;
   let name = '';
   let email = '';
@@ -43,7 +43,8 @@
 }]
     
     waitlist.add(entry);
-    reservationStore.setReservations(tableReservation)
+    // reservationStore.setReservations(tableReservation)
+    reservationStore.addReservation(tableReservation[0])
     alert('Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.');
     
     // Reset form
@@ -56,7 +57,6 @@
   <title>Reservaciones</title>
 </svelte:head>
 
-<Manage />
 <div class="container mx-auto px-4 py-28 max-w-4xl">
   <div class="bg-white rounded-lg shadow-lg p-8">
     <h1 class="text-3xl font-bold mb-8 text-center">Reserve su mesa</h1>
@@ -65,7 +65,8 @@
       Si no hay disponibilidad para la fecha deseada, únete a nuestra lista de espera.
       Te contactaremos si hay una cancelación.
     </p>
-    
+    <h1>{ JSON.stringify($waitlist) }</h1>
+    <h1>{ JSON.stringify($reservationStore) }</h1>
     <form on:submit|preventDefault={handleSubmit} class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -76,7 +77,7 @@
             bind:value={date}
             required
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          />
+            />
         </div>
         
         <div>
@@ -103,7 +104,7 @@
           type="number"
           bind:value={guests}
           min={reservationSettings.minGuestsPerBooking}
-            max={reservationSettings.maxGuestsPerBooking}
+          max={reservationSettings.maxGuestsPerBooking}
             required
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
@@ -121,8 +122,8 @@
           </div>
           
           <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
             id="email"
             type="email"
             bind:value={email}
@@ -133,9 +134,9 @@
           
           <div>
             <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Teléfono</label>
-          <input
-          id="phoneNumber"
-          type="tel"
+            <input
+            id="phoneNumber"
+            type="tel"
             bind:value={phone}
             required
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
@@ -158,7 +159,7 @@
         type="submit"
         disabled={!date || preferredTimes.length === 0}
         class="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+        >
         Unirse a la lista de espera
       </button>
     </form>
@@ -168,3 +169,4 @@
 <hr><hr>
 <hr>
 <hr>
+<Manage />

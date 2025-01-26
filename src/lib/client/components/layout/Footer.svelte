@@ -1,4 +1,4 @@
-<footer class="bg-gradient-to-r from-gray-200 via-gray-300 to-white text-gray-800 py-8">
+<footer class="bg-gradient-to-b from-gray-400 via-gray-200 to-white text-gray-800 py-8">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>

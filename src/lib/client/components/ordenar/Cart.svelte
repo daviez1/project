@@ -90,7 +90,6 @@
       </div>  
     </div>
   {/if}
-
   {#if showToast}
     <ToastComplete type={'success'} message={toastMessage} onClose={closeToast} />
   {/if}

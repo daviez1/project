@@ -1,7 +1,7 @@
 export interface WaitlistEntry {
   id: string;
   date: Date;
-  preferredTimes: string[];
+  preferredTimes: String[];
   guests: number;
   name: string;
   email: string;
@@ -11,27 +11,20 @@ export interface WaitlistEntry {
   createdAt: Date;
 }
 
-export interface CustomerPreferences {
+export interface Table { 
   id: string;
-  customerId: string;
-  preferredSection: 'indoor' | 'outdoor';
-  preferredTables: string[];
-  dietaryRestrictions: string[];
-  specialOccasions: {
-    type: 'birthday' | 'anniversary' | 'other';
-    date: Date;
-    notes?: string;
-  }[];
-  notes: string;
+  number: number;
+  capacity: number;
+  section: string;
 }
 
-export interface ReservationModification {
+export interface TableReservation {
+  id: string;
+  tableId: string;
   reservationId: string;
-  type: 'cancel' | 'modify';
-  newDate?: Date;
-  newTime?: string;
-  newGuests?: number;
-  reason?: string;
+  startTime: String; //era Date
+  endTime: String; //era Date
+  status: 'reserved' | 'available';
 }
 
 export interface ReservationSettings {
@@ -56,20 +49,27 @@ export interface ReservationSettings {
   maxGuestsPerBooking: number;
 }
 
-export interface Table { 
+export interface CustomerPreferences {
   id: string;
-  number: number;
-  capacity: number;
-  section: string;
+  customerId: string;
+  preferredSection: 'indoor' | 'outdoor';
+  preferredTables: string[];
+  dietaryRestrictions: string[];
+  specialOccasions: {
+    type: 'birthday' | 'anniversary' | 'other';
+    date: Date;
+    notes?: string;
+  }[];
+  notes: string;
 }
 
-export interface TableReservation {
-  id: string;
-  tableId: string;
+export interface ReservationModification {
   reservationId: string;
-  startTime: string; //era Date
-  endTime: string; //era Date
-  status: string;
+  type: 'cancel' | 'modify';
+  newDate?: Date;
+  newTime?: string;
+  newGuests?: number;
+  reason?: string;
 }
 
 export interface TimeSlot {

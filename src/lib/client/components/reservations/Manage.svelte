@@ -38,7 +38,7 @@
   
   <div class="container mx-auto px-4 py-12 max-w-4xl">
     <div class="bg-white rounded-lg shadow-lg p-8">
-      <h1 class="text-3xl font-bold mb-8 text-center">Gestionar Reservas</h1>
+      <h1 class="text-3xl font-bold mb-8 text-center text-gradient">Gestionar Reservas</h1>
       
       <div class="mb-8">
         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">

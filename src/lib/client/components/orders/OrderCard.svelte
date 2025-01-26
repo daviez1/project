@@ -13,9 +13,8 @@
   import { writable } from 'svelte/store';
 
   export let order: Order;
-  let showToast = writable(false);
-  let toastMessage = writable('');
-
+  let showToast = false;
+  
   const menuItemsQuery = createQuery({ 
     queryKey: [GetMenuItems], 
     queryFn: async () => await cart.fetchMenuItems()      
@@ -27,19 +26,12 @@
 
   function handleStatusChange(id: mongoose.Types.ObjectId) {
     if (id) {
-      if (order.status === 'ready') {
-        orders.updateStatus(id);
-        showToast.set(true); // Mostrar el toast cuando se actualiza el estado
-        toastMessage.set(`Pedido ${order.id} entregado!`);
-      } else {
-        orders.updateStatus(id);
-      }
+        orders.updateStatus(id); 
     } else {
       console.error('Order ID is undefined');
     }
   }
-  const closeToast = () => showToast.set(false);
-
+  const closeToast = () => showToast = false;
 </script>
 
 <div class="bg-1 rounded-lg shadow-md p-6">
@@ -55,7 +47,8 @@
     </span>
     <button class={`btn-change-status px-3 py-1 rounded-full capitalize text-xs md:text-sm font-medium ${statusColorsPlus[order.status]} ${order.status === 'completed' && 'hidden'}`} 
     on:click={()=> order._id && handleStatusChange(order._id)}
-    disabled={order.status=='completed'}>
+    on:click={()=> {if(order.status === 'ready') return showToast = true}}
+    >
       { translateStatusBtn(statusPlus(order.status))}
     </button>
   </div>
@@ -72,8 +65,8 @@
       <p>Cargando elementos del menú...</p>
     {/if}
   </div>
-  {#if $showToast}
-    <ToastComplete message={$toastMessage} onClose={closeToast} type='success' />
+  {#if showToast}
+    <ToastComplete message='Pedido entregado!!' onClose={closeToast} type='success' duration={ 3000 } />
   {/if}
   <div class="border-t pt-4 flex justify-between items-center">
     <span class="font-semibold">Total:</span>

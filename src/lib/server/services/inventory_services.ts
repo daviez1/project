@@ -41,7 +41,6 @@ try{
     const inventoryItem = await InventoryItem.findById( id )
     return inventoryItem;
 } catch (error:any) {
-    console.log(`error: ${error}`)
     throw new Error('Error al obtener el producto del inventario')
 }
 }

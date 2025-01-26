@@ -1,15 +1,15 @@
 <script lang="ts">
-  import KioskoCategory from '$lib/client/components/kiosko/KioskoCategory.svelte';
-  import * as KioskoCategoryTypes from '$lib/types/kiosko';
-  import Cart from '$lib/client/components/ordenar/Cart.svelte';
-  import { onMount } from 'svelte';
-  import { cart } from '$lib/common/stores/cart';
-  import ButtonSeeOrders from '$lib/client/components/form/ButtonSeeOrders.svelte';
-  import Loader from '$lib/client/components/form/Loader.svelte';
-  import { createQuery } from '@tanstack/svelte-query';
-  import { GetKioskoCategoryItems } from '$lib/common/constants/queries';
-  import '$lib/client/components/menu/Menu_Kiosko.css'
-  import Empty from '$lib/client/components/form/Empty.svelte';
+  import KioskoCategory from "$lib/client/components/kiosko/KioskoCategory.svelte";
+  import * as KioskoCategoryTypes from "$lib/types/kiosko";
+  import Cart from "$lib/client/components/ordenar/Cart.svelte";
+  import { onMount } from "svelte";
+  import { cart } from "$lib/common/stores/cart";
+  import ButtonSeeOrders from "$lib/client/components/form/ButtonSeeOrders.svelte";
+  import Loader from "$lib/client/components/form/Loader.svelte";
+  import { createQuery } from "@tanstack/svelte-query";
+  import { GetKioskoCategoryItems } from "$lib/common/constants/queries";
+  import "$lib/client/components/menu/Menu_Kiosko.css";
+  import Empty from "$lib/client/components/form/Empty.svelte";
 
   const kioskoCategoryQuery = createQuery({
     queryKey: [GetKioskoCategoryItems],
@@ -19,9 +19,9 @@
   let showSeeOrders = false;
 
   onMount(async () => {
-    const cartElement = document.getElementById('cart');
+    const cartElement = document.getElementById("cart");
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           showSeeOrders = false;
         } else {
@@ -40,11 +40,17 @@
   <title>Kiosko - Galletas & Más</title>
 </svelte:head>
 
-  <div class="container mx-auto px-4 py-8 mt-10">
-      <h1 class="text-2xl md:text-3xl sm:text-4xl text-gradient font-bold text-center mb-2">Kiosko</h1>
-      <p class="text-center text-gray-600 rounded mb-8">Encuentra comida rápida y picadera</p>
-    <div class="space-y-12">
-      {#if $kioskoCategoryQuery.isLoading}
+<div class="container mx-auto px-4 py-8 mt-10">
+  <h1
+    class="text-2xl md:text-3xl sm:text-4xl text-gradient font-bold text-center mb-2"
+  >
+    Kiosko
+  </h1>
+  <p class="text-center text-gray-600 rounded mb-8">
+    Encuentra comida rápida y picadera
+  </p>
+  <div class="space-y-12">
+    {#if $kioskoCategoryQuery.isLoading}
       <Loader />
     {:else if $kioskoCategoryQuery.isError}
       <p>Error: {$kioskoCategoryQuery.error.message}</p>
@@ -54,18 +60,18 @@
           <KioskoCategory {category} />
         {/each}
         <!-- {#if $cart.length > 0} -->
-          <div id="cart" class={$cart.length > 0 ? 'flex' : 'invisible'}>
-            <Cart />
+        <div id="cart">
+          <Cart />
+        </div>
+        {#if showSeeOrders}
+          <div class="fixed top-20 right-4 z-50">
+            <ButtonSeeOrders />
           </div>
-            {#if showSeeOrders}
-            <div class="fixed top-20 right-4 z-50">
-              <ButtonSeeOrders />
-            </div>
-            {/if}
+        {/if}
         <!-- {/if} -->
       {:else}
-      <Empty /> 
+        <Empty />
       {/if}
-      {/if}      
-    </div>
+    {/if}
   </div>
+</div>

@@ -1,5 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type { Table, TimeSlot, TableReservation } from '$lib/types/reservation';
+import * as reservationsApi from '../api/reservations';
 
 const reservations = writable<TableReservation[]>([]);
 const tables = writable<Table[]>([]);
@@ -7,13 +8,22 @@ const tables = writable<Table[]>([]);
 function createReservationStore() {
   const { subscribe, set, update } = writable<TableReservation[]>([]);
 
+
   return {
     subscribe,
+    getReservations: async()=>{
+      const reservations = await reservationsApi.get()
+      set(reservations)
+      return reservations
+    },
     setReservations: (newReservations: TableReservation[]) => set(newReservations),
-    addReservation: (reservation: TableReservation) => update(reservations => [...reservations, reservation]),
+    addReservation: async(reservation: TableReservation) => {
+      const newReservation = await reservationsApi.post( reservation )  
+      update(reservations => [...reservations, newReservation])
+    },
     cancelReservation: (reservationId: string) => update(reservations => reservations.filter(r => r.id !== reservationId)),
     getAvailableTimeSlots: (date: Date, guests: number) => {
-      const reservationsForDate = get(reservations).filter((res: TableReservation) => res.startTime.toDateString() === date.toDateString());
+      const reservationsForDate = get(reservations).filter((res: TableReservation) => res.startTime.toString() === date.toDateString());
       const allTables = get(tables);
 
       function getAvailableTablesForSlot(time: string): string[] {
@@ -50,7 +60,7 @@ function createReservationStore() {
         dinner: updateSlots(dinnerSlots)
       };
     },
-    findTableForReservation: (date: Date, time: string, guests: number): string | null => {
+    findTableForReservation(date: Date, time: string, guests: number): string | null {
       const availableSlots = this.getAvailableTimeSlots(date, guests);
       const slot = [...availableSlots.lunch, ...availableSlots.dinner].find(s => s.time === time);
       if (slot && slot.available) {
