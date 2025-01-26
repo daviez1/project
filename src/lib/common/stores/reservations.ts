@@ -8,7 +8,6 @@ const tables = writable<Table[]>([]);
 function createReservationStore() {
   const { subscribe, set, update } = writable<TableReservation[]>([]);
 
-
   return {
     subscribe,
     getReservations: async()=>{

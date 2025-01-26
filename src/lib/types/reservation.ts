@@ -1,19 +1,23 @@
+import mongoose from "mongoose";
+
 export interface WaitlistEntry {
+  _id?: mongoose.Types.ObjectId;
   id: string;
   date: Date;
-  preferredTimes: String[];
+  preferredTimes: string[];
   guests: number;
   name: string;
   email: string;
   phone: string;
   notes?: string;
-  status?: 'waiting' | 'notified' | 'reserved' | 'expired';
+  status?: 'waiting' | 'notified' | 'reserved' | 'expired' | 'confirmed';
   createdAt: Date;
 }
 
 export interface Table { 
   id: string;
   number: number;
+  available: boolean;
   capacity: number;
   section: string;
 }
@@ -22,10 +26,25 @@ export interface TableReservation {
   id: string;
   tableId: string;
   reservationId: string;
-  startTime: String; //era Date
-  endTime: String; //era Date
-  status: 'reserved' | 'available';
+  startTime: string; //era Date
+  endTime: string; //era Date
+  status: string;
 }
+
+export interface CustomerPreferences {
+  id: string;
+  customerId: string;
+  preferredSection: 'indoor' | 'outdoor';
+  preferredTables: string[];
+  dietaryRestrictions: string[];
+  specialOccasions: {
+    type: 'birthday' | 'anniversary' | 'other';
+    date: Date;
+    notes?: string;
+  }[];
+  notes: string;
+}
+
 
 export interface ReservationSettings {
   pricePerPerson: number;
@@ -48,21 +67,6 @@ export interface ReservationSettings {
   minGuestsPerBooking: number;
   maxGuestsPerBooking: number;
 }
-
-export interface CustomerPreferences {
-  id: string;
-  customerId: string;
-  preferredSection: 'indoor' | 'outdoor';
-  preferredTables: string[];
-  dietaryRestrictions: string[];
-  specialOccasions: {
-    type: 'birthday' | 'anniversary' | 'other';
-    date: Date;
-    notes?: string;
-  }[];
-  notes: string;
-}
-
 export interface ReservationModification {
   reservationId: string;
   type: 'cancel' | 'modify';

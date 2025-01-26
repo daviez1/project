@@ -4,9 +4,12 @@
   import { reservationStore } from '$lib/common/stores/reservations';
   import type { TableReservation, WaitlistEntry } from '$lib/types/reservation';
   import Manage from '$lib/client/components/reservations/Manage.svelte';
+  import { onMount } from 'svelte';
   
+  onMount(async()=> await reservationStore.getReservations() )
+
   let date: string = '';
-  let preferredTimes: String[] = [];
+  let preferredTimes: string[] = [];
   let guests = 2;
   let name = '';
   let email = '';
@@ -65,8 +68,7 @@
       Si no hay disponibilidad para la fecha deseada, únete a nuestra lista de espera.
       Te contactaremos si hay una cancelación.
     </p>
-    <h1>{ JSON.stringify($waitlist) }</h1>
-    <h1>{ JSON.stringify($reservationStore) }</h1>
+    <!-- <h1>{ JSON.stringify($waitlist) }</h1> -->
     <form on:submit|preventDefault={handleSubmit} class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>

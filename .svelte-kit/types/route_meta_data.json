@@ -45,6 +45,12 @@
 	"/api/reservations": [
 		"src/routes/api/reservations/+server.ts"
 	],
+	"/api/reservations/waitlist": [
+		"src/routes/api/reservations/waitlist/+server.ts"
+	],
+	"/api/reservations/waitlist/[id]": [
+		"src/routes/api/reservations/waitlist/[id]/+server.ts"
+	],
 	"/api/uploads": [
 		"src/routes/api/uploads/+server.ts"
 	],

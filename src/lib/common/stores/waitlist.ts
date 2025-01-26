@@ -1,20 +1,33 @@
 import { writable } from 'svelte/store';
 import type { WaitlistEntry } from '$lib/types/reservation';
+import * as waitlistApi from "../api/waitlist";
+import { DELETE } from '../api/inventoryItems';
+import mongoose from 'mongoose';
 
 function createWaitlistStore() {
   const { subscribe, set, update } = writable<WaitlistEntry[]>([]);
 
   return {
     subscribe,
-    add: (entry: WaitlistEntry) => 
-      update(entries => [...entries, entry]),
+    getWaitlistEntries: async()=>{
+          const waitlist = await waitlistApi.get()
+          set(waitlist)
+          return waitlist
+        },
+    add: async(entry: WaitlistEntry) => {
+      await waitlistApi.post(entry)  
+      update(entries => [...entries, entry])
+    },
     updateStatus: (id: string, status: WaitlistEntry['status']) =>
       update(entries =>
         entries.map(entry =>
           entry.id === id ? { ...entry, status } : entry
         )
       ),
-    remove: (id: string) => update(entries => entries.filter(entry => entry.id !== id)),
+    remove: async(id: mongoose.Types.ObjectId) => {
+      await waitlistApi.DELETE(id)
+      update(entries => entries.filter(entry => entry._id !== id))
+    },
     getActiveEntries: (date: Date) => {
       let activeEntries: WaitlistEntry[] = [];
       const unsubscribe = waitlist.subscribe(entries => {
