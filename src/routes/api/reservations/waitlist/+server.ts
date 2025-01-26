@@ -1,13 +1,15 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import * as ReservationsTypes from '$lib/types/reservation';
 import { createWaitlistEntry, getWaitlistEntries } from '$lib/server/services/waitlist_services';
+import { dbConnect } from '$lib/server/config/db';
 
 export const GET: RequestHandler = async () => {
     try {
+        await dbConnect()
         return new Response(JSON.stringify({ waitlistEntries: await getWaitlistEntries() }),
         {status: 200, headers: {'Content-Type': 'application/json'}});
     } catch (error) {
-        throw new Error('Error al obtener solicitudas a la lista de espera')
+        throw new Error('Error al obtener solicitudes a la lista de espera')
     }
 };
 

@@ -12,6 +12,10 @@ export const getWaitlistEntries = async() => {
 }
 export const createWaitlistEntry = async( waitlist: ReservationTypes.WaitlistEntry ) => {
     try {
+        const items = await WaitlistEntry.find();
+        const itemsId = String(items.length + 1);
+
+        waitlist.id = itemsId  
         const waitlistEntryCreated = await WaitlistEntry.create( waitlist );
         return waitlistEntryCreated;
     } catch (error) {

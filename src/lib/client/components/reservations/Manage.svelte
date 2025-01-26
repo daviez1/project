@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { reservationStore } from "$lib/common/stores/reservations";
   import { reservationSettings } from "$lib/common/data/reservationSettings";
   import { onMount } from "svelte";
   import { waitlist } from "$lib/common/stores/waitlist";
   import mongoose from "mongoose";
+  import type{ WaitlistEntry } from "$lib/types/reservation";
 
   onMount(async () => await waitlist.getWaitlistEntries());
 
   let userEmail = "";
-  let userReservations: any[] = [];
+  let userReservations: WaitlistEntry[] = [];
 
   function loadUserReservations() {
     if (!userEmail) return;
@@ -85,12 +85,9 @@
                   Reserva para {reservation.guests} personas
                 </h3>
                 <p class="text-gray-600">
-                  {new Date(reservation.date).toLocaleDateString()} a las {reservation.date.substring(
-                    11,
-                    20
-                  )}
+                  {new Date(reservation.date).toLocaleDateString()} a las { new Date(reservation.date).toLocaleTimeString() } 
                 </p>
-              </div>
+                </div>
               <span
                 class="px-3 py-1 rounded-full text-sm font-medium
                   {reservation.status === 'confirmed'
@@ -106,14 +103,14 @@
             <div class="space-y-2 text-sm text-gray-600">
               <p>Nombre: {reservation.name}</p>
               <p>Teléfono: {reservation.phone}</p>
-              {#if reservation.allergies}
+              <!-- {#if reservation.allergies}
                 <p>Alergias: {reservation.allergies}</p>
-              {/if}
+              {/if} -->
             </div>
 
             <div class="mt-6 flex justify-end gap-4">
               <button
-                on:click={() => handleCancel(reservation._id)}
+                on:click={() => reservation._id && handleCancel( reservation._id)}
                 class="text-red-600 hover:text-red-700 font-medium"
               >
                 Cancelar reserva

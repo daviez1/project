@@ -1,14 +1,15 @@
-import { getInventoryItem } from '$lib/server/services/inventory_services';
 import type { RequestHandler } from '@sveltejs/kit';
 import * as ReservationsTypes from '$lib/types/reservation';
 import { createReservation, getReservations } from '$lib/server/services/reservations_services';
+import { dbConnect } from '$lib/server/config/db';
 
 export const GET: RequestHandler = async () => {
     try {
+        await dbConnect()
         return new Response(JSON.stringify({ reservations: await getReservations() }),
         {status: 200, headers: {'Content-Type': 'application/json'}});
     } catch (error) {
-        throw new Error('Error al obtener productos del inventario')
+        throw new Error('Error al obtener reservas')
     }
 };
 

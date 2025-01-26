@@ -1,10 +1,10 @@
 import { RequestHandler } from "@sveltejs/kit";
 import { deleteWaitlistEntry } from '$lib/server/services/waitlist_services';
-import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 export const DELETE: RequestHandler = async ({ params }) => {
     try {
-        const id:mongoose.Types.ObjectId = params.id;
+        const id = new ObjectId( params.id );
         if (!id) throw new Error('ID no proporcionado');
         
         const deletedWaitlistEntry = await deleteWaitlistEntry(id);

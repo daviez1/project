@@ -5,8 +5,11 @@
   import type { TableReservation, WaitlistEntry } from '$lib/types/reservation';
   import Manage from '$lib/client/components/reservations/Manage.svelte';
   import { onMount } from 'svelte';
+  import ToastComplete from '$lib/client/components/notifications/ToastComplete.svelte';
   
   onMount(async()=> await reservationStore.getReservations() )
+
+  let showToast = false
 
   let date: string = '';
   let preferredTimes: string[] = [];
@@ -32,7 +35,7 @@
       email,
       phone,
       notes,
-      status: 'waiting' as 'waiting',
+      status: 'waiting',
       createdAt: new Date()
     };
 
@@ -48,12 +51,18 @@
     waitlist.add(entry);
     // reservationStore.setReservations(tableReservation)
     reservationStore.addReservation(tableReservation[0])
-    alert('Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.');
+    showToast = true
     
     // Reset form
     preferredTimes = [];
     notes = '';
+    name = '';
+    email = '';
+    phone = '';
   }
+
+  const onClose = () => showToast = false; 
+
 </script>
 
 <svelte:head>
@@ -167,6 +176,10 @@
     </form>
   </div>
 </div>
+
+{#if showToast}
+  <ToastComplete message='Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.' type='success' duration={3000} {onClose} />
+{/if}
 
 <hr><hr>
 <hr>
