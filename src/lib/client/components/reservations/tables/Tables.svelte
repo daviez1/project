@@ -50,7 +50,7 @@
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex justify-between items-center mb-8">
-    <h1 class="text-2xl font-bold">Gestión de Mesas</h1>
+    <h1 class="text-2xl font-bold text-gradient">Gestión de Mesas</h1>
     <button
       class="bg-gray-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-gray-700"
       on:click={() => (showAddForm = true)}

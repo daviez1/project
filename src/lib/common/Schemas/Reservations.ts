@@ -15,7 +15,7 @@ const WaitlistEntrySchema = new mongoose.Schema({
 
 const TableReservationSchema = new mongoose.Schema({
   id: { type: String, required: true },
-  tableId: { type: String, required: true },
+  tableId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Table' , required: true }],
   reservationId: { type: String, required: true },
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
