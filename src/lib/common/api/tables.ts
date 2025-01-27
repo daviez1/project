@@ -1,36 +1,36 @@
-import type{ WaitlistEntry } from "$lib/types/reservation";
+import type{ Table } from "$lib/types/reservation";
 import mongoose from "mongoose";
 
 export const get = async (customFetch = fetch) => {
-    const response = await customFetch('/api/reservations/waitlist');
-    const waitlist = await response.json();
-    return waitlist.waitlistEntries;
+    const response = await customFetch('/api/reservations/tables');
+    const tables = await response.json();
+    return tables.tables;
 }
 
-export const post = async (waitlist: WaitlistEntry, customFetch = fetch) => {
-    const response = await customFetch('/api/reservations/waitlist', {
+export const post = async (table: Table, customFetch = fetch) => {
+    const response = await customFetch('/api/reservations/tables', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(waitlist)
+        body: JSON.stringify(table)
     });
     const result = await response.json();
-    return result.newWaitlistEntry;
+    return result.newTable;
 }
 
 export const DELETE = async (id: mongoose.Types.ObjectId, customFetch = fetch) => {
-    const response = await customFetch(`/api/reservations/waitlist/${id}`, {
+    const response = await customFetch(`/api/reservations/tables/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     });
 
-    if (!response.ok) throw new Error('Error al eliminar el elemento de la lista de espera');
+    if (!response.ok) throw new Error('Error al eliminar la mesa');
 
     const result = await response.json();
-    return result.deletedWaitlistEntry;
+    return result.deletedTable;
 }
 
 export const PATCH = async (id: mongoose.Types.ObjectId, customFetch = fetch) => {
@@ -41,7 +41,7 @@ export const PATCH = async (id: mongoose.Types.ObjectId, customFetch = fetch) =>
         }
     });
 
-    if (!response.ok) throw new Error('Error al modificar el elemento de la lista de espera ');
+    if (!response.ok) throw new Error('Error al modificar la mesa');
 
     const result = await response.json();
     return result.updatedTable;

@@ -15,11 +15,12 @@ export interface WaitlistEntry {
 }
 
 export interface Table { 
+  _id?: mongoose.Types.ObjectId;
   id: string;
   number: number;
   available: boolean;
   capacity: number;
-  section: string;
+  section: 'indoor' | 'outdoor';
 }
 
 export interface TableReservation {

@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
 import type { WaitlistEntry } from '$lib/types/reservation';
 import * as waitlistApi from "../api/waitlist";
-import { DELETE } from '../api/inventoryItems';
 import mongoose from 'mongoose';
 
 function createWaitlistStore() {
@@ -18,12 +17,13 @@ function createWaitlistStore() {
       await waitlistApi.post(entry)  
       update(entries => [...entries, entry])
     },
-    updateStatus: (id: string, status: WaitlistEntry['status']) =>
+    updateStatus: async(id: mongoose.Types.ObjectId) =>{
+      const itemUpdated = await waitlistApi.PATCH(id)
       update(entries =>
         entries.map(entry =>
-          entry.id === id ? { ...entry, status } : entry
+          entry._id === id ? entry = itemUpdated : entry
         )
-      ),
+      )},
     remove: async(id: mongoose.Types.ObjectId) => {
       await waitlistApi.DELETE(id)
       update(entries => entries.filter(entry => entry._id !== id))
@@ -57,7 +57,3 @@ function get(waitlist: {
   });
   return entries;
 }
-
-// function get(waitlist: { subscribe: (this: void, run: Subscriber<WaitlistEntry[]>, invalidate?: Invalidator<WaitlistEntry[]> | undefined) => Unsubscriber; add: (entry: WaitlistEntry) => void; updateStatus: (id: string, status: WaitlistEntry["status"]) => void; remove: (id: string) => void; getActiveEntries: (date: Date) => any; }) {
-//   throw new Error('Function not implemented.');
-// }

@@ -67,5 +67,6 @@
 	"/ordenar": [
 		"src/routes/ordenar/+page.server.ts"
 	],
-	"/reservations": []
+	"/reservations": [],
+	"/reservations/tables": []
 }

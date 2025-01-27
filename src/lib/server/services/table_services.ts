@@ -39,7 +39,6 @@ export const updateAvailability = async (id: mongoose.Types.ObjectId) => {
         if (!itemToUpdate) throw new Error('Mesa no encontrada');
         
         itemToUpdate.available = !itemToUpdate.available
-        console.log( !itemToUpdate.available );
         await itemToUpdate.save(); // Guarda el objeto actualizado
 
         return itemToUpdate;

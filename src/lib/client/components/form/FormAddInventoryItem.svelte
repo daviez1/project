@@ -76,18 +76,18 @@
   <form on:submit|preventDefault={addProduct} class="px-3 space-y-4 py-3 md:py-0">
     <div class="relative">
       <input type="text" id="name" bind:value={newProduct.name} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder=" " required />
-      <label for="name" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Nombre del producto</label>
+      <label for="name" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs">Nombre del producto</label>
       {#if productExistActivate}
         <p class="text-red-500 text-xs md:text-sm mt-1">{formErrors.productExist.message}</p>
       {/if}
     </div>
     <div class="relative">
       <textarea id="description" bind:value={newProduct.description} class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder=" " required></textarea>
-      <label for="description" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Descripción</label>
+      <label for="description" class="absolute left-0 -top-3.5 text-gray-700 text-xs transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Descripción</label>
     </div>
     <div class="relative">
       <input type="number" id="price" bind:value={newProduct.price} min="0" class="mt-1 block w-full border-b-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring focus:ring-gray-200 focus:ring-opacity-50 peer" placeholder="Precio" required />
-      <label for="price" class="absolute left-0 -top-3.5 text-gray-700 text-xs md:text-sm transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Precio</label>
+      <label for="price" class="absolute left-0 -top-3.5 text-gray-700 text-xs transition-all peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-gray-700 peer-focus:text-xs md:text-sm">Precio</label>
       {#if productExistActivate}
       <p class="text-red-500 text-xs md:text-sm mt-1">{formErrors.productExist.message}</p>
       {/if}
