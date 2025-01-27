@@ -11,6 +11,7 @@
 
   let editingTable: Table | null = null;
   let showAddForm = false;
+  let showEditForm = false;
   let newTable: Table = {
     id: "",
     number: $tables.length + 1,
@@ -19,7 +20,10 @@
     section: "indoor",
   };
 
-  const handleEdit = (table: Table) => (editingTable = { ...table });
+  const handleEdit = (table: Table) => {
+    (editingTable = { ...table });
+    showEditForm = true;
+  }
 
   function handleSave() {
     if (editingTable) {
@@ -99,7 +103,7 @@
     <FormAddTable {newTable} {handleAdd} {showAddForm} />
   {/if}
 
-  {#if editingTable}
-    <FormEditTable {editingTable} {handleSave} />
+  {#if showEditForm && editingTable}
+    <FormEditTable {editingTable} {handleSave} {showEditForm} />
   {/if}
 </div>

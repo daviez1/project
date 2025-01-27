@@ -1,21 +1,23 @@
 <script lang="ts">
   import type{ Table } from "$lib/types/reservation";
 
-    export let editingTable: Table 
+    export let editingTable: Table | null
     export let handleSave
+    export let showEditForm
 </script>
 
+{#if editingTable}
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+  <div class="bg-white rounded-lg p-6 max-w-md w-full">
       <h2 class="text-xl font-bold mb-4">Editar Mesa {editingTable.number}</h2>
-
+      
       <div class="space-y-4">
         <div>
           <label for="number" class="block text-sm font-medium text-gray-700">Número</label>
           <input
             id="number"
             type="number"
-            bind:value={editingTable.number}
+            bind:value={ editingTable.number}
             class="mt-1 block w-full rounded-md border-gray-300"
           />
         </div>
@@ -37,7 +39,7 @@
             <option value="outdoor">Exterior</option>
           </select>
         </div>
-
+        
         <div>
           <label for="available" class="block text-sm font-medium text-gray-700">Disponibilidad</label>
           <div class="mt-1">
@@ -47,7 +49,7 @@
                 type="checkbox"
                 bind:checked={editingTable.available}
                 class="rounded text-gray-600"
-              />
+                />
               <span class="ml-2">Disponible</span>
             </label>
           </div>
@@ -56,7 +58,10 @@
 
       <div class="mt-6 flex justify-end gap-4">
         <button
-          on:click={() => editingTable = editingTable}
+          on:click={ () => {
+            showEditForm = false
+            editingTable = null
+          } }
           class="text-gray-600 hover:text-gray-700"
         >
           Cancelar
@@ -70,3 +75,4 @@
       </div>
     </div>
   </div>
+{/if}
