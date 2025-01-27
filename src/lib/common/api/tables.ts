@@ -47,3 +47,18 @@ export const PATCH = async (id: mongoose.Types.ObjectId, customFetch = fetch) =>
     return result.updatedTable;
 }
 
+export const PUT = async (id: mongoose.Types.ObjectId, table: Table, customFetch = fetch) => {
+    const response = await customFetch(`/api/reservations/tables/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(table)    
+    });
+
+    if (!response.ok) throw new Error('Error al modificar la mesa');
+
+    const result = await response.json();
+    return result.updatedTable;
+}
+

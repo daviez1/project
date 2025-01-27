@@ -6,6 +6,7 @@
   import Manage from '$lib/client/components/reservations/Manage.svelte';
   import { onMount } from 'svelte';
   import ToastComplete from '$lib/client/components/notifications/ToastComplete.svelte';
+  import { goto } from '$app/navigation';
   
   onMount(async()=> await reservationStore.getReservations() )
 
@@ -177,6 +178,8 @@
   </div>
 </div>
 
+<button class="bg-slate-700 text-white" on:click={ ()=> goto('/reservations/tables') }> Mesas </button>
+
 {#if showToast}
   <ToastComplete message='Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.' type='success' duration={3000} {onClose} />
 {/if}
@@ -184,4 +187,4 @@
 <hr><hr>
 <hr>
 <hr>
-<Manage />
+<Manage /> 

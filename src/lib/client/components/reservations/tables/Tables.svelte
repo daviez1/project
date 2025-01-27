@@ -7,7 +7,6 @@
 
   onMount(() => {
     tables.get();
-    console.log($tables);
   });
 
   let editingTable: Table | null = null;
@@ -20,14 +19,15 @@
     section: "indoor",
   };
 
-  function handleEdit(table: Table) {
-    editingTable = { ...table };
-  }
+  const handleEdit = (table: Table) => (editingTable = { ...table });
 
   function handleSave() {
     if (editingTable) {
-      tables.update(editingTable.id, editingTable);
-      editingTable = null;
+      if (editingTable._id) {
+        tables.update( editingTable._id, editingTable);
+        editingTable = null;
+      }else{ console.log(' No existe esa mesa ');
+       }
     }
   }
 
@@ -54,10 +54,6 @@
       Añadir Mesa
     </button>
   </div>
-
-  {#if showAddForm}
-    <FormAddTable {newTable} {handleAdd} {showAddForm} />
-  {/if}
 
   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {#each $tables as table (table.id)}
@@ -98,6 +94,10 @@
       </div>
     {/each}
   </div>
+
+  {#if showAddForm}
+    <FormAddTable {newTable} {handleAdd} {showAddForm} />
+  {/if}
 
   {#if editingTable}
     <FormEditTable {editingTable} {handleSave} />

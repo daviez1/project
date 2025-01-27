@@ -32,6 +32,15 @@ export const deleteTable = async( id: mongoose.Types.ObjectId ) => {
         throw new Error(`error: ${error}`)
     }
 }
+export const updateTable = async( id: mongoose.Types.ObjectId, table: ReservationTypes.Table ) => {
+    try {
+        const tableToUpdate = await Table.findByIdAndUpdate(id, table, { new: true });
+        return tableToUpdate;
+    } catch (error) {
+        console.log(error);
+        throw new Error(`error: ${error}`)
+    }
+}
 
 export const updateAvailability = async (id: mongoose.Types.ObjectId) => {
     try {

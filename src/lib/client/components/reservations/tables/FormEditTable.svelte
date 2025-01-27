@@ -1,7 +1,7 @@
 <script lang="ts">
   import type{ Table } from "$lib/types/reservation";
 
-    export let editingTable: Table
+    export let editingTable: Table 
     export let handleSave
 </script>
 
@@ -56,7 +56,7 @@
 
       <div class="mt-6 flex justify-end gap-4">
         <button
-          on:click={() => editingTable = null}
+          on:click={() => editingTable = editingTable}
           class="text-gray-600 hover:text-gray-700"
         >
           Cancelar

@@ -1,6 +1,6 @@
 import { writable, derived } from 'svelte/store';
 import type { Table } from '$lib/types/reservation';
-import { DELETE, get, PATCH, post } from '../api/tables';
+import { DELETE, get, PATCH, post, PUT } from '../api/tables';
 import mongoose from 'mongoose';
 
 function createTableStore() {
@@ -17,10 +17,11 @@ function createTableStore() {
       const newTable = await post( table );
       update(tables => [...tables, newTable]);
     },
-    update: (id: string, tableData: Partial<Table>) => {
+    update: async (id: mongoose.Types.ObjectId, tableData: Table) => {
+      const tableUpdated = await PUT( id, tableData )
       update(tables =>
         tables.map(table =>
-          table.id === id ? { ...table, ...tableData } : table
+          table._id === id ? table = tableUpdated : table
         )
       );
     },
