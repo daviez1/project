@@ -30,18 +30,26 @@
     let tablesAvailable = await tables.getAvailable();
     if (!date || preferredTimes.length === 0) return;
 
-    const entry: WaitlistEntry = {
-      id: "",
-      date: new Date(date),
-      preferredTimes,
-      guests,
-      name,
-      email,
-      phone,
-      notes,
-      status: "waiting",
-      createdAt: new Date(),
-    };
+      // Extrae la fecha y la hora
+  const selectedDate = new Date(date);
+  const selectedTime = preferredTimes[0];
+
+  // Combina la fecha y la hora
+  const [hours, minutes] = selectedTime.split(':').map(Number);
+  selectedDate.setHours(hours, minutes);
+
+  const entry: WaitlistEntry = {
+    id: "",
+    date: selectedDate, // Usa la fecha y hora combinadas
+    preferredTimes,
+    guests,
+    name,
+    email,
+    phone,
+    notes,
+    status: "waiting",
+    createdAt: new Date(),
+  };
 
     if (tablesAvailable.length === 0) {
       showModal.set(true);
