@@ -13,6 +13,10 @@ function createTableStore() {
         set(tables)
         return tables 
     },
+    getAvailable: async()=>{
+        const tables:Table[] = await get()
+        return tables.filter( table => table.available ===  true ) 
+    },
     add: async(table: Table) => {
       const newTable = await post( table );
       update(tables => [...tables, newTable]);

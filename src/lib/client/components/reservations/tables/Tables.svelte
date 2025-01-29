@@ -60,7 +60,7 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {#each $tables as table (table.id)}
+    {#each $tables.sort((a, b) => a.number - b.number) as table (table.id)}
       <div class="bg-white rounded-lg shadow-md p-4">
         <div class="flex justify-between items-start mb-4">
           <div>

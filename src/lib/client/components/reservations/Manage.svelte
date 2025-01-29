@@ -16,7 +16,7 @@
     userReservations = $waitlist
       .filter(
         (res: any) => res.email === userEmail && res.status !== "cancelled")
-      .sort((a: any, b: any) => a.date.getTime() - b.date.getTime());
+      // .sort((a: WaitlistEntry, b: WaitlistEntry) => a.date.getTime() - b.date.getTime());
   }
 
   async function handleCancel(id: mongoose.Types.ObjectId) {
