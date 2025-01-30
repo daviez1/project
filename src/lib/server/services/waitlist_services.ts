@@ -43,6 +43,24 @@
   export const deleteWaitlistEntry = async (id: mongoose.Types.ObjectId) => {
     try {
       const waitlistToDelete = await WaitlistEntry.findByIdAndDelete(id);
+      const reservationDeleted = await TableReservation.findOneAndDelete( { waitlistId: id} )
+      if (reservationDeleted) {
+        const tableReservationDeleted = await Table.findById( reservationDeleted.tableId )
+        
+        console.log(`tableReseDeleted: ${tableReservationDeleted}`);
+        
+        const waitlistEntries = await WaitlistEntry.find( { status: "waiting" } );
+        const matchingEntry = waitlistEntries.find(
+        (entry) => entry.guests <= tableReservationDeleted.capacity);
+        
+        await WaitlistEntry.findByIdAndUpdate(matchingEntry._id, { status: "reserved" });
+        
+        console.log(`matchingEntry: ${matchingEntry}`);
+
+        const newReservation = await createReservationFromWaitlistEntry( matchingEntry, tableReservationDeleted ) 
+        console.log(`newReservation>${newReservation}`);
+        await notifyCustomer(matchingEntry.email, newReservation, "reservation");
+    }
       return waitlistToDelete;
     } catch (error) {
       console.log(error);
@@ -69,22 +87,6 @@
         status: "reserved",
       });
       await notifyCustomer(matchingEntry.email, newReservation, "reservation");
-    }
-  }
-
-  async function handleReservationRequest(entry: ReservationTypes.WaitlistEntry) {
-    const availableTable = await findAvailableTable(entry);
-
-    if (availableTable) {
-      const reservation = await createReservationFromWaitlistEntry(
-        entry,
-        availableTable
-      );
-      await TableReservation.create(reservation);
-      await notifyCustomer(entry.email, reservation, "reservation");
-    } else {
-      await WaitlistEntry.create(entry);
-      await notifyCustomer(entry.email, entry, "waitlist");
     }
   }
 

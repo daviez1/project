@@ -12,7 +12,6 @@
   afterUpdate(()=> loading = false)
    // Create a client
    const queryClient = new QueryClient()
-   
 </script>
 
 {#if loading}

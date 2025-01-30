@@ -9,7 +9,7 @@
   import ToastComplete from "../notifications/ToastComplete.svelte";
 
   export let entryList;
-  let message = ''
+  let message = "";
 
   onMount(async () => {
     await reservationStore.getReservations();
@@ -30,26 +30,26 @@
     let tablesAvailable = await tables.getAvailable();
     if (!date || preferredTimes.length === 0) return;
 
-      // Extrae la fecha y la hora
-  const selectedDate = new Date(date);
-  const selectedTime = preferredTimes[0];
+    // Extrae la fecha y la hora
+    const selectedDate = new Date(date);
+    const selectedTime = preferredTimes[0];
 
-  // Combina la fecha y la hora
-  const [hours, minutes] = selectedTime.split(':').map(Number);
-  selectedDate.setHours(hours, minutes);
+    // Combina la fecha y la hora
+    const [hours, minutes] = selectedTime.split(":").map(Number);
+    selectedDate.setHours(hours, minutes);
 
-  const entry: WaitlistEntry = {
-    id: "",
-    date: selectedDate, // Usa la fecha y hora combinadas
-    preferredTimes,
-    guests,
-    name,
-    email,
-    phone,
-    notes,
-    status: "waiting",
-    createdAt: new Date(),
-  };
+    const entry: WaitlistEntry = {
+      id: "",
+      date: selectedDate, // Usa la fecha y hora combinadas
+      preferredTimes,
+      guests,
+      name,
+      email,
+      phone,
+      notes,
+      status: "waiting",
+      createdAt: new Date(),
+    };
 
     if (tablesAvailable.length === 0) {
       showModal.set(true);
@@ -65,13 +65,15 @@
     waitlist.add(entry);
 
     const waitlistDB: WaitlistEntry[] = await waitlist.getWaitlistEntries();
-    const waitlistId = waitlistDB.reverse()[0]?._id
+    const waitlistId = waitlistDB.reverse()[0]?._id;
 
-    if (!waitlistId || !tablesAvailable[0]?._id) 
-    return console.error('No se pudo obtener la entrada de la lista de espera o la mesa disponible.');
+    if (!waitlistId || !tablesAvailable[0]?._id)
+      return console.error(
+        "No se pudo obtener la entrada de la lista de espera o la mesa disponible."
+      );
 
     showToast = true;
-    message = 'Reserva confirmada. Te esperamos en Hanoi!!.'
+    message = "Reserva confirmada. Te esperamos en Hanoi!!.";
 
     // Reset form
     preferredTimes = [];
@@ -86,13 +88,17 @@
   function handleModalConfirm() {
     showModal.set(false);
     showToast = true;
-    message = 'Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.'
+    message =
+      "Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.";
   }
 
   async function handleModalCancel() {
     const waitlistDB: WaitlistEntry[] = await waitlist.getWaitlistEntries();
-    const waitlistId = waitlistDB.reverse()[0]?._id 
-    if (!waitlistId) return console.error('No se pudo obtener la entrada de la lista de espera.');
+    const waitlistId = waitlistDB.reverse()[0]?._id;
+    if (!waitlistId)
+      return console.error(
+        "No se pudo obtener la entrada de la lista de espera."
+      );
     waitlist.remove(waitlistId);
     showModal.set(false);
   }
@@ -211,21 +217,26 @@
 </form>
 
 {#if showToast}
-  <ToastComplete
-    {message}
-    type="success"
-    duration={3000}
-    {onClose}
-  />
+  <ToastComplete {message} type="success" duration={3000} {onClose} />
 {/if}
 
 {#if $showModal}
-  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+  >
     <div class="bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-xl font-bold mb-4">Usted ha sido añadido a la lista de espera, ¿está de acuerdo?</h2>
+      <h2 class="text-xl font-bold mb-4">
+        Usted ha sido añadido a la lista de espera, ¿está de acuerdo?
+      </h2>
       <div class="flex justify-end space-x-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded" on:click={ handleModalConfirm }>De acuerdo</button>
-        <button class="bg-gray-500 text-white px-4 py-2 rounded" on:click={ handleModalCancel }>No</button>
+        <button
+          class="bg-blue-500 text-white px-4 py-2 rounded"
+          on:click={handleModalConfirm}>De acuerdo</button
+        >
+        <button
+          class="bg-gray-500 text-white px-4 py-2 rounded"
+          on:click={handleModalCancel}>No</button
+        >
       </div>
     </div>
   </div>
