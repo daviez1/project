@@ -6,7 +6,7 @@ import { dbConnect } from "../config/db";
 export const getReservations = async() => {
     try {
         await dbConnect()
-        const reservations = await TableReservation.find().populate('tableId').populate('reservationId');
+        const reservations = await TableReservation.find().populate('tableId').populate('waitlistId');
         return reservations;
     } catch (error) {
         throw new Error(`error: ${error}`)

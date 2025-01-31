@@ -2,9 +2,7 @@
   import { page } from "$app/stores";
   import * as animate from "$lib/common/constants/animate";
   import { showMenu } from "$lib/common/stores/menuVisible";
-  import { flip } from "svelte/animate";
   import Hamburger from "../buttons/Hamburger.svelte";
-  import { slide } from "svelte/transition";
 
   // Función para alternar el menú
   const toggleMenu = () => !$showMenu;
@@ -12,11 +10,13 @@
 </script>
 
 <div class="fixed top-0 w-full z-20">
-  <nav
-    class="shadow-lg bg-opacity-25"
-  >
-    <div class="bg-transparent md:bg-gradient-to-b md:from-gray-400 md:via-gray-100 md:to-white">
-      <div class="flex justify-between items-center h-16 bg-gradient-to-b from-gray-400 via-gray-100 to-white">
+  <nav class="shadow-lg bg-opacity-25">
+    <div
+      class="bg-transparent md:bg-gradient-to-b md:from-gray-400 md:via-gray-100 md:to-white"
+    >
+      <div
+        class="flex justify-between items-center h-16 bg-gradient-to-b from-gray-400 via-gray-100 to-white"
+      >
         <a
           href="/"
           class="font-bold {animate.animate_bounceInLeft} inline text-xl sm:text-2xl ml-4 sm:ml-8 text-gradient-primary"
@@ -57,7 +57,7 @@
           </a>
           <a
             href="/inventory"
-            class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md text-sm lg:text-lg pr-4"
+            class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md text-sm lg:text-lg"
             class:font-bold={$page.url.pathname === "/inventory"}
           >
             Inventario
@@ -65,65 +65,69 @@
         </div>
       </div>
 
-        <div class="md:hidden absolute right-0 dropdown-content menu bg-gray-800 bg-opacity-[.99] rounded-lg rounded-box z-[1] w-fit px-4 py-2 { $showMenu ? "block" : "hidden" } {animate.animate_bounceInRight}">
-          <ul>
-            <li>
-              <a
-                href="/"
-                class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
-                class:font-bold={$page.url.pathname === "/"}
-                on:click={toggleMenu}
-                on:click={closeMenu}
-              >
-                Inicio
-              </a>
-            </li>
-            <li>
-              <a
+      <div
+        class="md:hidden absolute right-0 dropdown-content menu bg-gray-800 bg-opacity-[.99] rounded-lg rounded-box z-[1] w-fit px-4 py-2 {$showMenu
+          ? 'block'
+          : 'hidden'} {animate.animate_bounceInRight}"
+      >
+        <ul>
+          <li>
+            <a
+              href="/"
+              class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+              class:font-bold={$page.url.pathname === "/"}
+              on:click={toggleMenu}
+              on:click={closeMenu}
+            >
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a
               href="/reservations"
               class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
               class:font-bold={$page.url.pathname === "/reservations"}
               on:click={toggleMenu}
               on:click={closeMenu}
-              >
+            >
               Reservaciones
-              </a>
-            </li>
-            <li>
-              <a
-                href="/ordenar"
-                class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
-                class:font-bold={$page.url.pathname === "/ordenar"}
-                on:click={toggleMenu}
-                on:click={closeMenu}
-                >
-                Menú/Pedidos
-              </a>
-            </li>
-            <li>
-              <a
-                href="/kiosko"
-                class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
-                class:font-bold={$page.url.pathname === "/kiosko"}
-                on:click={toggleMenu}
-                on:click={closeMenu}
-                >
-                Kiosko
-              </a>
-            </li>
-            <li>
-              <a
-                href="/inventory"
-                class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
-                class:font-bold={$page.url.pathname === "/inventory"}
-                on:click={toggleMenu}
-                on:click={closeMenu}
-              >
-                Inventario
-              </a>
-            </li>
-          </ul>
-        </div>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/ordenar"
+              class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+              class:font-bold={$page.url.pathname === "/ordenar"}
+              on:click={toggleMenu}
+              on:click={closeMenu}
+            >
+              Menú/Pedidos
+            </a>
+          </li>
+          <li>
+            <a
+              href="/kiosko"
+              class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+              class:font-bold={$page.url.pathname === "/kiosko"}
+              on:click={toggleMenu}
+              on:click={closeMenu}
+            >
+              Kiosko
+            </a>
+          </li>
+          <li>
+            <a
+              href="/inventory"
+              class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+              class:font-bold={$page.url.pathname === "/inventory"}
+              on:click={toggleMenu}
+              on:click={closeMenu}
+            >
+              Inventario
+            </a>
+          </li>
+        </ul>
       </div>
+    </div>
   </nav>
 </div>

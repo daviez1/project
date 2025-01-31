@@ -5,7 +5,7 @@ import MenuItem from '$lib/common/Schemas/MenuItem';
 import MenuCategory from '$lib/common/Schemas/MenuCategory';
 import KioskoItem from '$lib/common/Schemas/KioskoItem';
 import KioskoCategory from '$lib/common/Schemas/KioskoCategory';
-import { handleCategoryCreation } from '../../../../hooks.server';
+import { handleCategoryCreation } from '../../../hooks.server';
 import mongoose from 'mongoose';
 import * as InventoryTypes from '$lib/types/inventory.js';
 

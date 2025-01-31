@@ -61,12 +61,24 @@
 		"src/routes/api/uploads/+server.ts"
 	],
 	"/chillGuy": [],
-	"/gestionarPedidos": [],
-	"/inventory": [],
+	"/gestionarPedidos": [
+		"src/routes/gestionarPedidos/+page.server.ts"
+	],
+	"/inventory": [
+		"src/routes/inventory/+page.server.ts"
+	],
 	"/kiosko": [],
 	"/ordenar": [
 		"src/routes/ordenar/+page.server.ts"
 	],
 	"/reservations": [],
-	"/reservations/tables": []
+	"/reservations/manage": [
+		"src/routes/reservations/manage/+page.server.ts"
+	],
+	"/reservations/manage/waitlist": [
+		"src/routes/reservations/manage/waitlist/+page.server.ts"
+	],
+	"/reservations/tables": [
+		"src/routes/reservations/tables/+page.server.ts"
+	]
 }

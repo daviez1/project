@@ -45,6 +45,18 @@
 >
   Mesas
 </button>
+<button
+  class="bg-slate-700 text-white"
+  on:click={() => goto("/reservations/manage")}
+>
+  Reservaciones
+</button>
+<button
+  class="bg-slate-700 text-white"
+  on:click={() => goto("/reservations/manage/waitlist")}
+>
+  Lista de espera
+</button>
 
 <hr />
 <hr />

@@ -33,6 +33,16 @@ export interface TableReservation {
   status: string;
 }
 
+export interface TableReservationFromAPI {
+  id: string;
+  tableId: Table[];
+  waitlistId: WaitlistEntry;
+  reservationId: string; 
+  startTime: string; //era Date
+  endTime: string; //era Date
+  status: string;
+}
+
 export interface CustomerPreferences {
   id: string;
   customerId: string;

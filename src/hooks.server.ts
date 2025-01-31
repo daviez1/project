@@ -1,13 +1,23 @@
-import type { Handle } from '@sveltejs/kit';
-import { dbConnect } from './src/lib/server/config/db';
-import { capitalize } from './src/lib/client/utils/capitalize';
-import { InventoryItem } from '$lib/types/inventory';
+import { error, type Handle } from '@sveltejs/kit';
+import { dbConnect } from './lib/server/config/db';
+import { capitalize } from './lib/client/utils/capitalize';
 
 await dbConnect();
 
+const allowedIPs:string[] = [];
+
 export const handle: Handle = async ({ event, resolve }) => {
-  const response = await resolve(event);
-  return response;
+    const clientIP = event.getClientAddress();
+    console.log(clientIP);
+    
+    if (event.url.pathname.startsWith('/inventory')) {
+        console.log('entro');
+        
+        if (!allowedIPs.includes(clientIP)) error( 403, {message: 'Acceso denegado: Tu IP no está autorizada.'});
+    }
+
+    const response = await resolve(event);
+    return response;
 };
 
 export const handleCategoryCreation = async (item: any, Model:any, CategoryModel:any) => {
@@ -34,3 +44,5 @@ export const handleCategoryCreation = async (item: any, Model:any, CategoryModel
       ).populate('items');
   }
 };
+
+
