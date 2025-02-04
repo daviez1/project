@@ -4,15 +4,12 @@ import { capitalize } from './lib/client/utils/capitalize';
 
 await dbConnect();
 
-const allowedIPs:string[] = [];
+const allowedIPs:string[] = ['::1'];
 
 export const handle: Handle = async ({ event, resolve }) => {
     const clientIP = event.getClientAddress();
-    console.log(clientIP);
     
     if (event.url.pathname.startsWith('/inventory')) {
-        console.log('entro');
-        
         if (!allowedIPs.includes(clientIP)) error( 403, {message: 'Acceso denegado: Tu IP no está autorizada.'});
     }
 
