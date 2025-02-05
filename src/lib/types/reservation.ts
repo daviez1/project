@@ -26,7 +26,7 @@ export interface Table {
 export interface TableReservation {
   id: string;
   tableId: mongoose.Types.ObjectId;
-  waitlistId: mongoose.Types.ObjectId;
+  waitlistId: mongoose.Types.ObjectId | WaitlistEntry;
   reservationId: string; 
   startTime: string; //era Date
   endTime: string; //era Date

@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import ToastComplete from "../notifications/ToastComplete.svelte";
+  import mongoose from "mongoose";
 
   export let entryList;
   let message = "";
@@ -14,6 +15,7 @@
   onMount(async () => {
     await reservationStore.getReservations();
     await tables.get();
+    console.log($reservationStore);
   });
 
   let showToast = false;
@@ -27,16 +29,37 @@
   ];
 
   async function handleSubmit() {
+    let soldOut = true;
     let tablesAvailable = await tables.getAvailable();
     if (!date || preferredTimes.length === 0) return;
 
-    // Extrae la fecha y la hora
-    const selectedDate = new Date(date);
-    const selectedTime = preferredTimes[0];
+// Extrae la fecha y la hora
+const selectedDate = new Date(date);
+preferredTimes.forEach((preferred: string) => {
+  const selectedTime = preferred;
 
-    // Combina la fecha y la hora
-    const [hours, minutes] = selectedTime.split(":").map(Number);
-    selectedDate.setHours(hours, minutes);
+  // Combina la fecha y la hora
+  const [hours, minutes] = selectedTime.split(":").map(Number);
+  selectedDate.setHours(hours, minutes);
+
+  for (const reservation of $reservationStore) {
+    if (typeof reservation.waitlistId !== "string" && "date" in reservation.waitlistId) {
+      if (selectedDate.toISOString() !== String(reservation.waitlistId.date)) {
+        soldOut = false;
+        // Encuentra el índice del elemento `preferred` en el array `preferredTimes`
+        const index = preferredTimes.indexOf(preferred);
+        // Elimina el elemento `preferred` del array
+        if (index > -1) {
+          preferredTimes.splice(index, 1);
+        }
+        // Agrega el elemento `preferred` al principio del array
+        preferredTimes.unshift(preferred);
+        break;
+      }
+    }
+  }
+});
+
 
     const entry: WaitlistEntry = {
       id: "",
@@ -73,7 +96,10 @@
       );
 
     showToast = true;
-    message = "Reserva confirmada. Te esperamos en Hanoi!!.";
+    soldOut
+      ? (message = "No existen reservas disponibles a esa hora y fecha")
+      : (message = "Reserva confirmada. Te esperamos en Hanoi!!.");
+    soldOut && showModal.set(true);
 
     // Reset form
     preferredTimes = [];

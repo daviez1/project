@@ -15,6 +15,13 @@ export const post = async (waitlist: WaitlistEntry, customFetch = fetch) => {
         },
         body: JSON.stringify(waitlist)
     });
+
+    // if (!response.ok) {
+    //     const result = await response.json();
+    //     console.log(result.error);
+    //     return result.error
+    // }
+
     const result = await response.json();
     return result.newWaitlistEntry;
 }

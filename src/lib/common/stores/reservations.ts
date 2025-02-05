@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store';
-import type { Table, TimeSlot, TableReservation } from '$lib/types/reservation';
+import type { Table, TimeSlot, TableReservation, TableReservationFromAPI } from '$lib/types/reservation';
 import * as reservationsApi from '../api/reservations';
 
 const reservations = writable<TableReservation[]>([]);

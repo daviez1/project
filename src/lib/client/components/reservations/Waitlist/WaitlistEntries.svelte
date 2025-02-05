@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          {#each waitlistEntries as entry}
+          {#each waitlistEntries.filter(entry=> entry.status !== 'reserved' ) as entry}
             <tr>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{entry.name}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{translateStatusSpan(entry.status)}</td>

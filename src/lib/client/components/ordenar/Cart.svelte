@@ -2,7 +2,7 @@
   import { cart } from '$lib/common/stores/cart';
   import { orders } from '$lib/common/stores/orders';
   import { createQuery } from '@tanstack/svelte-query';
-  import { GetKioskoItems, GetMenuItems, GetOrdersLastId } from '$lib/common/constants/queries';
+  import { GetKioskoItems, GetMenuItems } from '$lib/common/constants/queries';
   import * as OrderTypes from "$lib/types/order";
   import ToastComplete from '../notifications/ToastComplete.svelte';
   import { getKioskoItem, getMenuItem } from '$lib/client/utils/getItemsFromCart';

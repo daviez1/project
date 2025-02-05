@@ -19,7 +19,7 @@ export const reservationSettings: ReservationSettings = {
       { time: '21:30', available: true, tables: [] }
     ]
   },
-  maxGuestsPerTable: 8,
+  maxGuestsPerTable: 4,
   minGuestsPerBooking: 1,
   maxGuestsPerBooking: 12
 };
