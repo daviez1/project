@@ -55,7 +55,7 @@
                 >{reservation.waitlistId.name}</td
               >
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
-                >{new Date(reservation.waitlistId.date).toLocaleString()}</td
+                >{new Date(reservation.waitlistId.date).toISOString().split('T')[0]}</td
               >
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                 >{reservation.startTime}</td

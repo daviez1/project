@@ -20,10 +20,9 @@
   queryFn: async () => await cart.fetchKioskoItems()      
 });
 
-    $: menuItems = $menuItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
-    $: kioskoItems = $kioskoItemsQuery.data || []; // Función para obtener un elemento del menú por su ID 
+    $: menuItems = $menuItemsQuery.data || []; 
+    $: kioskoItems = $kioskoItemsQuery.data || []; 
     
-  // Componente Cart 
   $: items = $cart.map(item => ({
     ...item, 
     menuItem: getMenuItem(item.menuItemId, menuItems) ?? getKioskoItem(item.menuItemId,kioskoItems), 
@@ -38,7 +37,7 @@
     newOrder.total = total
     orders.post(newOrder);
     cart.clear();
-    // Muestra el toast
+   
     toastMessage = 'Pedido confirmado!';
     showToast = true;
     setTimeout(() => {

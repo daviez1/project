@@ -1,10 +1,9 @@
-import MenuItem from "$lib/common/Schemas/MenuItem";
 import Order from "$lib/common/Schemas/Order"
 import OrderItem from "$lib/common/Schemas/OrderItem"
 import { dbConnect } from "../config/db"
 import * as OrderTypes from '$lib/types/order'
 import mongoose from "mongoose";
-import { statusPlus, statusPlusBackend } from "$lib/client/utils/statusPlus";
+import { statusPlusBackend } from "$lib/client/utils/statusPlus";
 
 export const getOrder = async () => {
     try {
@@ -33,12 +32,12 @@ export const updateOrderStatusBackend = async (orderId: mongoose.Types.ObjectId)
         const order = await Order.findById(orderId);
         if (!order) throw new Error('Order not found');
 
-        const newStatus = statusPlusBackend(order.status); // Calcula el nuevo estado basado en el estado actual
+        const newStatus = statusPlusBackend(order.status);
 
         const orderUpdated = await Order.findByIdAndUpdate(
             orderId, 
             { status: newStatus, updatedAt: new Date()}, 
-            { new: true } // Para devolver el documento actualizado
+            { new: true } 
         );
 
         if (!orderUpdated) throw new Error('Order not found');

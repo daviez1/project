@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import FormAddTable from "./FormAddTable.svelte";
   import FormEditTable from "./FormEditTable.svelte";
+  import EditIcon from "../../icons/EditIcon.svelte";
 
   onMount(() => {
     tables.get();
@@ -80,10 +81,10 @@
           </span>
         </div>
 
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 gap-1 md:gap-2 lg:gap-4 flex justify-between">
           <button
             on:click={() => table._id && tables.toggleAvailable(table._id)}
-            class="text-sm rounded-md border border-gray-300 px-3 py-1"
+            class="text-sm rounded-md border lg:px-2 border-gray-300 py-1"
           >
             {table.available ? "Marcar No Disponible" : "Marcar Disponible"}
           </button>

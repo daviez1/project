@@ -19,7 +19,6 @@ function createCartStore() {
       const existingItemIndex = items.findIndex(i => i.menuItemId === item.menuItemId);
       
       if (existingItemIndex !== -1) {
-        // Si el artículo ya existe, actualiza la cantidad
         const existingItem = items[existingItemIndex];
         const updatedItem = { ...existingItem, quantity: existingItem.quantity + item.quantity };
         return [
@@ -28,7 +27,6 @@ function createCartStore() {
           ...items.slice(existingItemIndex + 1)
         ];
       } else {
-        // Si no existe, simplemente agrega el nuevo artículo
         return [...items, item];
       }
     }),

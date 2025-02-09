@@ -10,7 +10,6 @@
   let loading = true;
 
   afterUpdate(()=> loading = false)
-   // Create a client
    const queryClient = new QueryClient()
 </script>
 
@@ -18,7 +17,7 @@
   <Loading />
 {:else}
   <QueryClientProvider client={queryClient}>
-    <div class="min-h-screen flex flex-col platypi bg">
+    <div class="d-link min-h-screen flex flex-col platypi bg">
       <Navbar />
       <main class="flex-grow">
         <slot /> 

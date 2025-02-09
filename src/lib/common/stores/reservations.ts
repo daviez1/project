@@ -26,12 +26,10 @@ function createReservationStore() {
       const allTables = get(tables);
 
       function getAvailableTablesForSlot(time: string): string[] {
-        // Get tables already reserved for this time
         const reservedTableIds = reservationsForDate
           .filter((res: any) => res.time === time)
           .map((res: any) => res.tableId);
 
-        // Find tables that can accommodate the group and aren't reserved
         return allTables
           .filter(table => 
             table.capacity >= guests && 
@@ -40,7 +38,6 @@ function createReservationStore() {
           .map(table => table.id);
       }
 
-      // Update availability for each time slot
       const updateSlots = (slots: TimeSlot[]): TimeSlot[] =>
         slots.map(slot => {
           const availableTables = getAvailableTablesForSlot(slot.time);
@@ -51,8 +48,8 @@ function createReservationStore() {
           };
         });
 
-      const lunchSlots: TimeSlot[] = []; // Define your lunch slots here
-      const dinnerSlots: TimeSlot[] = []; // Define your dinner slots here
+      const lunchSlots: TimeSlot[] = [];
+      const dinnerSlots: TimeSlot[] = [];
 
       return {
         lunch: updateSlots(lunchSlots),

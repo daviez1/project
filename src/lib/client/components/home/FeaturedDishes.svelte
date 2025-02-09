@@ -12,7 +12,7 @@
   let direction = 'down';
   
   let paginateMenu: MenuItem[] = [];
-  let currentIndex = 0; // Índice para rastrear la posición actual
+  let currentIndex = 0; 
   const menuItemsQuery = createQuery({
     queryKey: [GetMenuItems],
     queryFn: async () => {
@@ -26,7 +26,6 @@
   });
 
   onMount(() => {    
-    // Configurar un timeout para que el intervalo comience después de 10 segundos
     setInterval(() => updatePaginateMenu(), 10000);
 
     const cartElement = document.getElementById('cart');
@@ -49,13 +48,13 @@
     const data = $menuItemsQuery.data;
     if (data) {
       paginateMenu = [data[currentIndex]];
-      currentIndex = (currentIndex + 1) % data.length; // Actualiza el índice
+      currentIndex = (currentIndex + 1) % data.length; 
     }
   };
 </script>
 
 <section>
-  <div class="mx-0 md:mx-8 rounded">
+  <div class="mx-0 md:mx-8 rounded mt-8">
     <div>
       {#if $menuItemsQuery.isLoading}
       <Loader />
@@ -63,8 +62,8 @@
       <p>Error: {$menuItemsQuery.error.message}</p>
       {:else if $menuItemsQuery.isSuccess}
       {#if $menuItemsQuery.data.length > 0}
-      <div class="grid grid-cols-1 h-fit w-full flex justify-center items-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-center leading-8 font-extrabold tracking-tight mt-2 mb-4 text-gray-700 sm:text-4xl">Algunos de nuestros platos</h2>
+      <div class="grid grid-cols-1 h-fit w-full justify-center items-center">
+            <h2 class="text-2xl md:text-3xl text-center leading-8 font-extrabold tracking-tight mt-2 mb-8 text-gray-700 sm:text-4xl">Algunos de nuestros platos</h2>
             {#each paginateMenu as item (item.id)}
              <DishCard {item}/>
             {/each}

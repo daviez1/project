@@ -7,7 +7,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import ToastComplete from "../notifications/ToastComplete.svelte";
-  import mongoose from "mongoose";
+  import { isSoldout } from "$lib/client/utils/isSoldout";
 
   export let entryList;
   let message = "";
@@ -15,7 +15,6 @@
   onMount(async () => {
     await reservationStore.getReservations();
     await tables.get();
-    console.log($reservationStore);
   });
 
   let showToast = false;
@@ -29,79 +28,43 @@
   ];
 
   async function handleSubmit() {
-    let soldOut = true;
     let tablesAvailable = await tables.getAvailable();
     if (!date || preferredTimes.length === 0) return;
 
-// Extrae la fecha y la hora
-const selectedDate = new Date(date);
-preferredTimes.forEach((preferred: string) => {
-  const selectedTime = preferred;
-
-  // Combina la fecha y la hora
-  const [hours, minutes] = selectedTime.split(":").map(Number);
-  selectedDate.setHours(hours, minutes);
-
-  for (const reservation of $reservationStore) {
-    if (typeof reservation.waitlistId !== "string" && "date" in reservation.waitlistId) {
-      if (selectedDate.toISOString() !== String(reservation.waitlistId.date)) {
-        soldOut = false;
-        // Encuentra el índice del elemento `preferred` en el array `preferredTimes`
-        const index = preferredTimes.indexOf(preferred);
-        // Elimina el elemento `preferred` del array
-        if (index > -1) {
-          preferredTimes.splice(index, 1);
-        }
-        // Agrega el elemento `preferred` al principio del array
-        preferredTimes.unshift(preferred);
-        break;
-      }
-    }
-  }
-});
-
+    const soldout = isSoldout(date, preferredTimes, $reservationStore)
 
     const entry: WaitlistEntry = {
       id: "",
-      date: selectedDate, // Usa la fecha y hora combinadas
+      date: soldout.selectedDate,
       preferredTimes,
       guests,
       name,
       email,
       phone,
-      notes,
-      status: "waiting",
+      notes,      
+      status: soldout.soldOut ? 'waiting' : 'reserved',
       createdAt: new Date(),
     };
 
     if (tablesAvailable.length === 0) {
       showModal.set(true);
-      waitlist.add(entry);
-      // Reset form
-      preferredTimes = [];
-      notes = "";
-      name = "";
-      email = "";
-      phone = "";
+      await waitlist.add(entry);
+      resetForm();
       return;
     }
-    waitlist.add(entry);
 
-    const waitlistDB: WaitlistEntry[] = await waitlist.getWaitlistEntries();
-    const waitlistId = waitlistDB.reverse()[0]?._id;
-
-    if (!waitlistId || !tablesAvailable[0]?._id)
-      return console.error(
-        "No se pudo obtener la entrada de la lista de espera o la mesa disponible."
-      );
+    const created = await waitlist.add(entry);
 
     showToast = true;
-    soldOut
+    soldout.soldOut
       ? (message = "No existen reservas disponibles a esa hora y fecha")
       : (message = "Reserva confirmada. Te esperamos en Hanoi!!.");
-    soldOut && showModal.set(true);
+    soldout.soldOut && showModal.set(true);
 
-    // Reset form
+    resetForm();
+  }
+
+  function resetForm() {
     preferredTimes = [];
     notes = "";
     name = "";
@@ -114,17 +77,16 @@ preferredTimes.forEach((preferred: string) => {
   function handleModalConfirm() {
     showModal.set(false);
     showToast = true;
-    message =
-      "Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.";
+    message = "Te hemos añadido a la lista de espera. Te contactaremos si hay una cancelación.";
   }
 
   async function handleModalCancel() {
     const waitlistDB: WaitlistEntry[] = await waitlist.getWaitlistEntries();
     const waitlistId = waitlistDB.reverse()[0]?._id;
-    if (!waitlistId)
-      return console.error(
-        "No se pudo obtener la entrada de la lista de espera."
-      );
+    if (!waitlistId) {
+      console.error("No se pudo obtener la entrada de la lista de espera.");
+      return;
+    }
     waitlist.remove(waitlistId);
     showModal.set(false);
   }
@@ -133,16 +95,14 @@ preferredTimes.forEach((preferred: string) => {
 <form on:submit|preventDefault={handleSubmit} class="space-y-6">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-      <label for="date" class="block text-sm font-medium text-gray-700"
-        >Fecha deseada</label
-      >
+      <label for="date" class="block text-sm font-medium text-gray-700">Fecha deseada</label>
       <input
         id="date"
         type="date"
         bind:value={date}
         required
         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-      />
+       />
     </div>
 
     <div>

@@ -30,7 +30,6 @@
   );
   $: lowStockItems = items.filter(item => item.quantity <= item.minStock);
 
-  // Agrupar elementos por categoría
   $: groupedItems = items.reduce((acc: any, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];

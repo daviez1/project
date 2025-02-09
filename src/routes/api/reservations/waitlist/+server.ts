@@ -17,6 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
     try { 
         const waitlistEntry: ReservationsTypes.WaitlistEntry = await request.json();
         const newWaitlistEntry = await createWaitlistEntry( waitlistEntry ); 
+        
         return new Response(JSON.stringify({ message: 'Reservación creada con éxito en la lista de espera', newWaitlistEntry }), 
         { status: 201, headers: { 'Content-Type': 'application/json' } }); 
     } catch (error:any) { 

@@ -14,9 +14,10 @@ function createWaitlistStore() {
           return waitlist
         },
     add: async(entry: WaitlistEntry) => {
-      await waitlistApi.post(entry)  
-      update(entries => [...entries, entry])
-      return entry
+      const entryPost = await waitlistApi.post(entry)  
+      
+      update(entries => [...entries, entryPost.waitlistEntryCreated])
+      return entryPost
     },
     updateStatus: async(id: mongoose.Types.ObjectId) =>{
       const itemUpdated = await waitlistApi.PATCH(id)

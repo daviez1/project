@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
   
     export let message: string;
-    export let duration: number = 3000; // Duración en milisegundos
+    export let duration: number = 3000;
     export let onClose: () => void;
   
     let visible = false;

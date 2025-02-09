@@ -3,7 +3,6 @@ import type { InventoryItem, InventoryFilter, StockUpdate } from '$lib/types/inv
 import * as InventoryApi from "../api/inventoryItems";
 import mongoose from 'mongoose';
 
-// Create the inventory store
 function createInventoryStore() {
   const { subscribe, set, update } = writable<InventoryItem[]>([]);
 
@@ -86,7 +85,6 @@ function createInventoryStore() {
 
 export const inventory = createInventoryStore();
 
-// Derived store to filter inventory based on the filter criteria
 export const filteredInventory = derived(
   inventory,
   ($inventory) => (filter: InventoryFilter) =>

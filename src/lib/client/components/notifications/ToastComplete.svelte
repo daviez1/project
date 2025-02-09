@@ -4,8 +4,8 @@
     export let message
     export let type: 'success' | 'warning' | 'danger'
     export let onClose: () => void;
-    export let duration: number = 3000; // Duración predeterminada de 3 segundos
-
+    export let duration: number = 3000;
+    
   onMount(() => {
     const timer = setTimeout(() => {
       onClose();

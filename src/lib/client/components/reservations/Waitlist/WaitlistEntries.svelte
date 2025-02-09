@@ -1,10 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { reservationStore } from "$lib/common/stores/reservations";
-    import type {
-      TableReservationFromAPI,
-      WaitlistEntry,
-    } from "$lib/types/reservation";
+    import type { WaitlistEntry } from "$lib/types/reservation";
     import { waitlist } from "$lib/common/stores/waitlist";
     import { translateStatusSpan } from "$lib/client/utils/translate";
   
@@ -29,12 +25,12 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          {#each waitlistEntries.filter(entry=> entry.status !== 'reserved' ) as entry}
+          {#each waitlistEntries as entry}
             <tr>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{entry.name}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{translateStatusSpan(entry.status)}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.guests}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(entry.date).toLocaleString()}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">{entry.guests}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(entry.date).toISOString().split('T')[0]}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{entry.preferredTimes.join(' • ')}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.email}</td>
             </tr>

@@ -28,8 +28,8 @@ export interface TableReservation {
   tableId: mongoose.Types.ObjectId;
   waitlistId: mongoose.Types.ObjectId | WaitlistEntry;
   reservationId: string; 
-  startTime: string; //era Date
-  endTime: string; //era Date
+  startTime: string; 
+  endTime: string; 
   status: string;
 }
 
@@ -38,8 +38,8 @@ export interface TableReservationFromAPI {
   tableId: Table[];
   waitlistId: WaitlistEntry;
   reservationId: string; 
-  startTime: string; //era Date
-  endTime: string; //era Date
+  startTime: string;
+  endTime: string;
   status: string;
 }
 

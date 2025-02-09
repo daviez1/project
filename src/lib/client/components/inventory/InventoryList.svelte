@@ -6,10 +6,9 @@
   import FormAddInventoryItem from '../form/FormAddInventoryItem.svelte';
   import Empty from '../form/Empty.svelte';
   import DeleteIcon from '../icons/DeleteIcon.svelte';
-  import EditIcon from '../icons/EditIcon.svelte';
-  import Modal from '$lib/client/components/form/Modal.svelte'; // Importa el componente Modal
-  import ToastComplete from '$lib/client/components/notifications/ToastComplete.svelte'; // Importa el componente ToastComplete
-  import { slide } from 'svelte/transition'; // Importa la transición fly
+  import Modal from '$lib/client/components/form/Modal.svelte';
+  import ToastComplete from '$lib/client/components/notifications/ToastComplete.svelte';
+  import { slide } from 'svelte/transition';
 
   export let groupedItems;
   let filter: InventoryFilter = { type: undefined };
@@ -33,7 +32,7 @@
     await inventory.deleteInventoryItem(categoryToDelete);
     showModal = false;
     showToast = true;
-    setTimeout(() => showToast = false, 3000); // Ocultar el toast después de 3 segundos
+    setTimeout(() => showToast = false, 3000); 
   }
 
   function toggleDetails(category: string) {
@@ -49,7 +48,7 @@
 
 <!--Divisor de lista y gestion  -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-0 md:mx-8 mt-8 rounded">
-  <ul class="inline grid grid-cols-1 gap-4 h-fit py-4 px-0 rounded">
+  <ul class="grid grid-cols-1 gap-4 h-fit py-4 px-0 rounded">
     {#if Object.keys(groupedItems).length > 0}
       {#each Object.keys(groupedItems) as category}
         <li class="bg-gray-100 rounded-lg p-1 mb-2 shadow-md w-full">

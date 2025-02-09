@@ -35,7 +35,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
     return new Response(readableStream, {
       headers: {
-        'Content-Type': file.contentType || 'application/octet-stream' // Usa el tipo de contenido almacenado
+        'Content-Type': file.contentType || 'application/octet-stream'
       }
     });
   } catch (error:any) {

@@ -3,8 +3,8 @@
   import * as animate from "$lib/common/constants/animate";
   import { showMenu } from "$lib/common/stores/menuVisible";
   import Hamburger from "../buttons/Hamburger.svelte";
+  import DropdownManage from "./DropdownManage.svelte";
 
-  // Función para alternar el menú
   const toggleMenu = () => !$showMenu;
   const closeMenu = () => showMenu.set(false);
 </script>
@@ -48,20 +48,7 @@
           >
             Menú/Pedidos
           </a>
-          <a
-            href="/gestionarPedidos"
-            class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md text-sm lg:text-lg"
-            class:font-bold={$page.url.pathname === "/gestionarPedidos"}
-          >
-            Gestionar Pedidos
-          </a>
-          <a
-            href="/inventory"
-            class="text-gray-800 {animate.animate_bounceInRight} hover:text-gray-600 py-2 rounded-md text-sm lg:text-lg"
-            class:font-bold={$page.url.pathname === "/inventory"}
-          >
-            Inventario
-          </a>
+          <DropdownManage {toggleMenu} {closeMenu} />
         </div>
       </div>
 
@@ -115,6 +102,7 @@
               Kiosko
             </a>
           </li>
+          <hr />
           <li>
             <a
               href="/inventory"
@@ -122,8 +110,45 @@
               class:font-bold={$page.url.pathname === "/inventory"}
               on:click={toggleMenu}
               on:click={closeMenu}
-            >
+              >
               Inventario
+            </a>
+            <a
+            href="/gestionarPedidos"
+            class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+            class:font-bold={$page.url.pathname === "/gestionarPedidos"}
+            on:click={toggleMenu}
+            on:click={closeMenu}
+            >
+            Gestionar Pedidos
+          </a>
+            <a
+            href="/reservations/manage/waitlist"
+            class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+            class:font-bold={$page.url.pathname ===
+                "/reservations/manage/waitlist"}
+                on:click={toggleMenu}
+                on:click={closeMenu}
+                >
+                Lista de espera
+              </a>
+              <a
+              href="/reservations/manage"
+              class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+              class:font-bold={$page.url.pathname === "/reservations/manage"}
+              on:click={toggleMenu}
+              on:click={closeMenu}
+              >
+              Reservas
+            </a>
+            <a
+            href="/reservations/tables"
+            class="block text-gray-200 hover:text-gray-600 py-2 font-normal text-right"
+            class:font-bold={$page.url.pathname === "/reservations/tables"}
+            on:click={toggleMenu}
+            on:click={closeMenu}
+            >
+              Mesas
             </a>
           </li>
         </ul>

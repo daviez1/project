@@ -23,8 +23,6 @@
       const start = (currentPage - 1) * itemsPerPage;
       const end = start + itemsPerPage;
       paginatedOrders.set($orders
-      // .filter(order => 
-      // order.status === 'pending' || order.status === 'preparing' || order.status === 'ready')
       .slice(start, end));
     }
   }

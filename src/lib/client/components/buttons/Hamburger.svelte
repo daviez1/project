@@ -2,7 +2,7 @@
   import { showMenu } from '$lib/common/stores/menuVisible';
 </script>
 
-<button class="relative flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-gray-200 border-none text-gray-800 hover:text-gray-700 focus:outline-none">
+<button class="relative flex items-center justify-center w-10 h-10 rounded-full bg-transparent hover:bg-gray-200 border-none text-gray-800 hover:text-gray-700 focus:outline-none" title="button">
   <input type="checkbox" bind:checked={$showMenu} class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
 
   <!-- hamburger icon -->

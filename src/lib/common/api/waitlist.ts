@@ -22,8 +22,8 @@ export const post = async (waitlist: WaitlistEntry, customFetch = fetch) => {
     //     return result.error
     // }
 
-    const result = await response.json();
-    return result.newWaitlistEntry;
+    const result = await response.json();  
+    return result;
 }
 
 export const DELETE = async (id: mongoose.Types.ObjectId, customFetch = fetch) => {
